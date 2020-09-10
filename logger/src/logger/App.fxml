@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane prefHeight="89.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logger.AppController">
+   <children>
+      <Button fx:id="calculateButton" layoutX="132.0" layoutY="32.0" mnemonicParsing="false" onAction="#calculate" text="Awake?" textAlignment="CENTER" />
+   </children>
+</Pane>
