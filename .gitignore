@@ -31,10 +31,13 @@ target/
 *.ipr
 .idea/
 
-# eclipse project file
+# Eclipse project file
 .settings/
 .classpath
 .project
+
+# Visual Studio Code
+.vscode
 
 # NetBeans specific
 nbproject/private/
@@ -45,7 +48,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-
 # OS
 .DS_Store
 
@@ -54,3 +56,4 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+debug.log
