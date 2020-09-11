@@ -6,6 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -22,9 +23,13 @@ public class AppController {
     @FXML private TextField inputMin2;
     @FXML private Button buttonRegister;
 
+
+
     @FXML
     void initialize(){
         System.out.println("Initialized!");
+        // inputHour1.setOnKeyTyped();
+
     }
 
     @FXML
@@ -34,9 +39,9 @@ public class AppController {
         String building = dropdownBuilding.getValue();
         String room = dropdownRoom.getValue();
 
-        int year = inputDate.getValue().getYear();
-        int month = inputDate.getValue().getMonthValue();
-        int day = inputDate.getValue().getDayOfMonth();
+        int year = getDate().getYear();
+        int month = getDate().getMonthValue();
+        int day = getDate().getDayOfMonth();
         int hour1 = Integer.parseInt(inputHour1.getText());
         int min1 = Integer.parseInt(inputMin1.getText());
         int hour2 = Integer.parseInt(inputHour2.getText());
@@ -47,7 +52,33 @@ public class AppController {
 
         System.out.println(new Visit(name, phone, building, room, fromTime, toTime).toString());
         System.out.println("Hello?!");
+
+        
     }
+
+
+
+    LocalDate getDate (){
+        return inputDate.getValue();
+    }
+
+    LocalTime getFromTime() {
+        int hour1 = Integer.parseInt(inputHour1.getText());
+        int min1 = Integer.parseInt(inputMin1.getText());
+        return LocalTime.of(hour1, min1);
+    }
+    LocalTime getToTime() {
+        int hour2 = Integer.parseInt(inputHour2.getText());
+        int min2 = Integer.parseInt(inputMin2.getText());
+        return LocalTime.of(hour2, min2);
+    }
+
+    boolean isValidTime(String hours, String minutes) {
+        String timeString = hours + ':' + minutes;
+        // Check if hours are between 0-23 and minutes between 0-59
+        return timeString.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+    };
+
 
     public static void main(String[] args) {
 
