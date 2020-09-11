@@ -11,7 +11,8 @@ The app is located in [logger/src](logger/src), while tests are located in [logg
 ## Developer installation
 
 1. `git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030.git`
-2. Open folder as Maven project in an IDE
+2. Open folder as Maven project in an IDE  
+    **IntelliJ IDEA:** File :point_right: New :point_right: Module from Existing Sources :point_right: `logger` folder :point_right: Maven
 3. Run app using `mvn javafx:run`
 4. Run tests using `mvn test`
 
