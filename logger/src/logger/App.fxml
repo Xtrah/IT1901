@@ -21,11 +21,11 @@
                         <TextField fx:id="inputPhone" layoutX="50.0" layoutY="129.0" prefHeight="26.0" prefWidth="270.0" promptText="Phone" />
                         <ChoiceBox fx:id="dropdownBuilding" layoutX="95.0" layoutY="195.0" prefHeight="28.0" prefWidth="180.0" />
                         <ChoiceBox fx:id="dropdownRoom" layoutX="95.0" layoutY="257.0" prefHeight="28.0" prefWidth="180.0" />
-                        <TextField fx:id="inputHour1" layoutX="75.0" layoutY="418.0" prefHeight="26.0" prefWidth="26.0" text="00" />
-                        <TextField fx:id="inputMin1" layoutX="120.0" layoutY="418.0" prefHeight="26.0" prefWidth="26.0" text="00" />
+                        <TextField fx:id="inputHour1" layoutX="73.0" layoutY="418.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputMin1" layoutX="118.0" layoutY="418.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
                         <Label layoutX="109.0" layoutY="422.0" text=":" />
-                        <TextField fx:id="inputHour2" layoutX="222.0" layoutY="417.0" prefHeight="26.0" prefWidth="26.0" text="00" />
-                        <TextField fx:id="inputMin2" layoutX="267.0" layoutY="417.0" prefHeight="26.0" prefWidth="26.0" text="00" />
+                        <TextField fx:id="inputHour2" layoutX="220.0" layoutY="417.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputMin2" layoutX="264.0" layoutY="417.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
                         <Label layoutX="256.0" layoutY="421.0" text=":" />
                         <Label layoutX="96.0" layoutY="390.0" text="From" />
                         <Label layoutX="250.0" layoutY="389.0" text="To" />
