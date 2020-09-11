@@ -10,5 +10,5 @@ The purpose of the app is to register a user's visits to rooms and see an overvi
 
 ## Illustration
 
-![UI register view](https://i.imgur.com/CWQTVAb.png)
-<!-- ![UI visitlog view](TODO) -->
+![UI register view](https://i.imgur.com/kjl7WFl.png)
+![UI visit log view](https://i.imgur.com/UYIaMtT.png)

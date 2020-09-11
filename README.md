@@ -6,15 +6,15 @@
 
 This repository contains the "Logger" JavaFX app, an app to register a user's visits to rooms and see an overview of all their visits.
 
-The app is located in [logger/src](logger/src). The repository includes Gitpod configuration files and a [.gitignore](.gitignore) file configured for development in IntelliJ IDEA.
+The app is located in [logger/src](logger/src), while tests are located in [logger/test](logger/test). The repository also includes Gitpod configuration files and a [.gitignore](.gitignore) file configured primarily for development in IntelliJ IDEA.
 
 ## Developer installation
 
 1. `git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030.git`
 2. Open folder as IntelliJ project
 3. File -> New -> Module from Existing Sources -> `logger` folder -> Maven
-4. Run app using `mvn javafx:run`.
-5. Run tests using `mvn test`.
+4. Run app using `mvn javafx:run`
+5. Run tests using `mvn test`
 
 ### Git conventions
 
