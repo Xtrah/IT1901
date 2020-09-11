@@ -5,8 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AppController {
