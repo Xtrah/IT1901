@@ -77,4 +77,16 @@ public class Visit {
     public void setToTime(LocalDateTime toTime) {
         this.toTime = toTime;
     }
+
+    @Override
+    public String toString() {
+        return "Visit{" +
+                "name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", building='" + building + '\'' +
+                ", room='" + room + '\'' +
+                ", fromTime=" + fromTime +
+                ", toTime=" + toTime +
+                '}';
+    }
 }
