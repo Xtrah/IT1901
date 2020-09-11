@@ -14,10 +14,6 @@ public class VisitLog {
         return log;
     }
 
-    public void setLog(Collection<Visit> log) {
-        this.log = log;
-    }
-
     public void addVisit(Visit visit) {
         log.add(visit);
     }

@@ -10,14 +10,16 @@ public class Visit {
     private String phoneNumber;
     private String building;
     private String room;
-    private LocalDateTime time;
+    private LocalDateTime fromTime;
+    private LocalDateTime toTime;
 
-    public Visit(String name, String phoneNumber, String building, String room, LocalDateTime time) {
+    public Visit(String name, String phoneNumber, String building, String room, LocalDateTime fromTime, LocalDateTime toTime) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.building = building;
         this.room = room;
-        this.time = time;
+        this.fromTime = fromTime;
+        this.toTime = toTime;
     }
 
     public String getName() {
@@ -52,15 +54,27 @@ public class Visit {
         this.room = room;
     }
 
-    public LocalDate getDate() {
-        return time.toLocalDate();
+    public LocalDate getFromDate() {
+        return fromTime.toLocalDate();
     }
 
-    public LocalTime getTime() {
-        return time.toLocalTime();
+    public LocalTime getFromTime() {
+        return fromTime.toLocalTime();
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setFromTime(LocalDateTime fromTime) {
+        this.fromTime = fromTime;
+    }
+
+    public LocalDate getToDate() {
+        return toTime.toLocalDate();
+    }
+
+    public LocalTime getToTime() {
+        return toTime.toLocalTime();
+    }
+
+    public void setToTime(LocalDateTime toTime) {
+        this.toTime = toTime;
     }
 }
