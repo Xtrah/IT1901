@@ -15,37 +15,37 @@
    <children>
       <TabPane layoutX="3.0" layoutY="14.0" prefHeight="590.0" prefWidth="370.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab text="Register">
+            <Tab text=" Register ">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="153.0" layoutY="14.0" text="Register">
+                        <Label alignment="CENTER" layoutX="127.0" layoutY="30.0" text="Register Visit">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="inputName" layoutX="50.0" layoutY="72.0" prefHeight="26.0" prefWidth="270.0" promptText="Name" />
-                        <TextField fx:id="inputPhone" layoutX="50.0" layoutY="129.0" prefHeight="26.0" prefWidth="270.0" promptText="Phone" />
-                        <ChoiceBox fx:id="dropdownBuilding" layoutX="95.0" layoutY="195.0" prefHeight="28.0" prefWidth="180.0" />
-                        <ChoiceBox fx:id="dropdownRoom" layoutX="95.0" layoutY="257.0" prefHeight="28.0" prefWidth="180.0" />
-                        <TextField fx:id="inputHour1" alignment="CENTER" layoutX="74.0" layoutY="418.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
-                        <TextField fx:id="inputMin1" alignment="CENTER" layoutX="117.0" layoutY="418.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
-                        <Label layoutX="109.0" layoutY="422.0" text=":" />
-                        <TextField fx:id="inputHour2" alignment="CENTER" layoutX="221.0" layoutY="417.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
-                        <TextField fx:id="inputMin2" alignment="CENTER" layoutX="263.0" layoutY="417.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
-                        <Label layoutX="256.0" layoutY="421.0" text=":" />
-                        <Label layoutX="96.0" layoutY="390.0" text="From" />
-                        <Label layoutX="250.0" layoutY="390.0" text="To" />
-                        <DatePicker fx:id="inputDate" layoutX="95.0" layoutY="322.0" prefHeight="26.0" prefWidth="180.0" />
-                        <Button layoutX="147.0" layoutY="484.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="75.0" text="+" />
-                        <Label layoutX="46.0" layoutY="200.0" text="Bygg:" />
-                        <Label layoutX="46.0" layoutY="262.0" text="Rom:" />
-                        <Label layoutX="46.0" layoutY="326.0" text="Dato:" />
+                        <TextField fx:id="inputName" layoutX="50.0" layoutY="99.0" prefHeight="26.0" prefWidth="270.0" promptText="Name" />
+                        <TextField fx:id="inputPhone" layoutX="50.0" layoutY="149.0" prefHeight="26.0" prefWidth="270.0" promptText="Phone" />
+                        <ChoiceBox fx:id="dropdownBuilding" layoutX="95.0" layoutY="228.0" prefHeight="28.0" prefWidth="180.0" />
+                        <ChoiceBox fx:id="dropdownRoom" layoutX="95.0" layoutY="275.0" prefHeight="28.0" prefWidth="180.0" />
+                        <TextField fx:id="inputHour1" alignment="CENTER" layoutX="75.0" layoutY="428.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputMin1" alignment="CENTER" layoutX="118.0" layoutY="428.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <Label layoutX="110.0" layoutY="432.0" text=":" />
+                        <TextField fx:id="inputHour2" alignment="CENTER" layoutX="222.0" layoutY="427.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputMin2" alignment="CENTER" layoutX="264.0" layoutY="427.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <Label layoutX="257.0" layoutY="431.0" text=":" />
+                        <Label layoutX="97.0" layoutY="400.0" text="From" />
+                        <Label layoutX="251.0" layoutY="400.0" text="To" />
+                        <DatePicker fx:id="inputDate" layoutX="95.0" layoutY="356.0" prefHeight="26.0" prefWidth="180.0" />
+                        <Button layoutX="147.0" layoutY="485.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="75.0" text="Register" />
+                        <Label layoutX="39.0" layoutY="232.0" text="Building:" />
+                        <Label layoutX="50.0" layoutY="280.0" text="Room:" />
+                        <Label layoutX="57.0" layoutY="360.0" text="Date:" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Log">
+            <Tab text=" Visit Log ">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
