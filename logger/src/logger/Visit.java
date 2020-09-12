@@ -1,6 +1,6 @@
 package logger;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Visit {
 
@@ -8,16 +8,19 @@ public class Visit {
     private String phone;
     private String building;
     private String room;
-    private Date fromTime;
-    private Date toTime;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
-    public Visit(String name, String phone, String building, String room, Date fromTime, Date toTime) {
+    public Visit() {
+    }
+
+    public Visit(String name, String phone, String building, String room, LocalDateTime from, LocalDateTime to) {
         this.name = name;
         this.phone = phone;
         this.building = building;
         this.room = room;
-        this.fromTime = fromTime;
-        this.toTime = toTime;
+        this.from = from;
+        this.to = to;
     }
 
     public String getName() {
@@ -52,27 +55,31 @@ public class Visit {
         this.room = room;
     }
 
-    public Date getFromDate() {
-        return fromTime;
+    public String getFrom() {
+        return from.toString();
     }
 
-    public Date getFromTime() {
-        return fromTime;
+    public void setFrom(LocalDateTime from) {
+        this.from = from;
     }
 
-    public void setFromTime(Date fromTime) {
-        this.fromTime = fromTime;
+    public String getTo() {
+        return to.toString();
     }
 
-    public Date getToDate() {
-        return toTime;
+    public void setTo(LocalDateTime to) {
+        this.to = to;
     }
 
-    public Date getToTime() {
-        return toTime;
-    }
-
-    public void setToTime(Date toTime) {
-        this.toTime = toTime;
+    @Override
+    public String toString() {
+        return "Visit{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", building='" + building + '\'' +
+                ", room='" + room + '\'' +
+                ", from=" + from +
+                ", to=" + to +
+                '}';
     }
 }
