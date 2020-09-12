@@ -49,11 +49,7 @@ public class AppController {
         tableView.getColumns().addAll(nameCol, phoneCol,
                 buildingCol, roomCol,fromTimeCol, toTimeCol);
 
-        // To add items to tableView. Mockup-data
-        tableView.getItems().add(new Visit("John Doe",
-                "99119911", "Bygg1", "A4", new Date(), new Date()));
-        tableView.getItems().add(new Visit("Jane Doe",
-                "12345678", "Bygg2", "A3", new Date(), new Date()));
+
     }
 
 }
