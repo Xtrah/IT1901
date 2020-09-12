@@ -1,5 +1,7 @@
 package logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -30,6 +32,15 @@ public class AppController {
         System.out.println("Initialized!");
         // inputHour1.setOnKeyTyped();
 
+        inputHour1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    inputHour1.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
     }
 
     @FXML
@@ -53,8 +64,30 @@ public class AppController {
         System.out.println(new Visit(name, phone, building, room, fromTime, toTime).toString());
         System.out.println("Hello?!");
 
-        
+
     }
+
+    @FXML
+    void disableButtonIfInvalidTime(){ // TODO - change name of this function!!!
+        if (isValidTime(inputHour1.getText(), inputMin1.getText()) && isValidTime(inputHour1.getText(), inputMin1.getText())){
+            buttonRegister.setDisable(!isValidTime(inputHour1.getText(), inputMin1.getText()));
+            buttonRegister.setDisable(!isValidTime(inputHour2.getText(), inputMin2.getText()));
+
+            if (getToTime() != null && getFromTime() != null){
+                buttonRegister.setDisable(!getFromTime().isBefore(getToTime()));
+            }
+            else{
+                buttonRegister.setDisable(true);
+            }
+
+        }
+        else {
+            buttonRegister.setDisable(true);
+            buttonRegister.setText("Invalid time input!");
+        }
+    }
+
+
 
 
 
@@ -63,21 +96,47 @@ public class AppController {
     }
 
     LocalTime getFromTime() {
-        int hour1 = Integer.parseInt(inputHour1.getText());
-        int min1 = Integer.parseInt(inputMin1.getText());
-        return LocalTime.of(hour1, min1);
+        if (isValidTime(inputHour1.getText(), inputMin1.getText())){
+            int hour1 = Integer.parseInt(inputHour1.getText());
+            int min1 = Integer.parseInt(inputMin1.getText());
+            return LocalTime.of(hour1, min1);
+        }
+        return null;
     }
     LocalTime getToTime() {
-        int hour2 = Integer.parseInt(inputHour2.getText());
-        int min2 = Integer.parseInt(inputMin2.getText());
-        return LocalTime.of(hour2, min2);
+        //String hour2String= inputHour2.getText();
+        //String min2String = inputMin2.getText();
+        if (isValidTime(inputHour2.getText(), inputMin2.getText())){
+            int hour2 = Integer.parseInt(inputHour2.getText());
+            int min2 = Integer.parseInt(inputMin2.getText());
+            return LocalTime.of(hour2, min2);
+        }
+        return null;
+
     }
 
     boolean isValidTime(String hours, String minutes) {
         String timeString = hours + ':' + minutes;
         // Check if hours are between 0-23 and minutes between 0-59
         return timeString.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
-    };
+    }
+
+    // Hvis minutter.length() != 2:
+    //     Sett minutter = 00
+
+    // Hvis timer.length == 1:
+    // Sett en 0 foran sifret
+    // if else timer.length > 2:
+    //    Slice til de to første sifrene
+
+    String nullifyString(String string){
+        String regEx = "0*";
+    }
+
+
+    void compareTimes(LocalTime fromTime, LocalTime toTime){
+
+    }
 
 
     public static void main(String[] args) {
