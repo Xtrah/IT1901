@@ -29,12 +29,11 @@ public class VisitLog {
 
     public void addVisit(Visit visit) {
         log.add(visit);
-        this.writeToFile();
     }
 
-    private void writeToFile() {
+    public void writeToFile(String filepath) {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("logger/src/logger/log.json");
+        File file = new File(filepath);
         try {
             mapper.writerWithDefaultPrettyPrinter()
                     .writeValue(file, log);
@@ -43,30 +42,15 @@ public class VisitLog {
         }
     }
 
-    public List<Visit> readFromFile() {
+    public static List<Visit> readFromFile(String filepath) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
-            return List.of(mapper.readValue(new File("logger/src/logger/log.json"), Visit[].class));
+            return List.of(mapper.readValue(new File(filepath), Visit[].class));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        Visit v1 = new Visit("J", "45", "B1", "R1",
-                LocalDateTime.of(2020, 10, 1, 15, 15),
-                LocalDateTime.of(2020, 10, 1, 16, 15));
-        Visit v2 = new Visit("K", "46", "B1", "R1",
-                LocalDateTime.of(2020, 10, 1, 17, 15),
-                LocalDateTime.of(2020, 10, 1, 18, 15));
-        VisitLog log = new VisitLog();
-        log.addVisit(v1);
-        log.addVisit(v2);
-        log.writeToFile();
-        VisitLog log2 = new VisitLog(log.readFromFile());
-        System.out.println(log2.getLog());
     }
 
     @Override
