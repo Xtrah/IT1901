@@ -69,40 +69,22 @@ public class AppController {
 
         System.out.println(new Visit(name, phone, building, room, fromTime, toTime).toString());
         System.out.println("Hello?!");
-
-
     }
 
     @FXML
     void disableButtonIfInvalidTime(){ // TODO - change name of this function!!!
-        if (isValidTime(inputHour1.getText(), inputMin1.getText()) && isValidTime(inputHour1.getText(), inputMin1.getText())){
-            buttonRegister.setDisable(!isValidTime(inputHour1.getText(), inputMin1.getText()));
-            buttonRegister.setDisable(!isValidTime(inputHour2.getText(), inputMin2.getText()));
-
-            if (getToTime() != null && getFromTime() != null){
-                buttonRegister.setDisable(!getFromTime().isBefore(getToTime()));
-            }
-            else{
-                buttonRegister.setDisable(true);
-            }
-
-        }
-        else {
-            buttonRegister.setDisable(true);
-            buttonRegister.setText("Invalid time input!");
-        }
+        // TODO: Put helper text "Invalid time" in label above button instead of in button text
+        // TODO: Let disableButton be a function for disabling registry button and giving helper text
+        buttonRegister.setDisable(!isValidTime());
+        buttonRegister.setText("Invalid time input!");
     }
-
-
-
-
 
     LocalDate getDate (){
         return inputDate.getValue();
     }
 
     LocalTime getFromTime() {
-        if (isValidTime(inputHour1.getText(), inputMin1.getText())){
+        if (isTimeString(inputHour1.getText(), inputMin1.getText())){
             int hour1 = Integer.parseInt(inputHour1.getText());
             int min1 = Integer.parseInt(inputMin1.getText());
             return LocalTime.of(hour1, min1);
@@ -110,9 +92,7 @@ public class AppController {
         return null;
     }
     LocalTime getToTime() {
-        //String hour2String= inputHour2.getText();
-        //String min2String = inputMin2.getText();
-        if (isValidTime(inputHour2.getText(), inputMin2.getText())){
+        if (isTimeString(inputHour2.getText(), inputMin2.getText())){
             int hour2 = Integer.parseInt(inputHour2.getText());
             int min2 = Integer.parseInt(inputMin2.getText());
             return LocalTime.of(hour2, min2);
@@ -121,20 +101,18 @@ public class AppController {
 
     }
 
-    boolean isValidTime(String hours, String minutes) {
+    private boolean isTimeString (String hours, String minutes) {
         String timeString = hours + ':' + minutes;
         // Check if hours are between 0-23 and minutes between 0-59
         return timeString.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
     }
 
-    // Hvis minutter.length() != 2:
-    //     Sett minutter = 00
-
-    // Hvis timer.length == 1:
-    // Sett en 0 foran sifret
-    // if else timer.length > 2:
-    //    Slice til de to første sifrene
-
+    private boolean isValidTime () {
+        if (getFromTime() != null && getToTime() != null){
+            return getFromTime().isBefore(getToTime());
+        }
+        return false;
+    }
 
     void compareTimes(LocalTime fromTime, LocalTime toTime){
 
