@@ -3,10 +3,7 @@ package logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +21,7 @@ public class AppController {
     @FXML private TextField inputHour2;
     @FXML private TextField inputMin2;
     @FXML private Button buttonRegister;
+    @FXML private Label helperText;
 
     private void forceNumberInput(TextField fxidName) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -72,11 +70,35 @@ public class AppController {
     }
 
     @FXML
-    void disableButtonIfInvalidTime(){ // TODO - change name of this function!!!
-        // TODO: Put helper text "Invalid time" in label above button instead of in button text
-        // TODO: Let disableButton be a function for disabling registry button and giving helper text
-        buttonRegister.setDisable(!isValidTime());
-        buttonRegister.setText("Invalid time input!");
+    void validateValues (){
+        // Initiating values
+        buttonRegister.setDisable(false);
+        helperText.setText("");
+
+        // Checking all values. If valid, setting helper text
+        if (!isValidTime()) {
+            buttonRegister.setDisable(true);
+            helperText.setText("Invalid time input!");
+        }
+        if (lackingValues()) {
+            buttonRegister.setDisable(true);
+            helperText.setText("Write values in all boxes!");
+        }
+    }
+
+    private boolean isEmptyString(String str) {
+        return (str == null || str.trim().isEmpty());
+    }
+
+    private boolean lackingValues () {
+        if (isEmptyString(inputName.getText())
+                || isEmptyString(inputPhone.getText())
+                || isEmptyString(inputPhone.getText())
+                //|| isEmptyString(dropdownBuilding.getValue())
+                //|| isEmptyString(dropdownRoom.getValue())
+                || getDate() == null
+        ) return true;
+        return false;
     }
 
     LocalDate getDate (){
