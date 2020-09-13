@@ -25,22 +25,28 @@ public class AppController {
     @FXML private TextField inputMin2;
     @FXML private Button buttonRegister;
 
+    private void forceNumberInput(TextField fxidName) {
+        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Only allow digits
+            if (!newValue.matches("\\d*")) {
+                fxidName.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            // Only allow 2 digits
+            if (newValue.length() > 2) {
+                fxidName.setText(oldValue);
+            }
+        });
+    }
 
 
     @FXML
     void initialize(){
         System.out.println("Initialized!");
-        // inputHour1.setOnKeyTyped();
-
-        inputHour1.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    inputHour1.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-
+        // Adding listeners to time-inputs;
+        forceNumberInput(inputHour1);
+        forceNumberInput(inputHour2);
+        forceNumberInput(inputMin1);
+        forceNumberInput(inputMin2);
     }
 
     @FXML
@@ -128,10 +134,6 @@ public class AppController {
     // Sett en 0 foran sifret
     // if else timer.length > 2:
     //    Slice til de to første sifrene
-
-    String nullifyString(String string){
-        String regEx = "0*";
-    }
 
 
     void compareTimes(LocalTime fromTime, LocalTime toTime){
