@@ -22,9 +22,6 @@ public class VisitLog {
     public VisitLog(Collection<Visit> log) {
         this.log = log;
     }
-    public VisitLog(){
-
-    }
 
     public Collection<Visit> getLog() {
         return log;
