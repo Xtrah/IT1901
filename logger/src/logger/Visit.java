@@ -1,25 +1,26 @@
 package logger;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class Visit {
 
     private String name;
-    private String phoneNumber;
+    private String phone;
     private String building;
     private String room;
-    private LocalDateTime fromTime;
-    private LocalDateTime toTime;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
-    public Visit(String name, String phoneNumber, String building, String room, LocalDateTime fromTime, LocalDateTime toTime) {
+    public Visit() {
+    }
+
+    public Visit(String name, String phone, String building, String room, LocalDateTime from, LocalDateTime to) {
         this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.phone = phone;
         this.building = building;
         this.room = room;
-        this.fromTime = fromTime;
-        this.toTime = toTime;
+        this.from = from;
+        this.to = to;
     }
 
     public String getName() {
@@ -30,12 +31,12 @@ public class Visit {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getBuilding() {
@@ -54,27 +55,31 @@ public class Visit {
         this.room = room;
     }
 
-    public LocalDate getFromDate() {
-        return fromTime.toLocalDate();
+    public String getFrom() {
+        return from.toString();
     }
 
-    public LocalTime getFromTime() {
-        return fromTime.toLocalTime();
+    public void setFrom(LocalDateTime from) {
+        this.from = from;
     }
 
-    public void setFromTime(LocalDateTime fromTime) {
-        this.fromTime = fromTime;
+    public String getTo() {
+        return to.toString();
     }
 
-    public LocalDate getToDate() {
-        return toTime.toLocalDate();
+    public void setTo(LocalDateTime to) {
+        this.to = to;
     }
 
-    public LocalTime getToTime() {
-        return toTime.toLocalTime();
-    }
-
-    public void setToTime(LocalDateTime toTime) {
-        this.toTime = toTime;
+    @Override
+    public String toString() {
+        return "Visit{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", building='" + building + '\'' +
+                ", room='" + room + '\'' +
+                ", from=" + from +
+                ", to=" + to +
+                '}';
     }
 }
