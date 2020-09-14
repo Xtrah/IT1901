@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logger.AppController">
    <children>
       <TabPane layoutX="3.0" layoutY="14.0" prefHeight="590.0" prefWidth="370.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
@@ -17,23 +18,24 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="inputName" layoutX="50.0" layoutY="99.0" prefHeight="26.0" prefWidth="270.0" promptText="Name" />
-                        <TextField fx:id="inputPhone" layoutX="50.0" layoutY="149.0" prefHeight="26.0" prefWidth="270.0" promptText="Phone" />
-                        <ChoiceBox fx:id="dropdownBuilding" layoutX="95.0" layoutY="228.0" prefHeight="28.0" prefWidth="180.0" />
-                        <ChoiceBox fx:id="dropdownRoom" layoutX="95.0" layoutY="275.0" prefHeight="28.0" prefWidth="180.0" />
-                        <TextField fx:id="inputHour1" alignment="CENTER" layoutX="75.0" layoutY="428.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
-                        <TextField fx:id="inputMin1" alignment="CENTER" layoutX="118.0" layoutY="428.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputName" layoutX="50.0" layoutY="99.0" prefHeight="26.0" prefWidth="270.0" onKeyTyped="#validateValues" promptText="Name" />
+                        <TextField fx:id="inputPhone" layoutX="50.0" layoutY="149.0" prefHeight="26.0" prefWidth="270.0" onKeyTyped="#validateValues" promptText="Phone" />
+                        <ChoiceBox fx:id="dropdownBuilding" layoutX="95.0" layoutY="228.0" prefHeight="28.0" prefWidth="180.0" onKeyTyped="#validateValues" />
+                        <ChoiceBox fx:id="dropdownRoom" layoutX="95.0" layoutY="275.0" prefHeight="28.0" prefWidth="180.0" onKeyTyped="#validateValues" />
+                        <TextField fx:id="inputHour1" alignment="CENTER" layoutX="75.0" layoutY="428.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputMin1" alignment="CENTER" layoutX="118.0" layoutY="428.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
                         <Label layoutX="110.0" layoutY="432.0" text=":" />
-                        <TextField fx:id="inputHour2" alignment="CENTER" layoutX="222.0" layoutY="427.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
-                        <TextField fx:id="inputMin2" alignment="CENTER" layoutX="264.0" layoutY="427.0" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputHour2" alignment="CENTER" layoutX="222.0" layoutY="427.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+                        <TextField fx:id="inputMin2" alignment="CENTER" layoutX="264.0" layoutY="427.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
                         <Label layoutX="257.0" layoutY="431.0" text=":" />
                         <Label layoutX="97.0" layoutY="400.0" text="From" />
                         <Label layoutX="251.0" layoutY="400.0" text="To" />
-                        <DatePicker fx:id="inputDate" layoutX="95.0" layoutY="356.0" prefHeight="26.0" prefWidth="180.0" />
-                        <Button layoutX="147.0" layoutY="485.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="75.0" text="Register" />
+                        <DatePicker fx:id="inputDate" layoutX="95.0" layoutY="356.0" prefHeight="26.0" prefWidth="180.0" onKeyTyped="#validateValues" />
+                        <Button fx:id="buttonRegister" layoutX="147.0" layoutY="485.0" mnemonicParsing="false" onAction="#registerVisit" prefHeight="32.0" prefWidth="75.0" text="Register" />
                         <Label layoutX="39.0" layoutY="232.0" text="Building:" />
                         <Label layoutX="50.0" layoutY="280.0" text="Room:" />
                         <Label layoutX="57.0" layoutY="360.0" text="Date:" />
+                        <Label fx:id="helperText" layoutX="57.0" layoutY="461.0" prefHeight="17.0" prefWidth="267.0" />
                      </children>
                   </AnchorPane>
                </content>
