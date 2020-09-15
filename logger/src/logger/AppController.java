@@ -164,14 +164,14 @@ public class AppController {
     }
 
     private boolean lackingValues () {
-        return isEmptyString(inputName.getText())
+        return (
+                isEmptyString(inputName.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(dropdownBuilding.getValue())
                 || isEmptyString(dropdownRoom.getValue())
                 || getDate() == null
-        ) return true;
-        return false;
+        );
     }
 
     LocalDate getDate (){
