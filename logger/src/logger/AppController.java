@@ -1,10 +1,9 @@
 package logger;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,6 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AppController {
+
+    private VisitLog log;
+
     @FXML private TableView tableView;
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
@@ -44,14 +46,13 @@ public class AppController {
 
     @FXML
     void initialize() {
-        System.out.println("Initialized!");
         // Adding listeners to time-inputs;
         forceNumberInput(inputHour1);
         forceNumberInput(inputHour2);
         forceNumberInput(inputMin1);
         forceNumberInput(inputMin2);
-        
-        // For Visit log 
+
+        // For Visit log
         // Make column
         TableColumn<String, Visit> nameCol = new TableColumn<>("Name");
         // Listen to value 'name' in class 'Visit'
@@ -70,24 +71,26 @@ public class AppController {
         roomCol.setCellValueFactory(new PropertyValueFactory<>("room"));
         roomCol.setMaxWidth(40);
 
-        TableColumn<String, Visit> fromTimeCol = new TableColumn<>("From date");
-        fromTimeCol.setCellValueFactory(new PropertyValueFactory<>("fromTime"));
+        TableColumn<Visit, LocalDateTime> fromTimeCol = new TableColumn<>("From date");
+        fromTimeCol.setCellValueFactory(new PropertyValueFactory<>("from"));
         fromTimeCol.setMaxWidth(65);
 
-        TableColumn<String, Visit> toTimeCol = new TableColumn<>("To date");
-        toTimeCol.setCellValueFactory(new PropertyValueFactory<>("toTime"));
+        TableColumn<Visit, LocalDateTime> toTimeCol = new TableColumn<>("To date");
+        toTimeCol.setCellValueFactory(new PropertyValueFactory<>("to"));
         toTimeCol.setMaxWidth(60);
 
         // Add all columns to tableView
         tableView.getColumns().addAll(nameCol, phoneCol,
                 buildingCol, roomCol,fromTimeCol, toTimeCol);
 
-        // To add items to tableView. Mockup-data
-        /*
-        tableView.getItems().add(new Visit("John Doe",
-                "99119911", "Bygg1", "A4", new Date(), new Date()));
-        tableView.getItems().add(new Visit("Jane Doe",
-                "12345678", "Bygg2", "A3", new Date(), new Date()));*/
+        if (new File("logger/src/logger/log.json").exists()) {
+            log = new VisitLog(VisitLog.readFromFile("logger/src/logger/log.json"));
+            updateTable();
+        } else {
+            log = new VisitLog();
+        }
+
+        System.out.println("Initialized!");
     }
 
     @FXML
@@ -108,8 +111,8 @@ public class AppController {
         LocalDateTime fromTime = LocalDateTime.of(year, month, day, hour1, min1);
         LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
-        System.out.println(new Visit(name, phone, building, room, fromTime, toTime).toString());
-        System.out.println("Hello?!");
+        log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
+        updateTable();
     }
 
     @FXML
@@ -134,14 +137,12 @@ public class AppController {
     }
 
     private boolean lackingValues () {
-        if (isEmptyString(inputName.getText())
+        return isEmptyString(inputName.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(inputPhone.getText())
                 //|| isEmptyString(dropdownBuilding.getValue())
                 //|| isEmptyString(dropdownRoom.getValue())
-                || getDate() == null
-        ) return true;
-        return false;
+                || getDate() == null;
     }
 
     LocalDate getDate (){
@@ -179,8 +180,8 @@ public class AppController {
         return false;
     }
 
-    public static void main(String[] args) {
-        
+    private void updateTable() {
+        tableView.getItems().clear();
+        tableView.getItems().addAll(log.getLog());
     }
-
 }
