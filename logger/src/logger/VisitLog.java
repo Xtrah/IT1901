@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VisitLog {
 
-    private final List<Visit> log;
+    private List<Visit> log;
 
     public VisitLog() {
         this.log = new ArrayList<>();
@@ -39,15 +39,14 @@ public class VisitLog {
         }
     }
 
-    public static List<Visit> readFromFile(String filepath) {
+    public void readFromFile(String filepath) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
-            return new ArrayList<>(List.of(mapper.readValue(new File(filepath), Visit[].class)));
+            log = new ArrayList<>(List.of(mapper.readValue(new File(filepath), Visit[].class)));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     @Override

@@ -52,11 +52,11 @@ class VisitLogTest {
 
     @Test
     void readFromFile() {
+        List<Visit> beforeReadLog = log.getLog();
         log.writeToFile(FILEPATH);
-        List<Visit> visitLog = VisitLog.readFromFile(FILEPATH);
+        log.readFromFile(FILEPATH);
 
-        assert visitLog != null;
-        assertEquals(visitLog.size(), log.getLog().size());
+        assertEquals(beforeReadLog.size(), log.getLog().size());
     }
 
     @Test
@@ -67,8 +67,7 @@ class VisitLogTest {
                 LocalDateTime.of(2020, 11, 1, 18, 15),
                 LocalDateTime.of(2020, 11, 1, 19, 15)));
         log.writeToFile(FILEPATH);
-        List<Visit> newLog = VisitLog.readFromFile(FILEPATH);
-        assert newLog != null;
-        assertEquals(3, newLog.size());
+        log.readFromFile(FILEPATH);
+        assertEquals(3, log.getLog().size());
     }
 }
