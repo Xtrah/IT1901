@@ -118,6 +118,14 @@ public class AppController {
         buttonRegister.setDisable(false);
         helperText.setText("");
 
+        // TODO - validate name
+        if (!inputName.getText().matches("^[a-zA-Z ]*$")){
+            buttonRegister.setDisable(true);
+            helperText.setText("Names can only contain characters!");
+        }
+
+        // TODO - validate phone
+
         // Checking all values. If valid, setting helper text
         if (!isValidTime()) {
             buttonRegister.setDisable(true);
