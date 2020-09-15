@@ -5,25 +5,22 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class VisitLog {
 
-    private final Collection<Visit> log;
+    private final List<Visit> log;
 
     public VisitLog() {
         this.log = new ArrayList<>();
     }
 
-    public VisitLog(Collection<Visit> log) {
+    public VisitLog(List<Visit> log) {
         this.log = log;
     }
 
-    public Collection<Visit> getLog() {
+    public List<Visit> getLog() {
         return log;
     }
 
@@ -46,7 +43,7 @@ public class VisitLog {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
-            return List.of(mapper.readValue(new File(filepath), Visit[].class));
+            return new ArrayList<>(List.of(mapper.readValue(new File(filepath), Visit[].class)));
         } catch (IOException e) {
             e.printStackTrace();
         }
