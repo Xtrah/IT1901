@@ -145,6 +145,13 @@ public class AppController {
             buttonRegister.setDisable(true);
             helperText.setText("Write values in all boxes!");
         }
+
+        // Validate date
+        if (LocalDate.now().isBefore(inputDate.getValue())){
+            buttonRegister.setDisable(true);
+            helperText.setText("Can't set future visits!");
+        }
+
     }
 
     private boolean isEmptyString(String str) {
