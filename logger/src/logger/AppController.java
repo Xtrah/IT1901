@@ -50,6 +50,7 @@ public class AppController {
         forceNumberInput(inputHour2, 2);
         forceNumberInput(inputMin1, 2);
         forceNumberInput(inputMin2, 2);
+        forceNumberInput(inputPhone, 8);
         
         // For Visit log 
         // Make column
