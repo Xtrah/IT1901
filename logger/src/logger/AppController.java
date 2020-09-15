@@ -29,14 +29,14 @@ public class AppController {
     @FXML private Button buttonRegister;
     @FXML private Label helperText;
 
-    private void forceNumberInput(TextField fxidName, int maxLenght) {
+    private void forceNumberInput(TextField fxidName, int maxLength) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
             // Only allow digits
             if (!newValue.matches("\\d*")) {
                 fxidName.setText(newValue.replaceAll("[^\\d]", ""));
             }
             // Only allow 2 digits
-            if (newValue.length() > maxLenght) {
+            if (newValue.length() > maxLength) {
                 fxidName.setText(oldValue);
             }
         });
@@ -124,13 +124,13 @@ public class AppController {
         buttonRegister.setDisable(false);
         helperText.setText("");
 
-        // TODO - validate name
+        // Validate name
         if (!inputName.getText().matches("^[a-zA-Z ]*$")){
             buttonRegister.setDisable(true);
             helperText.setText("Names can only contain characters!");
         }
 
-        // TODO - validate phone
+        // Validate phone
         if (!inputPhone.getText().matches("^[0-9]{8}$")){
             buttonRegister.setDisable(true);
             helperText.setText("Invalid phone number!");
@@ -155,8 +155,8 @@ public class AppController {
         if (isEmptyString(inputName.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(inputPhone.getText())
-                //|| isEmptyString(dropdownBuilding.getValue())
-                //|| isEmptyString(dropdownRoom.getValue())
+                || isEmptyString(dropdownBuilding.getValue())
+                || isEmptyString(dropdownRoom.getValue())
                 || getDate() == null
         ) return true;
         return false;
