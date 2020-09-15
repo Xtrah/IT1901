@@ -71,11 +71,11 @@ public class AppController {
         roomCol.setCellValueFactory(new PropertyValueFactory<>("room"));
         roomCol.setMaxWidth(40);
 
-        TableColumn<Visit, LocalDateTime> fromTimeCol = new TableColumn<>("From date");
+        TableColumn<LocalDateTime, Visit> fromTimeCol = new TableColumn<>("From date");
         fromTimeCol.setCellValueFactory(new PropertyValueFactory<>("from"));
         fromTimeCol.setMaxWidth(65);
 
-        TableColumn<Visit, LocalDateTime> toTimeCol = new TableColumn<>("To date");
+        TableColumn<LocalDateTime, Visit> toTimeCol = new TableColumn<>("To date");
         toTimeCol.setCellValueFactory(new PropertyValueFactory<>("to"));
         toTimeCol.setMaxWidth(60);
 
