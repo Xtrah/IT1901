@@ -125,6 +125,10 @@ public class AppController {
         }
 
         // TODO - validate phone
+        if (!inputPhone.getText().matches("^[0-9]{8}$")){
+            buttonRegister.setDisable(true);
+            helperText.setText("Invalid phone number!");
+        }
 
         // Checking all values. If valid, setting helper text
         if (!isValidTime()) {
