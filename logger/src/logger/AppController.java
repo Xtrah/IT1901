@@ -2,6 +2,7 @@ package logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -51,6 +52,10 @@ public class AppController {
         forceNumberInput(inputMin1, 2);
         forceNumberInput(inputMin2, 2);
         forceNumberInput(inputPhone, 8);
+
+        // DUMMY-INFO for choice boxes
+        dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
+        dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
         
         // For Visit log 
         // Make column
