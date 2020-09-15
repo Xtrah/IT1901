@@ -1,5 +1,8 @@
 package logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -30,14 +33,14 @@ public class AppController {
     @FXML private Button buttonRegister;
     @FXML private Label helperText;
 
-    private void forceNumberInput(TextField fxidName) {
+    private void forceNumberInput(TextField fxidName, int maxLength) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
             // Only allow digits
             if (!newValue.matches("\\d*")) {
                 fxidName.setText(newValue.replaceAll("[^\\d]", ""));
             }
             // Only allow 2 digits
-            if (newValue.length() > 2) {
+            if (newValue.length() > maxLength) {
                 fxidName.setText(oldValue);
             }
         });
@@ -47,12 +50,17 @@ public class AppController {
     @FXML
     void initialize() {
         // Adding listeners to time-inputs;
-        forceNumberInput(inputHour1);
-        forceNumberInput(inputHour2);
-        forceNumberInput(inputMin1);
-        forceNumberInput(inputMin2);
+        forceNumberInput(inputHour1, 2);
+        forceNumberInput(inputHour2, 2);
+        forceNumberInput(inputMin1, 2);
+        forceNumberInput(inputMin2, 2);
+        forceNumberInput(inputPhone, 8);
 
-        // For Visit log
+        // DUMMY-INFO for choice boxes
+        dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
+        dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
+        
+        // For Visit log 
         // Make column
         TableColumn<String, Visit> nameCol = new TableColumn<>("Name");
         // Listen to value 'name' in class 'Visit'
@@ -121,6 +129,18 @@ public class AppController {
         buttonRegister.setDisable(false);
         helperText.setText("");
 
+        // Validate name
+        if (!inputName.getText().matches("^[a-zA-Z ]*$")){
+            buttonRegister.setDisable(true);
+            helperText.setText("Names can only contain characters!");
+        }
+
+        // Validate phone
+        if (!inputPhone.getText().matches("^[0-9]{8}$")){
+            buttonRegister.setDisable(true);
+            helperText.setText("Number must be eight digits!");
+        }
+
         // Checking all values. If valid, setting helper text
         if (!isValidTime()) {
             buttonRegister.setDisable(true);
@@ -130,6 +150,13 @@ public class AppController {
             buttonRegister.setDisable(true);
             helperText.setText("Write values in all boxes!");
         }
+
+        // Validate date
+        if (LocalDate.now().isBefore(inputDate.getValue())){
+            buttonRegister.setDisable(true);
+            helperText.setText("Can't set future visits!");
+        }
+
     }
 
     private boolean isEmptyString(String str) {
@@ -140,9 +167,11 @@ public class AppController {
         return isEmptyString(inputName.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(inputPhone.getText())
-                //|| isEmptyString(dropdownBuilding.getValue())
-                //|| isEmptyString(dropdownRoom.getValue())
-                || getDate() == null;
+                || isEmptyString(dropdownBuilding.getValue())
+                || isEmptyString(dropdownRoom.getValue())
+                || getDate() == null
+        ) return true;
+        return false;
     }
 
     LocalDate getDate (){
