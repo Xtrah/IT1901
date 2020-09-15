@@ -133,7 +133,7 @@ public class AppController {
         // Validate phone
         if (!inputPhone.getText().matches("^[0-9]{8}$")){
             buttonRegister.setDisable(true);
-            helperText.setText("Invalid phone number!");
+            helperText.setText("Number must be eight digits!");
         }
 
         // Checking all values. If valid, setting helper text

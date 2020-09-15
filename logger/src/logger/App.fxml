@@ -18,7 +18,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="inputName" layoutX="50.0" layoutY="99.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="270.0" promptText="Name" />
-                        <TextField fx:id="inputPhone" layoutX="50.0" layoutY="149.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="270.0" promptText="Phone" />
+                        <TextField fx:id="inputPhone" layoutX="50.0" layoutY="149.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="270.0" promptText="Phone (8 digits)" />
                         <ChoiceBox fx:id="dropdownBuilding" layoutX="95.0" layoutY="228.0" onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0" />
                         <ChoiceBox fx:id="dropdownRoom" layoutX="95.0" layoutY="275.0" onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0" />
                         <TextField fx:id="inputHour1" alignment="CENTER" layoutX="75.0" layoutY="428.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
