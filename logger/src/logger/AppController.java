@@ -28,14 +28,14 @@ public class AppController {
     @FXML private Button buttonRegister;
     @FXML private Label helperText;
 
-    private void forceNumberInput(TextField fxidName) {
+    private void forceNumberInput(TextField fxidName, int maxLenght) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
             // Only allow digits
             if (!newValue.matches("\\d*")) {
                 fxidName.setText(newValue.replaceAll("[^\\d]", ""));
             }
             // Only allow 2 digits
-            if (newValue.length() > 2) {
+            if (newValue.length() > maxLenght) {
                 fxidName.setText(oldValue);
             }
         });
@@ -46,10 +46,10 @@ public class AppController {
     void initialize() {
         System.out.println("Initialized!");
         // Adding listeners to time-inputs;
-        forceNumberInput(inputHour1);
-        forceNumberInput(inputHour2);
-        forceNumberInput(inputMin1);
-        forceNumberInput(inputMin2);
+        forceNumberInput(inputHour1, 2);
+        forceNumberInput(inputHour2, 2);
+        forceNumberInput(inputMin1, 2);
+        forceNumberInput(inputMin2, 2);
         
         // For Visit log 
         // Make column
