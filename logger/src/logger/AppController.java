@@ -1,20 +1,14 @@
 package logger;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AppController {
 
@@ -49,6 +43,8 @@ public class AppController {
 
     @FXML
     void initialize() {
+        buttonRegister.setDisable(true);
+
         // Adding listeners to time-inputs;
         forceNumberInput(inputHour1, 2);
         forceNumberInput(inputHour2, 2);
@@ -140,11 +136,12 @@ public class AppController {
             helperText.setText("Number must be eight digits!");
         }
 
-        // Checking all values. If valid, setting helper text
+        // Validate time
         if (!isValidTime()) {
             buttonRegister.setDisable(true);
             helperText.setText("Invalid time input!");
         }
+        // Check if values are empty
         if (lackingValues()) {
             buttonRegister.setDisable(true);
             helperText.setText("Write values in all boxes!");
