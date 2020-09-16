@@ -151,7 +151,7 @@ public class AppController {
         }
 
         // Validate date
-        if (LocalDate.now().isBefore(inputDate.getValue())){
+        if (inputDate.getValue() != null && LocalDate.now().isBefore(inputDate.getValue())){
             buttonRegister.setDisable(true);
             helperText.setText("Can't set future visits!");
         }
