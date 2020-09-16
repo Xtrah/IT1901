@@ -91,11 +91,10 @@ public class AppController {
         tableView.getColumns().addAll(nameCol, phoneCol,
                 buildingCol, roomCol,fromTimeCol, toTimeCol);
 
+        log = new VisitLog();
         if (new File("logger/src/logger/log.json").exists()) {
-            log = new VisitLog(VisitLog.readFromFile("logger/src/logger/log.json"));
+            log.readFromFile("logger/src/logger/log.json");
             updateTable();
-        } else {
-            log = new VisitLog();
         }
 
         System.out.println("Initialized!");
