@@ -129,7 +129,7 @@ public class AppController {
         helperText.setText("");
 
         // Validate name
-        if (!inputName.getText().matches("^[a-zA-Z ]*$")){
+        if (!inputName.getText().matches("^[a-zA-ZæøåÆØÅ]*$")){
             buttonRegister.setDisable(true);
             helperText.setText("Names can only contain characters!");
         }
