@@ -26,6 +26,7 @@ public class VisitLog {
 
     public void addVisit(Visit visit) {
         log.add(visit);
+        writeToFile("logger/src/logger/log.json");
     }
 
     public void writeToFile(String filepath) {
