@@ -43,6 +43,7 @@ public class AppController {
 
     @FXML
     void initialize() {
+
         buttonRegister.setDisable(true);
 
         // Adding listeners to time-inputs;
@@ -88,10 +89,7 @@ public class AppController {
                 buildingCol, roomCol,fromTimeCol, toTimeCol);
 
         log = new VisitLog();
-        if (new File("logger/src/logger/log.json").exists()) {
-            log.readFromFile("logger/src/logger/log.json");
-            updateTable();
-        }
+        log.readFromFile();
 
         System.out.println("Initialized!");
     }
