@@ -1,11 +1,13 @@
-package logger;
+package test.java.logger.core;
 
+import main.java.logger.core.Visit;
+import main.java.logger.core.VisitLog;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,7 +40,7 @@ class VisitLogTest {
             System.out.println("File deleted successfully");
         else {
             System.out.println("Couldn't delete file");
-            fail();
+            Assertions.fail();
         }
     }
 
@@ -47,7 +49,7 @@ class VisitLogTest {
         log.writeToFile(FILEPATH);
 
         File file = new File(FILEPATH);
-        assertTrue(file.exists());
+        Assertions.assertTrue(file.exists());
     }
 
     @Test

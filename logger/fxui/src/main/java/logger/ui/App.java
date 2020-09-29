@@ -1,4 +1,4 @@
-package logger;
+package main.java.logger.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class App extends Application {
 
   @Override
   public void start(final Stage primaryStage) throws Exception {
-    final Parent parent = FXMLLoader.load(getClass().getResource("App.fxml"));
+    final Parent parent = FXMLLoader.load(getClass().getResource("../../fxui/src/main/resources/logger/ui/App.fxml"));
     primaryStage.setTitle("Logger");
     primaryStage.setScene(new Scene(parent));
     primaryStage.show();

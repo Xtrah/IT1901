@@ -1,4 +1,4 @@
-package logger;
+package main.java.logger.core;
 
 import java.time.LocalDateTime;
 
