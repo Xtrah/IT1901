@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VisitLog {
 
-    private static final String DEFAULT_FILEPATH = "src/logger/log.json";
+    private static final String DEFAULT_FILEPATH = "logger/src/logger/log.json";
 
     private List<Visit> log;
 
