@@ -5,13 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class AppController {
-
     private VisitLog log;
 
     @FXML private TableView tableView;
@@ -39,7 +36,6 @@ public class AppController {
             }
         });
     }
-
 
     @FXML
     void initialize() {
@@ -101,9 +97,10 @@ public class AppController {
         String building = dropdownBuilding.getValue();
         String room = dropdownRoom.getValue();
 
-        int year = getDate().getYear();
-        int month = getDate().getMonthValue();
-        int day = getDate().getDayOfMonth();
+        LocalDate pickedDate = inputDate.getValue();
+        int year = pickedDate.getYear();
+        int month = pickedDate.getMonthValue();
+        int day = pickedDate.getDayOfMonth();
         int hour1 = Integer.parseInt(inputHour1.getText());
         int min1 = Integer.parseInt(inputMin1.getText());
         int hour2 = Integer.parseInt(inputHour2.getText());
@@ -123,19 +120,24 @@ public class AppController {
         helperText.setText("");
 
         // Validate name
-        if (!inputName.getText().matches("^[a-zA-ZæøåÆØÅ ]*$")){
+        if (!Visit.isValidName(inputName.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Names can only contain characters!");
         }
 
         // Validate phone
-        if (!inputPhone.getText().matches("^[0-9]{8}$")){
+        if (!Visit.isValidPhone(inputPhone.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Number must be eight digits!");
         }
 
         // Validate time
-        if (!isValidTime()) {
+        // Format from text to LocalTime, and check if LocalTime is valid
+        if (!Visit.isValidTime(
+                Visit.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
+                Visit.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
+        )
+        ) {
             buttonRegister.setDisable(true);
             helperText.setText("Invalid time input!");
         }
@@ -146,7 +148,7 @@ public class AppController {
         }
 
         // Validate date
-        if (inputDate.getValue() != null && LocalDate.now().isBefore(inputDate.getValue())){
+        if (inputDate.getValue() != null && inputDate.getValue().isAfter(LocalDate.now())){
             buttonRegister.setDisable(true);
             helperText.setText("Can't set future visits!");
         }
@@ -164,43 +166,8 @@ public class AppController {
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(dropdownBuilding.getValue())
                 || isEmptyString(dropdownRoom.getValue())
-                || getDate() == null
+                || inputDate.getValue() == null
         );
-    }
-
-    LocalDate getDate (){
-        return inputDate.getValue();
-    }
-
-    LocalTime getFromTime() {
-        if (isTimeString(inputHour1.getText(), inputMin1.getText())){
-            int hour1 = Integer.parseInt(inputHour1.getText());
-            int min1 = Integer.parseInt(inputMin1.getText());
-            return LocalTime.of(hour1, min1);
-        }
-        return null;
-    }
-    LocalTime getToTime() {
-        if (isTimeString(inputHour2.getText(), inputMin2.getText())){
-            int hour2 = Integer.parseInt(inputHour2.getText());
-            int min2 = Integer.parseInt(inputMin2.getText());
-            return LocalTime.of(hour2, min2);
-        }
-        return null;
-
-    }
-
-    private boolean isTimeString (String hours, String minutes) {
-        String timeString = hours + ':' + minutes;
-        // Check if hours are between 0-23 and minutes between 0-59
-        return timeString.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
-    }
-
-    private boolean isValidTime () {
-        if (getFromTime() != null && getToTime() != null){
-            return getFromTime().isBefore(getToTime());
-        }
-        return false;
     }
 
     private void updateTable() {
