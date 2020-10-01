@@ -1,4 +1,4 @@
-package logger;
+package logger.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VisitLog {
 
-    private static final String DEFAULT_FILEPATH = "logger/src/logger/log.json";
+    private static final String DEFAULT_FILEPATH = "logger/log.json";
 
     private List<Visit> log;
 

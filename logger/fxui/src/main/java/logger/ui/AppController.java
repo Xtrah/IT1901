@@ -1,9 +1,11 @@
-package logger;
+package logger.ui;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import logger.core.Visit;
+import logger.core.VisitLog;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
