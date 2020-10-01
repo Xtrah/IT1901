@@ -1,7 +1,5 @@
-package test.java.logger.core;
+package logger.core;
 
-import main.java.logger.core.Visit;
-import main.java.logger.core.VisitLog;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
