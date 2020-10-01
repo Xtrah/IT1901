@@ -6,9 +6,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class VisitLog {
+public class VisitLog implements Iterable<Visit> {
 
     private static final String DEFAULT_FILEPATH = "logger/log.json";
 
@@ -28,7 +29,6 @@ public class VisitLog {
 
     public void addVisit(Visit visit) {
         log.add(visit);
-        writeToFile();
     }
 
     public void writeToFile() {
@@ -74,5 +74,29 @@ public class VisitLog {
         return "VisitLog{" +
                 "log=" + log +
                 '}';
+    }
+
+    @Override
+    public Iterator<Visit> iterator() {
+        return log.iterator();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof VisitLog)) return false;
+
+        VisitLog other = (VisitLog) obj;
+        if (other.getLog() == null) return false;
+
+        if (this.getLog().size() != other.getLog().size()) return false;
+
+        Iterator<Visit> it = this.iterator();
+        Iterator<Visit> oit = other.iterator();
+        while (it.hasNext()) {
+            Visit v1 = it.next();
+            Visit v2 = oit.next();
+            if (! v1.equals(v2)) return false;
+        }
+        return true;
     }
 }
