@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import logger.core.Visit;
 import logger.core.VisitLog;
+import logger.json.VisitLogModule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,6 +66,7 @@ public class VisitLogModuleTest {
             assertTrue(json.contains("room"));
             assertTrue(json.contains("from"));
             assertTrue(json.contains("to"));
+            System.out.println(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             fail();
@@ -81,6 +83,5 @@ public class VisitLogModuleTest {
             e.printStackTrace();
             fail();
         }
-
     }
 }
