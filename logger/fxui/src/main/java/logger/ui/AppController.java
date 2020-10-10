@@ -39,6 +39,14 @@ public class AppController {
         });
     }
 
+    private void forceCharacterInput(TextField fxidName) {
+        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[a-zA-ZæøåÆØÅ ]*$")) {
+                fxidName.setText(newValue.replaceAll("[^a-zA-ZæøåÆØÅ ]*$", ""));
+            }
+        });
+    }
+
     @FXML
     void initialize() {
 
@@ -50,6 +58,7 @@ public class AppController {
         forceNumberInput(inputMin1, 2);
         forceNumberInput(inputMin2, 2);
         forceNumberInput(inputPhone, 8);
+        forceCharacterInput(inputName);
 
         // DUMMY-INFO for choice boxes
         dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
