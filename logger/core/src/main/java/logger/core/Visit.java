@@ -56,16 +56,16 @@ public class Visit {
         this.room = room;
     }
 
-    public String getFrom() {
-        return from.toString();
+    public LocalDateTime getFrom() {
+        return from;
     }
 
     public void setFrom(LocalDateTime from) {
         this.from = from;
     }
 
-    public String getTo() {
-        return to.toString();
+    public LocalDateTime getTo() {
+        return to;
     }
 
     public void setTo(LocalDateTime to) {
@@ -110,5 +110,23 @@ public class Visit {
                 ", from=" + from +
                 ", to=" + to +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof Visit)) return false;
+        Visit other = (Visit) obj;
+
+        return this.getName().equals(other.getName())
+                && this.getPhone().equals(other.getPhone())
+                && this.getBuilding().equals(other.getBuilding())
+                && this.getRoom().equals(other.getRoom())
+                && this.getTo().equals(other.getTo())
+                && this.getFrom().equals(other.getFrom());
+    }
+
+    @Override
+    public int hashCode() {
+        return 41;
     }
 }
