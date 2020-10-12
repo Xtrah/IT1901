@@ -37,6 +37,49 @@
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 					</configuration>
 				</plugin>
+
+				<!-- JaCoCo -->
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.8.6</version>
+					<configuration>
+						<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+						<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+					</configuration>
+					<executions>
+						<execution>
+                            <id>jacoco-prepare-agent</id>
+                            <phase>process-test-classes</phase>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>jacoco-report</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>com.github.spotbugs</groupId>
+					<artifactId>spotbugs-maven-plugin</artifactId>
+					<version>4.0.4</version>
+					<executions>
+						<execution>
+							<id>spotbugs-check</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
