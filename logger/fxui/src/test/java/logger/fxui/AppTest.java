@@ -32,15 +32,7 @@ public class AppTest extends ApplicationTest {
     }
 
     @Test
-    public void testPhoneInput1() {
-        TextField inputPhone = lookup("#inputPhone").query();
-        String text = "99rgk99rgkrg99rgk99";
-        clickOn("#inputPhone").write(text);
-        Assertions.assertEquals("99999999", inputPhone.getText());
-    }
-
-    @Test
-    public void testPhoneInput2() {
+    public void testPhoneInput() {
         TextField inputPhone = lookup("#inputPhone").query();
         String text = "99rgk99rgkrg99rgk99";
         clickOn("#inputPhone").write(text);
