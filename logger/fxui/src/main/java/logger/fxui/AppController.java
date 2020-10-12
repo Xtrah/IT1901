@@ -1,4 +1,4 @@
-package logger.ui;
+package logger.fxui;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
