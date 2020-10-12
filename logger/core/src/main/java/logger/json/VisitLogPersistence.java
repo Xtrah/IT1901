@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -22,7 +23,7 @@ public class VisitLogPersistence {
     }
   
     public VisitLog readVisitLog() {
-        try (Reader reader = new FileReader(DEFAULT_FILE)) {
+        try (Reader reader = new FileReader(DEFAULT_FILE, StandardCharsets.UTF_8)) {
             return mapper.readValue(reader, VisitLog.class);
         } catch (IOException e) {
             System.err.println("Something went wrong when reading from file");
@@ -32,7 +33,7 @@ public class VisitLogPersistence {
     }
   
     public void writeVisitLog(VisitLog todoModel) {
-        try (Writer writer = new FileWriter(DEFAULT_FILE)){
+        try (Writer writer = new FileWriter(DEFAULT_FILE, StandardCharsets.UTF_8)){
             mapper.writerWithDefaultPrettyPrinter().writeValue(writer, todoModel);
         } catch (IOException e) {
             System.err.println("Something went wrong when writing to file.");
