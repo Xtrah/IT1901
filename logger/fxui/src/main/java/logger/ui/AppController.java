@@ -6,12 +6,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Visit;
 import logger.core.VisitLog;
+import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AppController {
     private VisitLog log;
+    private VisitLogPersistence persistence;
 
     @FXML private TableView tableView;
     @FXML private TextField inputName;
@@ -95,8 +97,9 @@ public class AppController {
         tableView.getColumns().addAll(nameCol, phoneCol,
                 buildingCol, roomCol,fromTimeCol, toTimeCol);
 
-        log = new VisitLog();
-        log.readFromFile();
+        persistence = new VisitLogPersistence();
+        log = persistence.readVisitLog();
+        updateTable();
 
         System.out.println("Initialized!");
     }
@@ -184,5 +187,6 @@ public class AppController {
     private void updateTable() {
         tableView.getItems().clear();
         tableView.getItems().addAll(log.getLog());
+        persistence.writeVisitLog(log);
     }
 }

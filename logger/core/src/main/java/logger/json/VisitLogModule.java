@@ -6,6 +6,7 @@ import logger.core.VisitLog;
 
 public class VisitLogModule extends SimpleModule {
 
+    private static final long serialVersionUID = 1L;
     private static final String NAME = "VisitLogModule";
 
     public VisitLogModule() {
