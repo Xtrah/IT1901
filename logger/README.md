@@ -31,4 +31,4 @@ Other features of the controller are validation and checks for the input fields.
 Lastly, it is the controller that creates both the instance of Visit and VisitLog.
 AppController.java is solely dependent on VisitLog to exist and work for the test to run. This is also true for the VisitLogTest class. VisitLog is further dependent on the Visit class.
 
-On a conceptual level you could say that you need the concept of visits to comprehend the idea og a visit log. The controller and the test class depends on this also as they directly work using the Visit log, which uses Visit.
+On a conceptual level you could say that you need the concept of visits to comprehend the idea of a visit log. The controller and the test class also depends on this as they directly work by using the Visit log, which uses Visit.
