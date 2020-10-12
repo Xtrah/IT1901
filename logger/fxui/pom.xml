@@ -60,7 +60,7 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<argLine>--add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
+					<argLine>@{argLine} -Xmx1024m --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
 				</configuration>
 			</plugin>
 
