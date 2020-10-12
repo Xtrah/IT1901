@@ -99,4 +99,9 @@ public class VisitLog implements Iterable<Visit> {
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        return 42;
+    }
 }

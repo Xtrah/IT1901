@@ -124,4 +124,9 @@ public class Visit {
                 && this.getTo().equals(other.getTo())
                 && this.getFrom().equals(other.getFrom());
     }
+
+    @Override
+    public int hashCode() {
+        return 41;
+    }
 }
