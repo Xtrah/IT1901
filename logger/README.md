@@ -12,3 +12,8 @@ The purpose of the app is to register a user's visits to rooms and see an overvi
 
 ![UI register view](https://i.imgur.com/gxikIqa.png)
 ![UI visit log view](https://i.imgur.com/UYIaMtT.png)
+
+## Class Diagram
+
+![PlantUML class diagram](../PlantUML_diagram.png)
+
