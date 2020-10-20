@@ -5,20 +5,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import logger.fxui.AppController;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
 public class AppTest extends ApplicationTest {
-    private AppController controller;
 
     @Override
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
         final Parent root = loader.load();
-        this.controller = loader.getController();
         stage.setScene(new Scene(root));
         stage.show();
     }
