@@ -10,12 +10,16 @@ import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class AppController {
     private VisitLog log;
     private VisitLogPersistence persistence;
 
-    @FXML private TableView tableView;
+
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
     @FXML private ChoiceBox<String> dropdownBuilding;
@@ -27,6 +31,11 @@ public class AppController {
     @FXML private TextField inputMin2;
     @FXML private Button buttonRegister;
     @FXML private Label helperText;
+
+    // Visit Log
+    @FXML private TableView tableView;
+    @FXML private TextField searchField;
+    @FXML private ChoiceBox<String> chooseSearch;
 
     private void forceNumberInput(TextField fxidName, int maxLength) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -97,6 +106,8 @@ public class AppController {
         tableView.getColumns().addAll(nameCol, phoneCol,
                 buildingCol, roomCol,fromTimeCol, toTimeCol);
 
+        // Observe searchField and update table when interacted with (key typed)
+
         persistence = new VisitLogPersistence();
         log = persistence.readVisitLog();
         updateTable();
@@ -123,6 +134,8 @@ public class AppController {
         LocalDateTime fromTime = LocalDateTime.of(year, month, day, hour1, min1);
         LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
+        // Handling VisitLog
+        chooseSearch.getItems().addAll(FXCollections.observableArrayList("Name", "Phone"));
         log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
         updateTable();
     }
@@ -183,6 +196,35 @@ public class AppController {
                 || inputDate.getValue() == null
         );
     }
+
+    // Navn -
+    // Ønsker å hente ut data fra input felt og sammenligne dette med valgt attribut fra Visits i VisitLog.
+    // Returnerer visits som går gjennom sammenligningen
+
+    @FXML private void filterVisitLog() {
+        String searchInput = searchField.getText();
+        String searchKey = chooseSearch.getValue();
+
+        List<Visit> allVisits = log.getLog();
+        List<Visit> result = null;
+        if (searchKey.equals("Name")) {
+            result = allVisits
+                    .stream()
+                    .filter(visit -> visit.getName().contains(searchInput))
+                    .collect(Collectors.toList());
+        }
+        if (searchKey.equals("Phone")) {
+            result = allVisits
+                    .stream()
+                    .filter(visit -> visit.getPhone().contains(searchInput))
+                    .collect(Collectors.toList());
+        }
+
+        tableView.getItems().clear();
+        tableView.getItems().addAll(result);
+    }
+
+
 
     private void updateTable() {
         tableView.getItems().clear();
