@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+import static junit.framework.Assert.assertEquals;
 
 public class AppTest extends ApplicationTest {
 
@@ -55,6 +56,6 @@ public class AppTest extends ApplicationTest {
         clickOn("#buttonRegister");
         clickOn("#visitTab");
         int tableSizeAfter = tableView.getItems().size();
-        Assertions.assertEquals(tableSizeBefore, tableSizeAfter - 1);
+        assertEquals(tableSizeBefore, tableSizeAfter - 1);
     }
 }
