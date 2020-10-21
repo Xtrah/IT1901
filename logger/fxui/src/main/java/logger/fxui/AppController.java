@@ -121,7 +121,9 @@ public class AppController {
         tableView.getColumns().addAll(nameCol, phoneCol,
                 buildingCol, roomCol,fromTimeCol, toTimeCol);
 
-        // Observe searchField and update table when interacted with (key typed)
+        // Add dropdown alternatives to filter
+        chooseSearch.getItems().addAll(FXCollections.observableArrayList(
+                "Name", "Phone", "Building", "Room"));
 
         persistence = new VisitLogPersistence();
         log = persistence.readVisitLog();
@@ -131,7 +133,7 @@ public class AppController {
     }
 
     @FXML
-    void registerVisit() throws InterruptedException {
+    void registerVisit() {
         String name = inputName.getText();
         String phone = inputPhone.getText();
         String building = dropdownBuilding.getValue();
@@ -150,8 +152,6 @@ public class AppController {
         LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
         // Handling VisitLog
-        chooseSearch.getItems().addAll(FXCollections.observableArrayList(
-                "Name", "Phone", "Building", "Room"));
         log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
         updateTable();
 
