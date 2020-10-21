@@ -1,9 +1,12 @@
 package logger.fxui;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,5 +36,26 @@ public class AppTest extends ApplicationTest {
         String text = "99rgk99rgkrg99rgk99";
         clickOn("#inputPhone").write(text);
         Assertions.assertEquals("99999999", inputPhone.getText());
+    }
+
+    @Test
+    public void testRegisterVisit() {
+        clickOn("#visitTab");
+        TableView tableView = lookup("#tableView").queryTableView();
+        int tableSizeBefore = tableView.getItems().size();
+        clickOn("#registerTab");
+        clickOn("#inputName").write("Kari Traa");
+        clickOn("#inputPhone").write("69696969");
+        clickOn("#dropdownBuilding").type(KeyCode.ENTER);
+        clickOn("#dropdownRoom").type(KeyCode.ENTER);
+        clickOn("#inputDate").write("20.10.2020").type(KeyCode.ENTER);
+        clickOn("#inputHour1").write("13");
+        clickOn("#inputMin1").write("37");
+        clickOn("#inputHour2").write("13");
+        clickOn("#inputMin2").write("38");
+        clickOn("#buttonRegister");
+        clickOn("#visitTab");
+        int tableSizeAfter = tableView.getItems().size();
+        Assertions.assertEquals(tableSizeBefore, tableSizeAfter - 1);
     }
 }
