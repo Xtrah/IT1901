@@ -10,6 +10,7 @@ import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,10 @@ public class AppController {
     @FXML private TableView tableView;
     @FXML private TextField searchField;
     @FXML private ChoiceBox<String> chooseSearch;
+    @FXML private Label logFromDateLabel;
+    @FXML private DatePicker logFromDate;
+    @FXML private Label logToDateLabel;
+    @FXML private DatePicker logToDate;
 
     private void resetInputs() {
         inputName.setText("");
@@ -68,7 +73,6 @@ public class AppController {
             }
         });
     }
-
 
     @FXML
     void initialize() {
@@ -123,7 +127,7 @@ public class AppController {
 
         // Add dropdown alternatives to filter
         chooseSearch.getItems().addAll(FXCollections.observableArrayList(
-                "Name", "Phone", "Building", "Room"));
+                "Name", "Phone", "Building", "Room", "Date"));
 
         persistence = new VisitLogPersistence();
         log = persistence.readVisitLog();
@@ -216,16 +220,12 @@ public class AppController {
         );
     }
 
-    // Navn -
-    // Ønsker å hente ut data fra input felt og sammenligne dette med valgt attribut fra Visits i VisitLog.
-    // Returnerer visits som går gjennom sammenligningen
-
     @FXML private void filterVisitLog() {
         String searchInput = searchField.getText();
         String searchKey = chooseSearch.getValue();
 
         List<Visit> allVisits = log.getLog();
-        List<Visit> result = null;
+        List<Visit> result = new ArrayList<>();
 
         if (searchKey.equals("Name")) {
             result = allVisits
@@ -252,6 +252,15 @@ public class AppController {
             result = allVisits
                     .stream()
                     .filter(visit -> visit.getRoom().contains(searchInput))
+                    .collect(Collectors.toList());
+        }
+
+        if (searchKey.equals("Date") && logFromDate.getValue() != null && logToDate.getValue() != null) {
+            result = allVisits
+                    .stream()
+                    .filter(visit -> logFromDate.getValue().isBefore(visit.getFrom().toLocalDate()) &&
+                            logToDate.getValue().isAfter(visit.getTo().toLocalDate())
+                    )
                     .collect(Collectors.toList());
         }
 
