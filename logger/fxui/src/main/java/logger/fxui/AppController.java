@@ -10,9 +10,7 @@ import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class AppController {
@@ -37,6 +35,19 @@ public class AppController {
     @FXML private TextField searchField;
     @FXML private ChoiceBox<String> chooseSearch;
 
+    private void resetInputs() {
+        inputName.setText("");
+        inputPhone.setText("");
+        dropdownBuilding.getSelectionModel().clearSelection();
+        dropdownRoom.getSelectionModel().clearSelection();
+        inputDate.setValue(LocalDate.now());
+        inputHour1.setText("");
+        inputMin1.setText("");
+        inputHour2.setText("");
+        inputMin2.setText("");
+        buttonRegister.setDisable(true);
+    }
+
     private void forceNumberInput(TextField fxidName, int maxLength) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
             // Only allow digits
@@ -58,6 +69,7 @@ public class AppController {
         });
     }
 
+
     @FXML
     void initialize() {
 
@@ -74,6 +86,9 @@ public class AppController {
         // DUMMY-INFO for choice boxes
         dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
         dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
+
+        // Set date to today by default
+        inputDate.setValue(LocalDate.now());
         
         // For Visit log 
         // Make column
@@ -116,7 +131,7 @@ public class AppController {
     }
 
     @FXML
-    void registerVisit(){
+    void registerVisit() throws InterruptedException {
         String name = inputName.getText();
         String phone = inputPhone.getText();
         String building = dropdownBuilding.getValue();
@@ -139,6 +154,9 @@ public class AppController {
                 "Name", "Phone", "Building", "Room"));
         log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
         updateTable();
+
+        resetInputs();
+        helperText.setText("Successfully registered!");
     }
 
     @FXML

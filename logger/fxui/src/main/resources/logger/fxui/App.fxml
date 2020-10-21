@@ -42,7 +42,7 @@
                         <Label layoutX="39.0" layoutY="232.0" text="Building:" />
                         <Label layoutX="50.0" layoutY="280.0" text="Room:" />
                         <Label layoutX="57.0" layoutY="360.0" text="Date:" />
-                        <Label fx:id="helperText" layoutX="57.0" layoutY="461.0" prefHeight="17.0" prefWidth="267.0" />
+                        <Label fx:id="helperText" alignment="CENTER" layoutX="51.0" layoutY="461.0" prefHeight="17.0" prefWidth="267.0" />
                      </children>
                   </AnchorPane>
                </content>
