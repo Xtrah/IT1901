@@ -4,13 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import logger.core.Building;
 import logger.core.Visit;
 import logger.core.VisitLog;
+import logger.json.BuildingReader;
 import logger.json.VisitLogPersistence;
+import org.apache.maven.model.Build;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class AppController {
     private VisitLog log;
@@ -19,7 +26,7 @@ public class AppController {
     @FXML private TableView tableView;
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
-    @FXML private ChoiceBox<String> dropdownBuilding;
+    @FXML private ChoiceBox<Building> dropdownBuilding;
     @FXML private ChoiceBox<String> dropdownRoom;
     @FXML private DatePicker inputDate;
     @FXML private TextField inputHour1;
@@ -63,6 +70,12 @@ public class AppController {
         });
     }
 
+    @FXML
+    void fillDropdownRoom(){
+        Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
+        dropdownRoom.getItems().addAll(FXCollections.observableArrayList(selectedBuilding.getRooms()));
+    }
+
 
     @FXML
     void initialize() {
@@ -78,8 +91,21 @@ public class AppController {
         forceCharacterInput(inputName);
 
         // DUMMY-INFO for choice boxes
-        dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
-        dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
+        //dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
+        //dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
+
+        try {
+            List<Building> buildings = BuildingReader.readBuildings();
+            dropdownBuilding.getItems().addAll(buildings);
+        }
+        catch (IOException e){
+            dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
+        }
+
+        // Get all buildings and make them available to the user through the UI
+        // Make the corresponding rooms available as the user selects a building
+
+
 
         // Set date to today by default
         inputDate.setValue(LocalDate.now());
@@ -126,7 +152,7 @@ public class AppController {
     void registerVisit() throws InterruptedException {
         String name = inputName.getText();
         String phone = inputPhone.getText();
-        String building = dropdownBuilding.getValue();
+        String building = dropdownBuilding.getValue().getName();
         String room = dropdownRoom.getValue();
 
         LocalDate pickedDate = inputDate.getValue();
@@ -199,7 +225,7 @@ public class AppController {
                 isEmptyString(inputName.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(inputPhone.getText())
-                || isEmptyString(dropdownBuilding.getValue())
+                || isEmptyString(dropdownBuilding.getValue().getName())
                 || isEmptyString(dropdownRoom.getValue())
                 || inputDate.getValue() == null
         );
