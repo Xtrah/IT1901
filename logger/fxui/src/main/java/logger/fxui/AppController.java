@@ -135,7 +135,8 @@ public class AppController {
         LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
         // Handling VisitLog
-        chooseSearch.getItems().addAll(FXCollections.observableArrayList("Name", "Phone"));
+        chooseSearch.getItems().addAll(FXCollections.observableArrayList(
+                "Name", "Phone", "Building", "Room"));
         log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
         updateTable();
     }
@@ -207,16 +208,32 @@ public class AppController {
 
         List<Visit> allVisits = log.getLog();
         List<Visit> result = null;
+
         if (searchKey.equals("Name")) {
             result = allVisits
                     .stream()
                     .filter(visit -> visit.getName().contains(searchInput))
                     .collect(Collectors.toList());
         }
+
         if (searchKey.equals("Phone")) {
             result = allVisits
                     .stream()
                     .filter(visit -> visit.getPhone().contains(searchInput))
+                    .collect(Collectors.toList());
+        }
+
+        if (searchKey.equals("Building")) {
+            result = allVisits
+                    .stream()
+                    .filter(visit -> visit.getBuilding().contains(searchInput))
+                    .collect(Collectors.toList());
+        }
+
+        if (searchKey.equals("Room")) {
+            result = allVisits
+                    .stream()
+                    .filter(visit -> visit.getRoom().contains(searchInput))
                     .collect(Collectors.toList());
         }
 
