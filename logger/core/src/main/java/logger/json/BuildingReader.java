@@ -13,6 +13,7 @@ public class BuildingReader {
     private static File fileURL = new File("../resources/logger/json/buildings.json");
 
     public static List<Building> readBuildings() throws IOException {
+        System.out.println(fileURL.getAbsolutePath());
         return new ArrayList<>(List.of(mapper.readValue(fileURL, Building[].class )));
     }
 }

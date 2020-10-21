@@ -95,6 +95,7 @@ public class AppController {
         //dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
 
         try {
+            //System.out.println(BuildingReader.fileURL.getAbsolutePath());
             List<Building> buildings = BuildingReader.readBuildings();
             dropdownBuilding.getItems().addAll(buildings);
         }

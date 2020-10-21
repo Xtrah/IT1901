@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Realfagsbygget",
+    "rooms": ["A3", "A4", "R7"]
+  },
+  {
+    "name": "Stripa",
+    "rooms": ["S1", "S3", "S5"]
+  }
+]
