@@ -51,15 +51,21 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableView" layoutX="1.0" layoutY="106.0" prefHeight="398.0" prefWidth="370.0">
+                        <TableView fx:id="tableView" layoutX="1.0" layoutY="162.0" prefHeight="342.0" prefWidth="370.0">
                           <columns>
                           </columns>
                         </TableView>
-                        <Label layoutX="150.0" layoutY="36.0" text="Visit Log">
+                        <Label layoutX="150.0" layoutY="25.0" text="Visit Log">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <ChoiceBox fx:id="chooseSearch" layoutX="14.0" layoutY="66.0" prefHeight="26.0" prefWidth="158.0" onAction="#filterVisitLog" />
+                        <TextField fx:id="searchField" layoutX="208.0" layoutY="66.0" onKeyTyped="#filterVisitLog" prefHeight="26.0" prefWidth="150.0" promptText="Search" />
+                        <DatePicker fx:id="logFromDate" layoutX="11.0" layoutY="128.0" prefHeight="25.0" prefWidth="162.0" onAction="#filterVisitLog" />
+                        <DatePicker fx:id="logToDate" layoutX="209.0" layoutY="128.0" prefHeight="25.0" prefWidth="147.0" onAction="#filterVisitLog" />
+                        <Label fx:id="logFromDateLabel" layoutX="14.0" layoutY="104.0" prefHeight="17.0" prefWidth="89.0" text="From date" />
+                        <Label fx:id="logToDateLabel" layoutX="209.0" layoutY="104.0" prefHeight="17.0" prefWidth="89.0" text="To date" />
                      </children></AnchorPane>
                </content>
             </Tab>
