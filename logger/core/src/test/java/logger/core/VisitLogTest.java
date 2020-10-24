@@ -18,6 +18,9 @@ class VisitLogTest {
     private Visit v1;
     private Visit v2;
 
+    /**
+     * Sets up sample Visit objects and a VisitLog object
+     */
     @BeforeEach
     void setUp() {
         v1 = new Visit("Ola Normann", "12345678", "Realfagsbygget", "A4-100",
