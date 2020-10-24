@@ -60,12 +60,13 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="chooseSearch" layoutX="14.0" layoutY="66.0" prefHeight="26.0" prefWidth="158.0" onAction="#filterVisitLog" />
+                        <ChoiceBox fx:id="chooseSearch" layoutX="14.0" layoutY="66.0" onAction="#filterVisitLog" prefHeight="26.0" prefWidth="158.0" />
                         <TextField fx:id="searchField" layoutX="208.0" layoutY="66.0" onKeyTyped="#filterVisitLog" prefHeight="26.0" prefWidth="150.0" promptText="Search" />
-                        <DatePicker fx:id="logFromDate" layoutX="11.0" layoutY="128.0" prefHeight="25.0" prefWidth="162.0" onAction="#filterVisitLog" />
-                        <DatePicker fx:id="logToDate" layoutX="209.0" layoutY="128.0" prefHeight="25.0" prefWidth="147.0" onAction="#filterVisitLog" />
+                        <DatePicker fx:id="logFromDate" layoutX="11.0" layoutY="128.0" onAction="#filterVisitLog" prefHeight="25.0" prefWidth="162.0" />
+                        <DatePicker fx:id="logToDate" layoutX="209.0" layoutY="128.0" onAction="#filterVisitLog" prefHeight="25.0" prefWidth="147.0" />
                         <Label fx:id="logFromDateLabel" layoutX="14.0" layoutY="104.0" prefHeight="17.0" prefWidth="89.0" text="From date" />
                         <Label fx:id="logToDateLabel" layoutX="209.0" layoutY="104.0" prefHeight="17.0" prefWidth="89.0" text="To date" />
+                        <Button fx:id="deleteButton" layoutX="306.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteVisit" text="Delete" />
                      </children></AnchorPane>
                </content>
             </Tab>

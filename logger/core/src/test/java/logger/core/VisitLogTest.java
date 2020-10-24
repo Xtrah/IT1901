@@ -53,4 +53,12 @@ class VisitLogTest {
         VisitLog newLog = new VisitLog(log.getLog());
         assertEquals(log, newLog);
     }
+
+    @Test
+    void testRemoveVisit() {
+        log.addVisit(v1);
+        log.addVisit(v2);
+        log.removeVisit(v1);
+        assertEquals(log.getLog().size(), 1);
+    }
 }
