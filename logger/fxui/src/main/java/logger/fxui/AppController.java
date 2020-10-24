@@ -16,7 +16,7 @@ public class AppController {
     private VisitLog log;
     private VisitLogPersistence persistence;
 
-    @FXML private TableView tableView;
+    @SuppressWarnings("rawtypes") @FXML private TableView tableView;
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
     @FXML private ChoiceBox<String> dropdownBuilding;

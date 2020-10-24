@@ -16,7 +16,7 @@
    <children>
       <TabPane layoutX="3.0" layoutY="14.0" prefHeight="590.0" prefWidth="370.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab text=" Register ">
+            <Tab fx:id="registerTab" text=" Register ">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -47,7 +47,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text=" Visit Log ">
+            <Tab fx:id="visitTab" text=" Visit Log ">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
