@@ -3,6 +3,7 @@ package logger.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VisitLog implements Iterable<Visit> {
 
@@ -22,6 +23,16 @@ public class VisitLog implements Iterable<Visit> {
 
     public void addVisit(Visit visit) {
         log.add(visit);
+    }
+
+    public void removeVisit(Visit visit) {
+        if (!log.contains(visit)) {
+            throw new IllegalArgumentException("Didn't find Visit in VisitLog");
+        }
+        log = log
+                .stream()
+                .filter(v -> visit.getId() != v.getId())
+                .collect(Collectors.toList());
     }
 
     @Override
