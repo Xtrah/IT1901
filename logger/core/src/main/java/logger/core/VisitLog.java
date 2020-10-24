@@ -31,7 +31,7 @@ public class VisitLog implements Iterable<Visit> {
         }
         log = log
                 .stream()
-                .filter(v -> visit.getId() != v.getId())
+                .filter(v -> !visit.getId().equals(v.getId()))
                 .collect(Collectors.toList());
     }
 

@@ -115,6 +115,7 @@ public class Visit {
                 ", room='" + room + '\'' +
                 ", from=" + from +
                 ", to=" + to +
+                ", id='" + id + '\'' +
                 '}';
     }
 
