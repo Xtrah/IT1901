@@ -7,11 +7,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Visit;
 import logger.core.VisitLog;
+import logger.fxui.validation.VisitValidation;
 import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppController {
@@ -182,22 +182,22 @@ public class AppController {
         helperText.setText("");
 
         // Validate name
-        if (!Visit.isValidName(inputName.getText())){
+        if (!VisitValidation.isValidName(inputName.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Names can only contain characters!");
         }
 
         // Validate phone
-        if (!Visit.isValidPhone(inputPhone.getText())){
+        if (!VisitValidation.isValidPhone(inputPhone.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Number must be eight digits!");
         }
 
         // Validate time
         // Format from text to LocalTime, and check if LocalTime is valid
-        if (!Visit.isValidTime(
-                Visit.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
-                Visit.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
+        if (!VisitValidation.isValidTime(
+                VisitValidation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
+                VisitValidation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
         )
         ) {
             buttonRegister.setDisable(true);
@@ -236,7 +236,7 @@ public class AppController {
         String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
         String searchKey = chooseSearch.getValue(); // DropDown choice
         List<Visit> allVisits = log.getLog();
-        List<Visit> result = new ArrayList<>();
+        List<Visit> result;
 
         // Hide unused widgets
         searchField.setVisible(!searchKey.equals("Date"));
@@ -244,27 +244,15 @@ public class AppController {
         logFromDate.setVisible(searchKey.equals("Date"));
         logToDateLabel.setVisible(searchKey.equals("Date"));
         logToDate.setVisible(searchKey.equals("Date"));
-       
-        switch (searchKey) {
-            case "Name": 
-                result = VisitLogFilter.filterByName(searchInput, allVisits);
-                break;
-            case "Phone": 
-                result = VisitLogFilter.filterByPhone(searchInput, allVisits);
-                break;
-            case "Building": 
-                result = VisitLogFilter.filterByBuilding(searchInput, allVisits);
-                break;
-            case "Room":    
-                result = VisitLogFilter.filterByRoom(searchInput, allVisits);
-                break;
-            case "Date":
-                result = VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
-                break;
-            default:
-                result = allVisits;
-                break;
-        }
+
+        result = switch (searchKey) {
+            case "Name" -> VisitLogFilter.filterByName(searchInput, allVisits);
+            case "Phone" -> VisitLogFilter.filterByPhone(searchInput, allVisits);
+            case "Building" -> VisitLogFilter.filterByBuilding(searchInput, allVisits);
+            case "Room" -> VisitLogFilter.filterByRoom(searchInput, allVisits);
+            case "Date" -> VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
+            default -> allVisits;
+        };
 
         tableView.getItems().clear();
         tableView.getItems().addAll(result);
