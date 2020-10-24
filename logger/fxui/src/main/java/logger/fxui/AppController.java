@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Visit;
 import logger.core.VisitLog;
-    import logger.fxui.Validation.VisitValidation;
+import logger.fxui.Validation.VisitValidation;
 import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ public class AppController {
     private VisitLog log;
     private VisitLogPersistence persistence;
 
-    @SuppressWarnings("rawtypes") @FXML private TableView tableView;
+
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
     @FXML private ChoiceBox<String> dropdownBuilding;
@@ -28,6 +28,15 @@ public class AppController {
     @FXML private TextField inputMin2;
     @FXML private Button buttonRegister;
     @FXML private Label helperText;
+
+    // Visit Log
+    @FXML private TableView tableView;
+    @FXML private TextField searchField;
+    @FXML private ChoiceBox<String> chooseSearch;
+    @FXML private Label logFromDateLabel;
+    @FXML private DatePicker logFromDate;
+    @FXML private Label logToDateLabel;
+    @FXML private DatePicker logToDate;
 
     private void resetInputs() {
         inputName.setText("");
@@ -62,7 +71,6 @@ public class AppController {
             }
         });
     }
-
 
     @FXML
     void initialize() {
@@ -119,6 +127,10 @@ public class AppController {
         log = persistence.readVisitLog();
         updateTable();
 
+        // Add dropdown alternatives to filter
+        chooseSearch.getItems().addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
+        chooseSearch.getSelectionModel().selectFirst();
+
         System.out.println("Initialized!");
     }
 
@@ -141,6 +153,7 @@ public class AppController {
         LocalDateTime fromTime = LocalDateTime.of(year, month, day, hour1, min1);
         LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
+        // Handling VisitLog
         log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
         updateTable();
 
@@ -205,9 +218,49 @@ public class AppController {
         );
     }
 
+    @FXML private void filterVisitLog() {
+        String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
+        String searchKey = chooseSearch.getValue(); // DropDown choice
+        List<Visit> allVisits = log.getLog();
+        List<Visit> result = new ArrayList<>();
+
+        // Hide unused widgets
+        searchField.setVisible(!searchKey.equals("Date"));
+        logFromDateLabel.setVisible(searchKey.equals("Date"));
+        logFromDate.setVisible(searchKey.equals("Date"));
+        logToDateLabel.setVisible(searchKey.equals("Date"));
+        logToDate.setVisible(searchKey.equals("Date"));
+       
+        switch (searchKey) {
+            case "Name": 
+                result = VisitLogFilter.filterByName(searchInput, allVisits);
+                break;
+            case "Phone": 
+                result = VisitLogFilter.filterByPhone(searchInput, allVisits);
+                break;
+            case "Building": 
+                result = VisitLogFilter.filterByBuilding(searchInput, allVisits);
+                break;
+            case "Room":    
+                result = VisitLogFilter.filterByRoom(searchInput, allVisits);
+                break;
+            case "Date":
+                result = VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
+                break;
+            default:
+                result = allVisits;
+                break;
+        }
+
+        tableView.getItems().clear();
+        tableView.getItems().addAll(result);
+    }
+
+
+
     private void updateTable() {
+        persistence.writeVisitLog(log);
         tableView.getItems().clear();
         tableView.getItems().addAll(log.getLog());
-        persistence.writeVisitLog(log);
     }
 }
