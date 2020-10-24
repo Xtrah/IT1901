@@ -246,7 +246,7 @@ public class AppController {
                 result = VisitLogFilter.filterByRoom(searchInput, allVisits);
                 break;
             case "Date":
-                result = VisitLogFilter.filterByDate(searchInput, allVisits, logFromDate.getValue(), logToDate.getValue());
+                result = VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
                 break;
             default:
                 result = allVisits;

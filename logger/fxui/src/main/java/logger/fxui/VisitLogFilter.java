@@ -31,7 +31,7 @@ public class VisitLogFilter {
         return filterVisits(visit -> visit.getRoom().contains(searchInput), allVisits);
     }
 
-    public static List<Visit> filterByDate(String searchInput, List<Visit> allVisits, LocalDate logFromDate, LocalDate logToDate) {
+    public static List<Visit> filterByDate(List<Visit> allVisits, LocalDate logFromDate, LocalDate logToDate) {
         if (logFromDate == null || logToDate == null) {
             return allVisits;
         }
