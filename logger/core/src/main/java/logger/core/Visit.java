@@ -2,6 +2,7 @@ package logger.core;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.UUID;
 
 public class Visit {
 
@@ -11,6 +12,7 @@ public class Visit {
     private String room;
     private LocalDateTime from;
     private LocalDateTime to;
+    private final String id = UUID.randomUUID().toString();
 
     public Visit() {
     }
@@ -72,6 +74,10 @@ public class Visit {
         this.to = to;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Visit{" +
@@ -81,6 +87,7 @@ public class Visit {
                 ", room='" + room + '\'' +
                 ", from=" + from +
                 ", to=" + to +
+                ", id='" + id + '\'' +
                 '}';
     }
 
