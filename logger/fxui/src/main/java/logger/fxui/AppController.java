@@ -6,11 +6,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Visit;
 import logger.core.VisitLog;
+    import logger.fxui.Validation.VisitValidation;
 import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
 
 public class AppController {
     private VisitLog log;
@@ -123,7 +123,7 @@ public class AppController {
     }
 
     @FXML
-    void registerVisit() throws InterruptedException {
+    void registerVisit() {
         String name = inputName.getText();
         String phone = inputPhone.getText();
         String building = dropdownBuilding.getValue();
@@ -155,22 +155,22 @@ public class AppController {
         helperText.setText("");
 
         // Validate name
-        if (!Visit.isValidName(inputName.getText())){
+        if (!VisitValidation.isValidName(inputName.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Names can only contain characters!");
         }
 
         // Validate phone
-        if (!Visit.isValidPhone(inputPhone.getText())){
+        if (!VisitValidation.isValidPhone(inputPhone.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Number must be eight digits!");
         }
 
         // Validate time
         // Format from text to LocalTime, and check if LocalTime is valid
-        if (!Visit.isValidTime(
-                Visit.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
-                Visit.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
+        if (!VisitValidation.isValidTime(
+                VisitValidation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
+                VisitValidation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
         )
         ) {
             buttonRegister.setDisable(true);

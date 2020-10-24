@@ -1,8 +1,8 @@
-package logger.fxui;
+package logger.fxui.Validation;
 
 import java.time.LocalTime;
 
-public class Validation {
+public class VisitValidation {
 
     public static boolean isTimeString(String hours, String minutes) {
         String timeString = hours + ':' + minutes;
