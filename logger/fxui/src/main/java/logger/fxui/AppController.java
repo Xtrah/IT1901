@@ -6,11 +6,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Visit;
 import logger.core.VisitLog;
-import logger.fxui.Validation.VisitValidation;
+import logger.fxui.validation.VisitValidation;
 import logger.json.VisitLogPersistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AppController {
     private VisitLog log;
@@ -222,7 +223,7 @@ public class AppController {
         String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
         String searchKey = chooseSearch.getValue(); // DropDown choice
         List<Visit> allVisits = log.getLog();
-        List<Visit> result = new ArrayList<>();
+        List<Visit> result;
 
         // Hide unused widgets
         searchField.setVisible(!searchKey.equals("Date"));
@@ -230,27 +231,15 @@ public class AppController {
         logFromDate.setVisible(searchKey.equals("Date"));
         logToDateLabel.setVisible(searchKey.equals("Date"));
         logToDate.setVisible(searchKey.equals("Date"));
-       
-        switch (searchKey) {
-            case "Name": 
-                result = VisitLogFilter.filterByName(searchInput, allVisits);
-                break;
-            case "Phone": 
-                result = VisitLogFilter.filterByPhone(searchInput, allVisits);
-                break;
-            case "Building": 
-                result = VisitLogFilter.filterByBuilding(searchInput, allVisits);
-                break;
-            case "Room":    
-                result = VisitLogFilter.filterByRoom(searchInput, allVisits);
-                break;
-            case "Date":
-                result = VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
-                break;
-            default:
-                result = allVisits;
-                break;
-        }
+
+        result = switch (searchKey) {
+            case "Name" -> VisitLogFilter.filterByName(searchInput, allVisits);
+            case "Phone" -> VisitLogFilter.filterByPhone(searchInput, allVisits);
+            case "Building" -> VisitLogFilter.filterByBuilding(searchInput, allVisits);
+            case "Room" -> VisitLogFilter.filterByRoom(searchInput, allVisits);
+            case "Date" -> VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
+            default -> allVisits;
+        };
 
         tableView.getItems().clear();
         tableView.getItems().addAll(result);

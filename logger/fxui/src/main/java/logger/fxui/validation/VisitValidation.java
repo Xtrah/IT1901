@@ -1,4 +1,4 @@
-package logger.fxui.Validation;
+package logger.fxui.validation;
 
 import java.time.LocalTime;
 
