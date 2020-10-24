@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class VisitLogTest {
 
@@ -38,5 +39,15 @@ class VisitLogTest {
 
         log.addVisit(v2);
         assertEquals(2, log.getLog().size());
+    }
+
+    @Test
+    void testVisitLogConstructors() {
+        assertNotNull(log);
+
+        log.addVisit(v1);
+        log.addVisit(v2);
+        VisitLog newLog = new VisitLog(log.getLog());
+        assertEquals(log, newLog);
     }
 }
