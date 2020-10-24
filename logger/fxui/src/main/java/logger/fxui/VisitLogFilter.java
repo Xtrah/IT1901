@@ -16,7 +16,7 @@ public class VisitLogFilter {
     }
 
     public static List<Visit> filterByName(String searchInput, List<Visit> allVisits) {
-        return filterVisits(visit -> visit.getName().contains(searchInput), allVisits);
+        return filterVisits(visit -> visit.getName().toLowerCase().contains(searchInput), allVisits);
     }
 
     public static List<Visit> filterByPhone(String searchInput, List<Visit> allVisits) {
@@ -24,11 +24,11 @@ public class VisitLogFilter {
     }
 
     public static List<Visit> filterByBuilding(String searchInput, List<Visit> allVisits) {
-        return filterVisits(visit -> visit.getBuilding().contains(searchInput), allVisits);
+        return filterVisits(visit -> visit.getBuilding().toLowerCase().contains(searchInput), allVisits);
     }
 
     public static List<Visit> filterByRoom(String searchInput, List<Visit> allVisits) {
-        return filterVisits(visit -> visit.getRoom().contains(searchInput), allVisits);
+        return filterVisits(visit -> visit.getRoom().toLowerCase().contains(searchInput), allVisits);
     }
 
     public static List<Visit> filterByDate(List<Visit> allVisits, LocalDate logFromDate, LocalDate logToDate) {

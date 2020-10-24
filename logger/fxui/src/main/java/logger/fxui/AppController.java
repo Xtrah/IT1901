@@ -220,7 +220,7 @@ public class AppController {
     }
 
     @FXML private void filterVisitLog() {
-        String searchInput = searchField.getText(); // User input
+        String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
         String searchKey = chooseSearch.getValue(); // DropDown choice
         List<Visit> allVisits = log.getLog();
         List<Visit> result = new ArrayList<>();
