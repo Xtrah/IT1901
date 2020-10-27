@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AppController {
     private VisitLog log;
@@ -81,6 +82,7 @@ public class AppController {
     @FXML
     void fillDropdownRoom(){
         Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
+        dropdownRoom.getItems().clear();
         dropdownRoom.getItems().addAll(FXCollections.observableArrayList(selectedBuilding.getRooms()));
     }
 
@@ -106,7 +108,8 @@ public class AppController {
             List<Building> buildings = BuildingReader.readBuildings();
             dropdownBuilding.getItems().addAll(buildings);
         }
-        catch (IOException e){
+        catch (IOException e) {
+            System.out.println("Couldn't fetch any buildings");
             dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
         }
 
@@ -118,7 +121,7 @@ public class AppController {
         // Set date to today by default
         inputDate.setValue(LocalDate.now());
         
-        // For Visit log 
+        // For Visit log
         // Make column
         TableColumn<String, Visit> nameCol = new TableColumn<>("Name");
         // Listen to value 'name' in class 'Visit'
