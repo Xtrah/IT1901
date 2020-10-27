@@ -1,17 +1,11 @@
 package logger.core;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VisitLog implements Iterable<Visit> {
-
-    private static final String DEFAULT_FILEPATH = "logger/log.json";
 
     private List<Visit> log;
 
@@ -31,42 +25,14 @@ public class VisitLog implements Iterable<Visit> {
         log.add(visit);
     }
 
-    public void writeToFile() {
-        writeToFile(DEFAULT_FILEPATH);
-    }
-
-    public void writeToFile(String filepath) {
-        ObjectMapper mapper = new ObjectMapper();
-        File file = new File(filepath);
-        try {
-            if (file.createNewFile()) {
-                System.out.printf("Created new file %s", file.getName());
-            }
-            mapper.writerWithDefaultPrettyPrinter()
-                    .writeValue(file, log);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Something went wrong while writing to file");
+    public void removeVisit(Visit visit) {
+        if (!log.contains(visit)) {
+            throw new IllegalArgumentException("Didn't find Visit in VisitLog");
         }
-    }
-
-    public void readFromFile() {
-        readFromFile(DEFAULT_FILEPATH);
-    }
-
-    public void readFromFile(String filepath) {
-        try {
-            File file = new File(filepath);
-            if (file.exists()) {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.registerModule(new JavaTimeModule());
-                log = new ArrayList<>(List.of(mapper.readValue(file, Visit[].class)));
-            } else {
-                log = new ArrayList<>();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        log = log
+                .stream()
+                .filter(v -> !visit.getId().equals(v.getId()))
+                .collect(Collectors.toList());
     }
 
     @Override

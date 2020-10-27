@@ -1,6 +1,7 @@
 package logger.fxui;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -8,22 +9,20 @@ import logger.core.Building;
 import logger.core.Visit;
 import logger.core.VisitLog;
 import logger.json.BuildingReader;
+import logger.fxui.validation.VisitValidation;
 import logger.json.VisitLogPersistence;
-import org.apache.maven.model.Build;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class AppController {
     private VisitLog log;
     private VisitLogPersistence persistence;
 
-    @FXML private TableView tableView;
+
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
     @FXML private ChoiceBox<Building> dropdownBuilding;
@@ -35,6 +34,15 @@ public class AppController {
     @FXML private TextField inputMin2;
     @FXML private Button buttonRegister;
     @FXML private Label helperText;
+
+    // Visit Log
+    @FXML private TableView tableView;
+    @FXML private TextField searchField;
+    @FXML private ChoiceBox<String> chooseSearch;
+    @FXML private Label logFromDateLabel;
+    @FXML private DatePicker logFromDate;
+    @FXML private Label logToDateLabel;
+    @FXML private DatePicker logToDate;
 
     private void resetInputs() {
         inputName.setText("");
@@ -75,7 +83,6 @@ public class AppController {
         Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
         dropdownRoom.getItems().addAll(FXCollections.observableArrayList(selectedBuilding.getRooms()));
     }
-
 
     @FXML
     void initialize() {
@@ -146,11 +153,15 @@ public class AppController {
         log = persistence.readVisitLog();
         updateTable();
 
+        // Add dropdown alternatives to filter
+        chooseSearch.getItems().addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
+        chooseSearch.getSelectionModel().selectFirst();
+
         System.out.println("Initialized!");
     }
 
     @FXML
-    void registerVisit() throws InterruptedException {
+    void registerVisit() {
         String name = inputName.getText();
         String phone = inputPhone.getText();
         String building = dropdownBuilding.getValue().getName();
@@ -168,11 +179,24 @@ public class AppController {
         LocalDateTime fromTime = LocalDateTime.of(year, month, day, hour1, min1);
         LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
+        // Handling VisitLog
         log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
         updateTable();
 
         resetInputs();
         helperText.setText("Successfully registered!");
+    }
+
+    @FXML
+    private void deleteVisit() {
+        ObservableList deleteList = tableView.getSelectionModel().getSelectedItems();
+        Visit deleteVisit = (Visit) deleteList.get(0);
+
+        log.removeVisit(deleteVisit);
+        tableView.getItems().removeAll(
+                deleteList
+        );
+        updateTable();
     }
 
     @FXML
@@ -182,22 +206,22 @@ public class AppController {
         helperText.setText("");
 
         // Validate name
-        if (!Visit.isValidName(inputName.getText())){
+        if (!VisitValidation.isValidName(inputName.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Names can only contain characters!");
         }
 
         // Validate phone
-        if (!Visit.isValidPhone(inputPhone.getText())){
+        if (!VisitValidation.isValidPhone(inputPhone.getText())){
             buttonRegister.setDisable(true);
             helperText.setText("Number must be eight digits!");
         }
 
         // Validate time
         // Format from text to LocalTime, and check if LocalTime is valid
-        if (!Visit.isValidTime(
-                Visit.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
-                Visit.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
+        if (!VisitValidation.isValidTime(
+                VisitValidation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
+                VisitValidation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
         )
         ) {
             buttonRegister.setDisable(true);
@@ -232,9 +256,37 @@ public class AppController {
         );
     }
 
+    @FXML private void filterVisitLog() {
+        String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
+        String searchKey = chooseSearch.getValue(); // DropDown choice
+        List<Visit> allVisits = log.getLog();
+        List<Visit> result;
+
+        // Hide unused widgets
+        searchField.setVisible(!searchKey.equals("Date"));
+        logFromDateLabel.setVisible(searchKey.equals("Date"));
+        logFromDate.setVisible(searchKey.equals("Date"));
+        logToDateLabel.setVisible(searchKey.equals("Date"));
+        logToDate.setVisible(searchKey.equals("Date"));
+
+        result = switch (searchKey) {
+            case "Name" -> VisitLogFilter.filterByName(searchInput, allVisits);
+            case "Phone" -> VisitLogFilter.filterByPhone(searchInput, allVisits);
+            case "Building" -> VisitLogFilter.filterByBuilding(searchInput, allVisits);
+            case "Room" -> VisitLogFilter.filterByRoom(searchInput, allVisits);
+            case "Date" -> VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
+            default -> allVisits;
+        };
+
+        tableView.getItems().clear();
+        tableView.getItems().addAll(result);
+    }
+
+
+
     private void updateTable() {
+        persistence.writeVisitLog(log);
         tableView.getItems().clear();
         tableView.getItems().addAll(log.getLog());
-        persistence.writeVisitLog(log);
     }
 }
