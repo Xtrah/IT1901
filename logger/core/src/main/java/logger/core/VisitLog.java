@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class VisitLog implements Iterable<Visit> {
 
-    private final List<Visit> log;
+    private List<Visit> log;
 
     public VisitLog() {
         this.log = new ArrayList<>();
