@@ -1,6 +1,7 @@
 package logger.fxui;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -75,6 +76,18 @@ public class AppController {
 
         resetInputs();
         helperText.setText("Successfully registered!");
+    }
+
+    @FXML
+    private void deleteVisit() {
+        ObservableList deleteList = tableView.getSelectionModel().getSelectedItems();
+        Visit deleteVisit = (Visit) deleteList.get(0);
+
+        log.removeVisit(deleteVisit);
+        tableView.getItems().removeAll(
+                deleteList
+        );
+        updateTable();
     }
 
     @FXML
