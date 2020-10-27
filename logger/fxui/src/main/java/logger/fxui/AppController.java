@@ -46,12 +46,7 @@ public class AppController {
         setUpPersistence();
         setUpFiltering();
         activateInputRules();
-
-        // DUMMY-INFO
-        dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
-        dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
         inputDate.setValue(LocalDate.now());
-
         System.out.println("Initialized!");
     }
 
