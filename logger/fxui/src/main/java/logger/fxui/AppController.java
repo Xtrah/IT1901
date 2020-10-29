@@ -93,8 +93,14 @@ public class AppController {
     @FXML
     void fillDropdownRoom(){
         Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
+        ObservableList<String> rooms;
         dropdownRoom.getItems().clear();
-        dropdownRoom.getItems().addAll(FXCollections.observableArrayList(selectedBuilding.getRooms()));
+        if (selectedBuilding == null) {
+            rooms = FXCollections.observableArrayList(new ArrayList<>());
+        } else {
+            rooms = FXCollections.observableArrayList(selectedBuilding.getRooms());
+        }
+        dropdownRoom.getItems().addAll(rooms);
     }
 
     @FXML
@@ -110,12 +116,7 @@ public class AppController {
         forceNumberInput(inputPhone, 8);
         forceCharacterInput(inputName);
 
-        // DUMMY-INFO for choice boxes
-        //dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
-        //dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
-
         try {
-            //System.out.println(BuildingReader.fileURL.getAbsolutePath());
             List<Building> buildings = BuildingReader.readBuildings();
             dropdownBuilding.getItems().addAll(buildings);
         }
@@ -123,11 +124,6 @@ public class AppController {
             System.out.println("Couldn't fetch any buildings");
             dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
         }
-
-        // Get all buildings and make them available to the user through the UI
-        // Make the corresponding rooms available as the user selects a building
-
-
 
         // Set date to today by default
         inputDate.setValue(LocalDate.now());
@@ -254,7 +250,7 @@ public class AppController {
         }
 
         // Validate date
-        if (inputDate.getValue() != null && inputDate.getValue().isAfter(LocalDate.now())){
+        if (!VisitValidation.isValidDate(inputDate.getValue())){
             buttonRegister.setDisable(true);
             helperText.setText("Can't set future visits!");
         }
@@ -273,7 +269,7 @@ public class AppController {
                 isEmptyString(inputName.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(inputPhone.getText())
-                || isEmptyString(dropdownBuilding.getValue().getName())
+                || dropdownBuilding.getValue() == null
                 || isEmptyString(dropdownRoom.getValue())
                 || inputDate.getValue() == null
         );
