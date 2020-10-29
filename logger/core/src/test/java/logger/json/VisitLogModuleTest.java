@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import logger.core.Visit;
 import logger.core.VisitLog;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,9 @@ public class VisitLogModuleTest {
 
     private VisitLog log;
 
+    /**
+     * Sets up sample Visit objects and a mapper with the VisitLogModule registered to it
+     */
     @BeforeAll
     static void initialize() {
         TEST_INPUT1 = new Visit(

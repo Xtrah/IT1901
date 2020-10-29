@@ -5,13 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import logger.core.Building;
 import logger.core.Visit;
 import logger.core.VisitLog;
+import logger.json.BuildingReader;
 import logger.fxui.validation.VisitValidation;
 import logger.json.VisitLogPersistence;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppController {
@@ -21,7 +25,7 @@ public class AppController {
     // Registration
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
-    @FXML private ChoiceBox<String> dropdownBuilding;
+    @FXML private ChoiceBox<Building> dropdownBuilding;
     @FXML private ChoiceBox<String> dropdownRoom;
     @FXML private DatePicker inputDate;
     @FXML private TextField inputHour1;
@@ -40,22 +44,75 @@ public class AppController {
     @FXML private Label logToDateLabel;
     @FXML private DatePicker logToDate;
 
+    /**
+     * Disallows a user to input nothing but numbers in the given TextField
+     * @param fxidName fxid of the TextField to enforce
+     * @param maxLength maximum length of input
+     */
+    private void forceNumberInput(TextField fxidName, int maxLength) {
+        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Only allow digits
+            if (!newValue.matches("\\d*")) {
+                fxidName.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            // Only allow 2 digits
+            if (newValue.length() > maxLength) {
+                fxidName.setText(oldValue);
+            }
+        });
+    }
+    /**
+     * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the given TextField
+     * @param fxidName fxid of the TextField to enforce
+     */
+    private void forceCharacterInput(TextField fxidName) {
+        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[a-zA-ZæøåÆØÅ ]*$")) {
+                fxidName.setText(newValue.replaceAll("[^a-zA-ZæøåÆØÅ ]*$", ""));
+            }
+        });
+    }
+
+    /**
+     * Fills the room dropdown with rooms according to which building is chosen
+     */
+    @FXML
+    void fillDropdownRoom(){
+        Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
+        ObservableList<String> rooms;
+        dropdownRoom.getItems().clear();
+        if (selectedBuilding == null) {
+            rooms = FXCollections.observableArrayList(new ArrayList<>());
+        } else {
+            rooms = FXCollections.observableArrayList(selectedBuilding.getRooms());
+        }
+        dropdownRoom.getItems().addAll(rooms);
+    }
+
+
+    /**
+     * Sets up UI
+     */
     @FXML
     void initialize() {
         buttonRegister.setDisable(true);
         initTable();
         setUpPersistence();
         setUpFiltering();
+        setUpBuildings();
         activateInputRules();
         inputDate.setValue(LocalDate.now());
         System.out.println("Initialized!");
     }
 
+    /**
+     * Register a visit to the log
+     */
     @FXML
     void registerVisit() {
         String name = inputName.getText();
         String phone = inputPhone.getText();
-        String building = dropdownBuilding.getValue();
+        String building = dropdownBuilding.getValue().getName();
         String room = dropdownRoom.getValue();
 
         LocalDate pickedDate = inputDate.getValue();
@@ -78,18 +135,22 @@ public class AppController {
         helperText.setText("Successfully registered!");
     }
 
+    /**
+     * Deletes a visit
+     */
     @FXML
     private void deleteVisit() {
-        ObservableList deleteList = tableView.getSelectionModel().getSelectedItems();
-        Visit deleteVisit = (Visit) deleteList.get(0);
+        ObservableList<Visit> deleteList = tableView.getSelectionModel().getSelectedItems();
+        Visit deleteVisit = deleteList.get(0);
 
         log.removeVisit(deleteVisit);
-        tableView.getItems().removeAll(
-                deleteList
-        );
+        tableView.getItems().removeAll(deleteList);
         updateTable();
     }
 
+    /**
+     * Validates the user input
+     */
     @FXML
     void validateValues (){
         // Initiating values
@@ -125,15 +186,14 @@ public class AppController {
         }
 
         // Validate date
-        if (inputDate.getValue() != null && inputDate.getValue().isAfter(LocalDate.now())){
+        if (!VisitValidation.isValidDate(inputDate.getValue())){
             buttonRegister.setDisable(true);
             helperText.setText("Can't set future visits!");
         }
 
     }
 
-    @FXML
-    void filterVisitLog() {
+    @FXML private void filterVisitLog() {
         String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
         String searchKey = chooseSearch.getValue(); // DropDown choice
         List<Visit> allVisits = log.getLog();
@@ -159,6 +219,9 @@ public class AppController {
         tableView.getItems().addAll(result);
     }
 
+    /**
+     * Resets all inputs to empty fields, except the DatePicker which is set to todays date.
+     */
     private void resetInputs() {
         inputName.setText("");
         inputPhone.setText("");
@@ -172,27 +235,6 @@ public class AppController {
         buttonRegister.setDisable(true);
     }
 
-    private void forceNumberInput(TextField fxidName, int maxLength) {
-        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Only allow digits
-            if (!newValue.matches("\\d*")) {
-                fxidName.setText(newValue.replaceAll("[^\\d]", ""));
-            }
-            // Only allow 2 digits
-            if (newValue.length() > maxLength) {
-                fxidName.setText(oldValue);
-            }
-        });
-    }
-
-    private void forceCharacterInput(TextField fxidName) {
-        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("^[a-zA-ZæøåÆØÅ ]*$")) {
-                fxidName.setText(newValue.replaceAll("[^a-zA-ZæøåÆØÅ ]*$", ""));
-            }
-        });
-    }
-
     private boolean isEmptyString(String str) {
         return (str == null || str.trim().isEmpty());
     }
@@ -202,12 +244,15 @@ public class AppController {
                 isEmptyString(inputName.getText())
                 || isEmptyString(inputPhone.getText())
                 || isEmptyString(inputPhone.getText())
-                || isEmptyString(dropdownBuilding.getValue())
+                || dropdownBuilding.getValue() == null
                 || isEmptyString(dropdownRoom.getValue())
                 || inputDate.getValue() == null
         );
     }
 
+    /**
+     * Updates the log
+     */
     private void updateTable() {
         persistence.writeVisitLog(log);
         tableView.getItems().clear();
@@ -266,5 +311,17 @@ public class AppController {
     private void setUpFiltering() {
         chooseSearch.getItems().addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
         chooseSearch.getSelectionModel().selectFirst();
+    }
+
+    private void setUpBuildings() {
+        try {
+            List<Building> buildings = BuildingReader.readBuildings();
+            dropdownBuilding.getItems().addAll(buildings);
+        }
+        catch (IOException e) {
+            System.out.println("Couldn't fetch any buildings");
+            dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
+        }
+
     }
 }
