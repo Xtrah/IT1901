@@ -23,6 +23,9 @@ public class VisitLogModuleTest {
 
     private VisitLog log;
 
+    /**
+     * Sets up sample Visit objects and a mapper with the VisitLogModule registered to it
+     */
     @BeforeAll
     static void initialize() {
         TEST_INPUT1 = new Visit(
