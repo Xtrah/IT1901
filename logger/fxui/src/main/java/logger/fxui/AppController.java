@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AppController {
     private VisitLog log;
@@ -90,6 +89,9 @@ public class AppController {
         });
     }
 
+    /**
+     * Fills the room dropdown with rooms according to which building is chosen
+     */
     @FXML
     void fillDropdownRoom(){
         Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
@@ -103,6 +105,10 @@ public class AppController {
         dropdownRoom.getItems().addAll(rooms);
     }
 
+
+    /**
+     * Sets up UI
+     */
     @FXML
     void initialize() {
 
@@ -215,6 +221,9 @@ public class AppController {
         updateTable();
     }
 
+    /**
+     * Validates the user input
+     */
     @FXML
     void validateValues (){
         // Initiating values
@@ -257,20 +266,16 @@ public class AppController {
 
     }
 
-    private boolean isEmptyString(String str) {
-        return (str == null || str.trim().isEmpty());
-    }
-
     /**
      * @return true if any of the required fields are empty
      */
     private boolean lackingValues () {
         return (
-                isEmptyString(inputName.getText())
-                || isEmptyString(inputPhone.getText())
-                || isEmptyString(inputPhone.getText())
+                VisitValidation.isEmptyString(inputName.getText())
+                || VisitValidation.isEmptyString(inputPhone.getText())
+                || VisitValidation.isEmptyString(inputPhone.getText())
                 || dropdownBuilding.getValue() == null
-                || isEmptyString(dropdownRoom.getValue())
+                || VisitValidation.isEmptyString(dropdownRoom.getValue())
                 || inputDate.getValue() == null
         );
     }

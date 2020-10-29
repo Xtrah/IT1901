@@ -45,6 +45,10 @@ public class VisitValidation {
         return false;
     }
 
+    /**
+     * @param date date to validate
+     * @return true if date is in the past or today, false otherwise
+     */
     public static boolean isValidDate(LocalDate date) {
         return date != null && (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()));
     }
@@ -59,5 +63,13 @@ public class VisitValidation {
             return LocalTime.parse(hour + ":" + min);
         }
         return null;
+    }
+
+    /**
+     * @param str String to validate
+     * @return true if the string is empty, false otherwise
+     */
+    public static boolean isEmptyString(String str) {
+        return (str == null || str.trim().isEmpty());
     }
 }
