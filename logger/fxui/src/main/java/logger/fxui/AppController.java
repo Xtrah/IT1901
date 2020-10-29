@@ -45,6 +45,9 @@ public class AppController {
     @FXML private Label logToDateLabel;
     @FXML private DatePicker logToDate;
 
+    /**
+     * Resets all inputs to empty fields, except the DatePicker which is set to todays date.
+     */
     private void resetInputs() {
         inputName.setText("");
         inputPhone.setText("");
@@ -58,6 +61,11 @@ public class AppController {
         buttonRegister.setDisable(true);
     }
 
+    /**
+     * Disallows a user to input nothing but numbers in the given TextField
+     * @param fxidName fxid of the TextField to enforce
+     * @param maxLength maximum length of input
+     */
     private void forceNumberInput(TextField fxidName, int maxLength) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
             // Only allow digits
@@ -70,7 +78,10 @@ public class AppController {
             }
         });
     }
-
+    /**
+     * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the given TextField
+     * @param fxidName fxid of the TextField to enforce
+     */
     private void forceCharacterInput(TextField fxidName) {
         fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^[a-zA-ZæøåÆØÅ ]*$")) {
@@ -163,6 +174,9 @@ public class AppController {
         System.out.println("Initialized!");
     }
 
+    /**
+     * Register a visit to the log
+     */
     @FXML
     void registerVisit() {
         String name = inputName.getText();
@@ -190,6 +204,9 @@ public class AppController {
         helperText.setText("Successfully registered!");
     }
 
+    /**
+     * Deletes a visit
+     */
     @FXML
     private void deleteVisit() {
         ObservableList deleteList = tableView.getSelectionModel().getSelectedItems();
@@ -248,6 +265,9 @@ public class AppController {
         return (str == null || str.trim().isEmpty());
     }
 
+    /**
+     * @return true if any of the required fields are empty
+     */
     private boolean lackingValues () {
         return (
                 isEmptyString(inputName.getText())
@@ -259,6 +279,9 @@ public class AppController {
         );
     }
 
+    /**
+     * Filters the log based on name, phone, building, room or date
+     */
     @FXML private void filterVisitLog() {
         String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
         String searchKey = chooseSearch.getValue(); // DropDown choice
@@ -286,7 +309,9 @@ public class AppController {
     }
 
 
-
+    /**
+     * Updates the log
+     */
     private void updateTable() {
         persistence.writeVisitLog(log);
         tableView.getItems().clear();
