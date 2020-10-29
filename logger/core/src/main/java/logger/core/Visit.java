@@ -1,7 +1,6 @@
 package logger.core;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.UUID;
 
 public class Visit {

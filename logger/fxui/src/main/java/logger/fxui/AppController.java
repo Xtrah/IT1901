@@ -178,7 +178,7 @@ public class AppController {
     }
 
     /**
-     * Validates user input
+     * Deletes a visit
      */
     @FXML
     private void deleteVisit() {
