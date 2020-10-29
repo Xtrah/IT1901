@@ -21,6 +21,10 @@ public class VisitLog implements Iterable<Visit> {
         return log;
     }
 
+    /**
+     * Adds a visit to the VisitLog
+     * @param visit Visit to add
+     */
     public void addVisit(Visit visit) {
         log.add(visit);
     }
@@ -42,6 +46,9 @@ public class VisitLog implements Iterable<Visit> {
                 '}';
     }
 
+    /**
+     * @return Iterator over logs
+     */
     @Override
     public Iterator<Visit> iterator() {
         return log.iterator();
