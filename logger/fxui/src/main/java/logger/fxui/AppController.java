@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static logger.fxui.validation.VisitValidation.*;
+
 public class AppController {
     private VisitLog log;
     private VisitLogPersistence persistence;
@@ -45,58 +47,12 @@ public class AppController {
     @FXML private DatePicker logToDate;
 
     /**
-     * Disallows a user to input nothing but numbers in the given TextField
-     * @param fxidName fxid of the TextField to enforce
-     * @param maxLength maximum length of input
-     */
-    private void forceNumberInput(TextField fxidName, int maxLength) {
-        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Only allow digits
-            if (!newValue.matches("\\d*")) {
-                fxidName.setText(newValue.replaceAll("[^\\d]", ""));
-            }
-            // Only allow 2 digits
-            if (newValue.length() > maxLength) {
-                fxidName.setText(oldValue);
-            }
-        });
-    }
-    /**
-     * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the given TextField
-     * @param fxidName fxid of the TextField to enforce
-     */
-    private void forceCharacterInput(TextField fxidName) {
-        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("^[a-zA-ZæøåÆØÅ ]*$")) {
-                fxidName.setText(newValue.replaceAll("[^a-zA-ZæøåÆØÅ ]*$", ""));
-            }
-        });
-    }
-
-    /**
-     * Fills the room dropdown with rooms according to which building is chosen
-     */
-    @FXML
-    void fillDropdownRoom(){
-        Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
-        ObservableList<String> rooms;
-        dropdownRoom.getItems().clear();
-        if (selectedBuilding == null) {
-            rooms = FXCollections.observableArrayList(new ArrayList<>());
-        } else {
-            rooms = FXCollections.observableArrayList(selectedBuilding.getRooms());
-        }
-        dropdownRoom.getItems().addAll(rooms);
-    }
-
-
-    /**
-     * Sets up UI
+     * Sets up the UI
      */
     @FXML
     void initialize() {
         buttonRegister.setDisable(true);
-        initTable();
+        setUpTable();
         setUpPersistence();
         setUpFiltering();
         setUpBuildings();
@@ -136,7 +92,7 @@ public class AppController {
     }
 
     /**
-     * Deletes a visit
+     * Deletes a visit from the log
      */
     @FXML
     private void deleteVisit() {
@@ -193,6 +149,9 @@ public class AppController {
 
     }
 
+    /**
+     * Filters the log according to what the user has chosen
+     */
     @FXML private void filterVisitLog() {
         String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
         String searchKey = chooseSearch.getValue(); // DropDown choice
@@ -220,7 +179,23 @@ public class AppController {
     }
 
     /**
-     * Resets all inputs to empty fields, except the DatePicker which is set to todays date.
+     * Fills the room dropdown with rooms according to which building is chosen
+     */
+    @FXML
+    void fillDropdownRoom(){
+        Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
+        ObservableList<String> rooms;
+        dropdownRoom.getItems().clear();
+        if (selectedBuilding == null) {
+            rooms = FXCollections.observableArrayList(new ArrayList<>());
+        } else {
+            rooms = FXCollections.observableArrayList(selectedBuilding.getRooms());
+        }
+        dropdownRoom.getItems().addAll(rooms);
+    }
+
+    /**
+     * Resets all inputs to empty fields, except the DatePicker which is set to today's  date.
      */
     private void resetInputs() {
         inputName.setText("");
@@ -235,10 +210,9 @@ public class AppController {
         buttonRegister.setDisable(true);
     }
 
-    private boolean isEmptyString(String str) {
-        return (str == null || str.trim().isEmpty());
-    }
-
+    /**
+     * @return true if the user has not yet filled in all required fields, false otherwise
+     */
     private boolean lackingValues () {
         return (
                 isEmptyString(inputName.getText())
@@ -259,7 +233,10 @@ public class AppController {
         tableView.getItems().addAll(log.getLog());
     }
 
-    private void initTable() {
+    /**
+     * Sets up the log table with columns
+     */
+    private void setUpTable() {
         // For Visit log
         // Make column
         TableColumn<Visit, String> nameCol = new TableColumn<>("Name");
@@ -293,6 +270,9 @@ public class AppController {
 
     }
 
+    /**
+     * Applies input rules to input fields
+     */
     private void activateInputRules() {
         forceNumberInput(inputHour1, 2);
         forceNumberInput(inputHour2, 2);
@@ -302,17 +282,27 @@ public class AppController {
         forceCharacterInput(inputName);
     }
 
+    /**
+     * Imports previously stored visits and displays them, or creates a new log if none is found
+     */
     private void setUpPersistence() {
         persistence = new VisitLogPersistence();
         log = persistence.readVisitLog();
         updateTable();
     }
 
+
+    /**
+     * Sets up filter options and filter input fields
+     */
     private void setUpFiltering() {
         chooseSearch.getItems().addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
         chooseSearch.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Fetches buildings and puts them in the buildings dropdown menu
+     */
     private void setUpBuildings() {
         try {
             List<Building> buildings = BuildingReader.readBuildings();
@@ -323,5 +313,35 @@ public class AppController {
             dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
         }
 
+    }
+
+    /**
+     * Disallows a user to input nothing but numbers in the given TextField
+     * @param fxidName fxid of the TextField to enforce
+     * @param maxLength maximum length of input
+     */
+    private void forceNumberInput(TextField fxidName, int maxLength) {
+        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Only allow digits
+            if (!newValue.matches("\\d*")) {
+                fxidName.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            // Only allow 2 digits
+            if (newValue.length() > maxLength) {
+                fxidName.setText(oldValue);
+            }
+        });
+    }
+
+    /**
+     * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the given TextField
+     * @param fxidName fxid of the TextField to enforce
+     */
+    private void forceCharacterInput(TextField fxidName) {
+        fxidName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[a-zA-ZæøåÆØÅ ]*$")) {
+                fxidName.setText(newValue.replaceAll("[^a-zA-ZæøåÆØÅ ]*$", ""));
+            }
+        });
     }
 }
