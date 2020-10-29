@@ -5,13 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import logger.core.Building;
 import logger.core.Visit;
 import logger.core.VisitLog;
+import logger.json.BuildingReader;
 import logger.fxui.validation.VisitValidation;
 import logger.json.VisitLogPersistence;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppController {
@@ -21,7 +25,7 @@ public class AppController {
 
     @FXML private TextField inputName;
     @FXML private TextField inputPhone;
-    @FXML private ChoiceBox<String> dropdownBuilding;
+    @FXML private ChoiceBox<Building> dropdownBuilding;
     @FXML private ChoiceBox<String> dropdownRoom;
     @FXML private DatePicker inputDate;
     @FXML private TextField inputHour1;
@@ -85,6 +89,26 @@ public class AppController {
         });
     }
 
+    /**
+     * Fills the room dropdown with rooms according to which building is chosen
+     */
+    @FXML
+    void fillDropdownRoom(){
+        Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
+        ObservableList<String> rooms;
+        dropdownRoom.getItems().clear();
+        if (selectedBuilding == null) {
+            rooms = FXCollections.observableArrayList(new ArrayList<>());
+        } else {
+            rooms = FXCollections.observableArrayList(selectedBuilding.getRooms());
+        }
+        dropdownRoom.getItems().addAll(rooms);
+    }
+
+
+    /**
+     * Sets up UI
+     */
     @FXML
     void initialize() {
 
@@ -98,14 +122,19 @@ public class AppController {
         forceNumberInput(inputPhone, 8);
         forceCharacterInput(inputName);
 
-        // DUMMY-INFO for choice boxes
-        dropdownBuilding.getItems().addAll(FXCollections.observableArrayList("Bygg1", "Bygg2"));
-        dropdownRoom.getItems().addAll(FXCollections.observableArrayList("Rom1", "Rom2"));
+        try {
+            List<Building> buildings = BuildingReader.readBuildings();
+            dropdownBuilding.getItems().addAll(buildings);
+        }
+        catch (IOException e) {
+            System.out.println("Couldn't fetch any buildings");
+            dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
+        }
 
         // Set date to today by default
         inputDate.setValue(LocalDate.now());
         
-        // For Visit log 
+        // For Visit log
         // Make column
         TableColumn<String, Visit> nameCol = new TableColumn<>("Name");
         // Listen to value 'name' in class 'Visit'
@@ -154,7 +183,7 @@ public class AppController {
     void registerVisit() {
         String name = inputName.getText();
         String phone = inputPhone.getText();
-        String building = dropdownBuilding.getValue();
+        String building = dropdownBuilding.getValue().getName();
         String room = dropdownRoom.getValue();
 
         LocalDate pickedDate = inputDate.getValue();
@@ -192,6 +221,9 @@ public class AppController {
         updateTable();
     }
 
+    /**
+     * Validates the user input
+     */
     @FXML
     void validateValues (){
         // Initiating values
@@ -227,15 +259,11 @@ public class AppController {
         }
 
         // Validate date
-        if (inputDate.getValue() != null && inputDate.getValue().isAfter(LocalDate.now())){
+        if (!VisitValidation.isValidDate(inputDate.getValue())){
             buttonRegister.setDisable(true);
             helperText.setText("Can't set future visits!");
         }
 
-    }
-
-    private boolean isEmptyString(String str) {
-        return (str == null || str.trim().isEmpty());
     }
 
     /**
@@ -243,11 +271,11 @@ public class AppController {
      */
     private boolean lackingValues () {
         return (
-                isEmptyString(inputName.getText())
-                || isEmptyString(inputPhone.getText())
-                || isEmptyString(inputPhone.getText())
-                || isEmptyString(dropdownBuilding.getValue())
-                || isEmptyString(dropdownRoom.getValue())
+                VisitValidation.isEmptyString(inputName.getText())
+                || VisitValidation.isEmptyString(inputPhone.getText())
+                || VisitValidation.isEmptyString(inputPhone.getText())
+                || dropdownBuilding.getValue() == null
+                || VisitValidation.isEmptyString(dropdownRoom.getValue())
                 || inputDate.getValue() == null
         );
     }

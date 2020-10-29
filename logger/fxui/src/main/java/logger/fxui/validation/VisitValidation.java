@@ -1,5 +1,6 @@
 package logger.fxui.validation;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class VisitValidation {
@@ -45,6 +46,14 @@ public class VisitValidation {
     }
 
     /**
+     * @param date date to validate
+     * @return true if date is in the past or today, false otherwise
+     */
+    public static boolean isValidDate(LocalDate date) {
+        return date != null && (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()));
+    }
+
+    /**
      * @param hour hour of day
      * @param min minute of day
      * @return a LocalTime of hour and min
@@ -56,4 +65,11 @@ public class VisitValidation {
         return null;
     }
 
+    /**
+     * @param str String to validate
+     * @return true if the string is empty, false otherwise
+     */
+    public static boolean isEmptyString(String str) {
+        return (str == null || str.trim().isEmpty());
+    }
 }
