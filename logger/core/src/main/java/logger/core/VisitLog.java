@@ -29,6 +29,11 @@ public class VisitLog implements Iterable<Visit> {
         log.add(visit);
     }
 
+
+    /**
+     * Removes a visit from the VisitLog
+     * @param visit Visit to remove
+     */
     public void removeVisit(Visit visit) {
         if (!log.contains(visit)) {
             throw new IllegalArgumentException("Didn't find Visit in VisitLog");
