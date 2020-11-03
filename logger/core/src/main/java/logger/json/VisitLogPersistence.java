@@ -26,8 +26,7 @@ public class VisitLogPersistence {
         try (Reader reader = new FileReader(DEFAULT_FILE, StandardCharsets.UTF_8)) {
             return mapper.readValue(reader, VisitLog.class);
         } catch (IOException e) {
-            System.err.println("Something went wrong when reading from file");
-            e.printStackTrace();
+            System.out.println("Couldn't read data from file, creating empty VisitLog...");
             return new VisitLog();
         }
     }
