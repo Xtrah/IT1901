@@ -10,13 +10,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
 import logger.core.Visit;
@@ -51,12 +45,22 @@ public class AppController {
   @FXML private Label logToDateLabel;
   @FXML private DatePicker logToDate;
 
-  /**
+  // Log Columns
+    @FXML private TableColumn<String, Visit> nameCol;
+    @FXML private TableColumn<String, Visit> phoneCol;
+    @FXML private TableColumn<String, Visit> buildingCol;
+    @FXML private TableColumn<String, Visit> roomCol;
+    @FXML private TableColumn<String, Visit> fromTimeCol;
+    @FXML private TableColumn<String, Visit> toTimeCol;
+
+
+    /**
    * Sets up the UI
    */
   @FXML
-  void initialize() { buttonRegister.setDisable(true);
-    setUpTable();
+  void initialize() {
+    buttonRegister.setDisable(true);
+    setUpColumnListeners();
     setUpPersistence();
     setUpFiltering();
     setUpBuildings();
@@ -102,9 +106,7 @@ public class AppController {
   private void deleteVisit() {
     ObservableList<Visit> deleteList = tableView.getSelectionModel().getSelectedItems();
     Visit deleteVisit = deleteList.get(0);
-
     log.removeVisit(deleteVisit);
-    tableView.getItems().removeAll(deleteList);
     updateTable();
   }
 
@@ -237,39 +239,15 @@ public class AppController {
   }
 
   /**
-   * Sets up the log table with columns
-   */
-  private void setUpTable() {
-    // For Visit log
-    // Make column
-    TableColumn<Visit, String> nameCol = new TableColumn<>("Name");
-    // Listen to value 'name' in class 'Visit'
+  * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
+  */
+  private void setUpColumnListeners() {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-    nameCol.setMaxWidth(120);
-
-    TableColumn<Visit, String> phoneCol = new TableColumn<>("Phone");
     phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-    phoneCol.setMaxWidth(120);
-
-    TableColumn<Visit, String> buildingCol = new TableColumn<>("Building");
     buildingCol.setCellValueFactory(new PropertyValueFactory<>("building"));
-    buildingCol.setMaxWidth(120);
-
-    TableColumn<Visit, String> roomCol = new TableColumn<>("Room");
     roomCol.setCellValueFactory(new PropertyValueFactory<>("room"));
-    roomCol.setMaxWidth(120);
-
-    TableColumn<Visit, LocalDateTime> fromTimeCol = new TableColumn<>("From");
     fromTimeCol.setCellValueFactory(new PropertyValueFactory<>("from"));
-    fromTimeCol.setMaxWidth(200);
-
-    TableColumn<Visit, LocalDateTime> toTimeCol = new TableColumn<>("To");
     toTimeCol.setCellValueFactory(new PropertyValueFactory<>("to"));
-    toTimeCol.setMaxWidth(200);
-
-    // Add all columns to tableView
-    tableView.getColumns().addAll(nameCol, phoneCol,
-      buildingCol, roomCol,fromTimeCol, toTimeCol);
   }
 
   /**
