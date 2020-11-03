@@ -43,9 +43,6 @@ class VisitLogTest {
     @Test
     void testVisitLogConstructors() {
         assertNotNull(log);
-
-        log.addVisit(v1);
-        log.addVisit(v2);
     }
 
     @Test
