@@ -3,35 +3,36 @@ package logger.core;
 import java.util.List;
 
 public class Building {
-    private String name;
-    private List<String> rooms;
 
-    public Building() {
-    }
+  private String name;
+  private List<String> rooms;
 
-    public Building(String name, List<String> rooms) {
-        this.name = name;
-        this.rooms = rooms;
-    }
+  public Building() {
+  }
 
-    @Override
-    public String toString() {
-        return getName();
-    }
+  public Building(String name, List<String> rooms) {
+    this.name = name;
+    this.rooms = rooms;
+  }
 
-    public String getName() {
-        return name;
-    }
+  @Override
+  public String toString() {
+    return getName();
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public List<String> getRooms() {
-        return rooms;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setRooms(List<String> rooms) {
-        this.rooms = rooms;
-    }
+  public List<String> getRooms() {
+    return rooms;
+  }
+
+  public void setRooms(List<String> rooms) {
+    this.rooms = rooms;
+  }
 }
