@@ -109,7 +109,6 @@ public class AppController {
         Visit deleteVisit = deleteList.get(0);
 
         log.removeVisit(deleteVisit);
-        tableView.getItems().removeAll(deleteList);
         updateTable();
     }
 
