@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,7 +28,7 @@
                         </Label>
                         <TextField fx:id="inputName" layoutX="50.0" layoutY="99.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="270.0" promptText="Name" />
                         <TextField fx:id="inputPhone" layoutX="50.0" layoutY="149.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="270.0" promptText="Phone (8 digits)" />
-                        <ChoiceBox fx:id="dropdownBuilding" onAction="#fillDropdownRoom" layoutX="95.0" layoutY="228.0" onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0" />
+                        <ChoiceBox fx:id="dropdownBuilding" layoutX="95.0" layoutY="228.0" onAction="#fillDropdownRoom" onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0" />
                         <ChoiceBox fx:id="dropdownRoom" layoutX="95.0" layoutY="275.0" onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0" />
                         <TextField fx:id="inputHour1" alignment="CENTER" layoutX="75.0" layoutY="428.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
                         <TextField fx:id="inputMin1" alignment="CENTER" layoutX="118.0" layoutY="428.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
@@ -52,8 +53,14 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="tableView" layoutX="1.0" layoutY="162.0" prefHeight="342.0" prefWidth="370.0">
-                          <columns>
-                          </columns>
+                           <columns>
+                              <TableColumn fx:id="nameCol" maxWidth="120.0" prefWidth="60.0" text="Name" />
+                              <TableColumn fx:id="phoneCol" maxWidth="120.0" prefWidth="60.0" text="Phone" />
+                              <TableColumn fx:id="buildingCol" maxWidth="120.0" prefWidth="60.0" text="Building" />
+                              <TableColumn fx:id="roomCol" maxWidth="120.0" prefWidth="60.0" text="Room" />
+                              <TableColumn fx:id="fromTimeCol" maxWidth="120.0" prefWidth="60.0" text="From" />
+                              <TableColumn fx:id="toTimeCol" maxWidth="120.0" prefWidth="60.0" text="To" />
+                           </columns>
                         </TableView>
                         <Label layoutX="150.0" layoutY="25.0" text="Visit Log">
                            <font>

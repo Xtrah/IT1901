@@ -46,13 +46,22 @@ public class AppController {
     @FXML private Label logToDateLabel;
     @FXML private DatePicker logToDate;
 
+    // Log Columns
+    @FXML private TableColumn<String, Visit> nameCol;
+    @FXML private TableColumn<String, Visit> phoneCol;
+    @FXML private TableColumn<String, Visit> buildingCol;
+    @FXML private TableColumn<String, Visit> roomCol;
+    @FXML private TableColumn<String, Visit> fromTimeCol;
+    @FXML private TableColumn<String, Visit> toTimeCol;
+
+
     /**
      * Sets up the UI
      */
     @FXML
     void initialize() {
         buttonRegister.setDisable(true);
-        setUpTable();
+        setUpColumnListeners();
         setUpPersistence();
         setUpFiltering();
         setUpBuildings();
@@ -236,38 +245,14 @@ public class AppController {
     /**
      * Sets up the log table with columns
      */
-    private void setUpTable() {
-        // For Visit log
-        // Make column
-        TableColumn<Visit, String> nameCol = new TableColumn<>("Name");
-        // Listen to value 'name' in class 'Visit'
+    private void setUpColumnListeners() {
+        // Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameCol.setMaxWidth(120);
-
-        TableColumn<Visit, String> phoneCol = new TableColumn<>("Phone");
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        phoneCol.setMaxWidth(120);
-
-        TableColumn<Visit, String> buildingCol = new TableColumn<>("Building");
         buildingCol.setCellValueFactory(new PropertyValueFactory<>("building"));
-        buildingCol.setMaxWidth(120);
-
-        TableColumn<Visit, String> roomCol = new TableColumn<>("Room");
         roomCol.setCellValueFactory(new PropertyValueFactory<>("room"));
-        roomCol.setMaxWidth(120);
-
-        TableColumn<Visit, LocalDateTime> fromTimeCol = new TableColumn<>("From");
         fromTimeCol.setCellValueFactory(new PropertyValueFactory<>("from"));
-        fromTimeCol.setMaxWidth(200);
-
-        TableColumn<Visit, LocalDateTime> toTimeCol = new TableColumn<>("To");
         toTimeCol.setCellValueFactory(new PropertyValueFactory<>("to"));
-        toTimeCol.setMaxWidth(200);
-
-        // Add all columns to tableView
-        tableView.getColumns().addAll(nameCol, phoneCol,
-                buildingCol, roomCol,fromTimeCol, toTimeCol);
-
     }
 
     /**
