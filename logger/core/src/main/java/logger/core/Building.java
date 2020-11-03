@@ -3,10 +3,12 @@ package logger.core;
 import java.util.List;
 
 public class Building {
+
   private String name;
   private List<String> rooms;
 
-  public Building() {}
+  public Building() {
+  }
 
   public Building(String name, List<String> rooms) {
     this.name = name;

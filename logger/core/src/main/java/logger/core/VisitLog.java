@@ -43,7 +43,9 @@ public class VisitLog implements Iterable<Visit> {
     return "VisitLog{" + "log=" + log + '}';
   }
 
-  /** @return Iterator over logs */
+  /**
+   * @return Iterator over logs
+   */
   @Override
   public Iterator<Visit> iterator() {
     return log.iterator();

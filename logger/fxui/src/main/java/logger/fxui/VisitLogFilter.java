@@ -9,7 +9,7 @@ import logger.core.Visit;
 public class VisitLogFilter {
 
   /**
-   * @param pred which filter
+   * @param pred      which filter
    * @param allVisits visits to filter
    * @return a list of visits that matches the filter
    */
@@ -19,7 +19,7 @@ public class VisitLogFilter {
 
   /**
    * @param searchInput name to search for
-   * @param allVisits visits to filter
+   * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByName(String searchInput, List<Visit> allVisits) {
@@ -28,7 +28,7 @@ public class VisitLogFilter {
 
   /**
    * @param searchInput phone to search for
-   * @param allVisits visits to filter
+   * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByPhone(String searchInput, List<Visit> allVisits) {
@@ -37,17 +37,17 @@ public class VisitLogFilter {
 
   /**
    * @param searchInput building to search for
-   * @param allVisits visits to filter
+   * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByBuilding(String searchInput, List<Visit> allVisits) {
     return filterVisits(
-      visit -> visit.getBuilding().toLowerCase().contains(searchInput), allVisits);
+        visit -> visit.getBuilding().toLowerCase().contains(searchInput), allVisits);
   }
 
   /**
    * @param searchInput room to search for
-   * @param allVisits visits to filter
+   * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByRoom(String searchInput, List<Visit> allVisits) {
@@ -55,22 +55,22 @@ public class VisitLogFilter {
   }
 
   /**
-   * @param allVisits visits to filter
+   * @param allVisits   visits to filter
    * @param logFromDate start date
-   * @param logToDate end date
+   * @param logToDate   end date
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByDate(
-    List<Visit> allVisits, LocalDate logFromDate, LocalDate logToDate) {
+      List<Visit> allVisits, LocalDate logFromDate, LocalDate logToDate) {
     if (logFromDate == null || logToDate == null) {
       return allVisits;
     }
     return filterVisits(
-      visit ->
-        (logFromDate.isBefore(visit.getFrom().toLocalDate())
-        || logFromDate.isEqual(visit.getFrom().toLocalDate()))
-        && logToDate.isAfter(visit.getTo().toLocalDate())
-        || logToDate.isEqual(visit.getTo().toLocalDate()),
-      allVisits);
+        visit ->
+            (logFromDate.isBefore(visit.getFrom().toLocalDate())
+                || logFromDate.isEqual(visit.getFrom().toLocalDate()))
+                && logToDate.isAfter(visit.getTo().toLocalDate())
+                || logToDate.isEqual(visit.getTo().toLocalDate()),
+        allVisits);
   }
 }

@@ -13,7 +13,8 @@ public class Visit {
   private LocalDateTime from;
   private LocalDateTime to;
 
-  public Visit() {}
+  public Visit() {
+  }
 
   public Visit(
       String name,

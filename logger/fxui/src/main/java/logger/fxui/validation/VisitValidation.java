@@ -6,7 +6,7 @@ import java.time.LocalTime;
 public class VisitValidation {
 
   /**
-   * @param hours hours String to be validated
+   * @param hours   hours String to be validated
    * @param minutes minutes String to be validated
    * @return true if the String is a valid time, False otherwise
    */
@@ -34,9 +34,8 @@ public class VisitValidation {
 
   /**
    * @param from start time
-   * @param to end time
-   * @return true if none of the parameters are null and from is chronologically behind to, false
-   *     otherwise
+   * @param to   end time
+   * @return true if no params are null and from is chronologically behind to, false otherwise
    */
   public static boolean isValidTime(LocalTime from, LocalTime to) {
     if (from != null && to != null) {
@@ -55,7 +54,7 @@ public class VisitValidation {
 
   /**
    * @param hour hour of day
-   * @param min minute of day
+   * @param min  minute of day
    * @return a LocalTime of hour and min
    */
   public static LocalTime formatToLocalTime(String hour, String min) {

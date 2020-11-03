@@ -10,7 +10,13 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
 import logger.core.Visit;
@@ -20,41 +26,66 @@ import logger.json.BuildingReader;
 import logger.json.VisitLogPersistence;
 
 public class AppController {
+
   private VisitLog log;
   private VisitLogPersistence persistence;
 
   // Registration
-  @FXML private TextField inputName;
-  @FXML private TextField inputPhone;
-  @FXML private ChoiceBox<Building> dropdownBuilding;
-  @FXML private ChoiceBox<String> dropdownRoom;
-  @FXML private DatePicker inputDate;
-  @FXML private TextField inputHour1;
-  @FXML private TextField inputMin1;
-  @FXML private TextField inputHour2;
-  @FXML private TextField inputMin2;
-  @FXML private Button buttonRegister;
-  @FXML private Label helperText;
+  @FXML
+  private TextField inputName;
+  @FXML
+  private TextField inputPhone;
+  @FXML
+  private ChoiceBox<Building> dropdownBuilding;
+  @FXML
+  private ChoiceBox<String> dropdownRoom;
+  @FXML
+  private DatePicker inputDate;
+  @FXML
+  private TextField inputHour1;
+  @FXML
+  private TextField inputMin1;
+  @FXML
+  private TextField inputHour2;
+  @FXML
+  private TextField inputMin2;
+  @FXML
+  private Button buttonRegister;
+  @FXML
+  private Label helperText;
 
   // Log
-  @FXML private TableView<Visit> tableView;
-  @FXML private TextField searchField;
-  @FXML private ChoiceBox<String> chooseSearch;
-  @FXML private Label logFromDateLabel;
-  @FXML private DatePicker logFromDate;
-  @FXML private Label logToDateLabel;
-  @FXML private DatePicker logToDate;
+  @FXML
+  private TableView<Visit> tableView;
+  @FXML
+  private TextField searchField;
+  @FXML
+  private ChoiceBox<String> chooseSearch;
+  @FXML
+  private Label logFromDateLabel;
+  @FXML
+  private DatePicker logFromDate;
+  @FXML
+  private Label logToDateLabel;
+  @FXML
+  private DatePicker logToDate;
 
   // Log Columns
-    @FXML private TableColumn<String, Visit> nameCol;
-    @FXML private TableColumn<String, Visit> phoneCol;
-    @FXML private TableColumn<String, Visit> buildingCol;
-    @FXML private TableColumn<String, Visit> roomCol;
-    @FXML private TableColumn<String, Visit> fromTimeCol;
-    @FXML private TableColumn<String, Visit> toTimeCol;
+  @FXML
+  private TableColumn<String, Visit> nameCol;
+  @FXML
+  private TableColumn<String, Visit> phoneCol;
+  @FXML
+  private TableColumn<String, Visit> buildingCol;
+  @FXML
+  private TableColumn<String, Visit> roomCol;
+  @FXML
+  private TableColumn<String, Visit> fromTimeCol;
+  @FXML
+  private TableColumn<String, Visit> toTimeCol;
 
 
-    /**
+  /**
    * Sets up the UI
    */
   @FXML
@@ -114,19 +145,19 @@ public class AppController {
    * Validates the user input
    */
   @FXML
-  void validateValues (){
+  void validateValues() {
     // Initiating values
     buttonRegister.setDisable(false);
     helperText.setText("");
 
     // Validate name
-    if (!VisitValidation.isValidName(inputName.getText())){
+    if (!VisitValidation.isValidName(inputName.getText())) {
       buttonRegister.setDisable(true);
       helperText.setText("Names can only contain characters!");
     }
 
     // Validate phone
-    if (!VisitValidation.isValidPhone(inputPhone.getText())){
+    if (!VisitValidation.isValidPhone(inputPhone.getText())) {
       buttonRegister.setDisable(true);
       helperText.setText("Number must be eight digits!");
     }
@@ -134,8 +165,8 @@ public class AppController {
     // Validate time
     // Format from text to LocalTime, and check if LocalTime is valid
     if (!VisitValidation.isValidTime(
-          VisitValidation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
-          VisitValidation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
+        VisitValidation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
+        VisitValidation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
     )
     ) {
       buttonRegister.setDisable(true);
@@ -148,7 +179,7 @@ public class AppController {
     }
 
     // Validate date
-    if (!VisitValidation.isValidDate(inputDate.getValue())){
+    if (!VisitValidation.isValidDate(inputDate.getValue())) {
       buttonRegister.setDisable(true);
       helperText.setText("Can't set future visits!");
     }
@@ -157,11 +188,12 @@ public class AppController {
   /**
    * Filters the log according to what the user has chosen
    */
-  @FXML private void filterVisitLog() {
-    String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
+  @FXML
+  private void filterVisitLog() {
+    final String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
     String searchKey = chooseSearch.getValue(); // DropDown choice
-    List<Visit> allVisits = log.getLog();
-    List<Visit> result;
+    final List<Visit> allVisits = log.getLog();
+    final List<Visit> result;
 
     // Hide unused widgets
     searchField.setVisible(!searchKey.equals("Date"));
@@ -175,7 +207,8 @@ public class AppController {
       case "Phone" -> VisitLogFilter.filterByPhone(searchInput, allVisits);
       case "Building" -> VisitLogFilter.filterByBuilding(searchInput, allVisits);
       case "Room" -> VisitLogFilter.filterByRoom(searchInput, allVisits);
-      case "Date" -> VisitLogFilter.filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
+      case "Date" -> VisitLogFilter
+          .filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
       default -> allVisits;
     };
 
@@ -187,7 +220,7 @@ public class AppController {
    * Fills the room dropdown with rooms according to which building is chosen
    */
   @FXML
-  void fillDropdownRoom(){
+  void fillDropdownRoom() {
     Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
     ObservableList<String> rooms;
     dropdownRoom.getItems().clear();
@@ -218,15 +251,14 @@ public class AppController {
   /**
    * @return true if the user has not yet filled in all required fields, false otherwise
    */
-  private boolean lackingValues () {
+  private boolean lackingValues() {
     return (
-      isEmptyString(inputName.getText())
-      || isEmptyString(inputPhone.getText())
-      || isEmptyString(inputPhone.getText())
-      || dropdownBuilding.getValue() == null
-      || isEmptyString(dropdownRoom.getValue())
-      || inputDate.getValue() == null
-    );
+        isEmptyString(inputName.getText())
+            || isEmptyString(inputPhone.getText())
+            || isEmptyString(inputPhone.getText())
+            || dropdownBuilding.getValue() == null
+            || isEmptyString(dropdownRoom.getValue())
+            || inputDate.getValue() == null);
   }
 
   /**
@@ -239,8 +271,8 @@ public class AppController {
   }
 
   /**
-  * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
-  */
+   * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
+   */
   private void setUpColumnListeners() {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
@@ -276,7 +308,8 @@ public class AppController {
    * Sets up filter options and filter input fields
    */
   private void setUpFiltering() {
-    chooseSearch.getItems().addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
+    chooseSearch.getItems()
+        .addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
     chooseSearch.getSelectionModel().selectFirst();
   }
 
@@ -287,8 +320,7 @@ public class AppController {
     try {
       List<Building> buildings = BuildingReader.readBuildings();
       dropdownBuilding.getItems().addAll(buildings);
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       System.out.println("Couldn't fetch any buildings");
       dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
     }
@@ -296,7 +328,8 @@ public class AppController {
 
   /**
    * Disallows a user to input nothing but numbers in the given TextField
-   * @param fxidName fxid of the TextField to enforce
+   *
+   * @param fxidName  fxid of the TextField to enforce
    * @param maxLength maximum length of input
    */
   private void forceNumberInput(TextField fxidName, int maxLength) {
@@ -304,16 +337,18 @@ public class AppController {
       // Only allow digits
       if (!newValue.matches("\\d*")) {
         fxidName.setText(newValue.replaceAll("[^\\d]", ""));
-        }
-        // Only allow 2 digits
-        if (newValue.length() > maxLength) {
+      }
+      // Only allow 2 digits
+      if (newValue.length() > maxLength) {
         fxidName.setText(oldValue);
-        }
+      }
     });
   }
 
   /**
-   * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the given TextField
+   * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the
+   * given TextField
+   *
    * @param fxidName fxid of the TextField to enforce
    */
   private void forceCharacterInput(TextField fxidName) {

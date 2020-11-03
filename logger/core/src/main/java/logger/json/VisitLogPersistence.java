@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import logger.core.VisitLog;
 
 public class VisitLogPersistence {
+
   private static final File DEFAULT_FILE = new File(System.getProperty("user.dir") + "/log.json");
 
   private ObjectMapper mapper;
