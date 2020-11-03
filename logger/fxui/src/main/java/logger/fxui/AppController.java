@@ -242,10 +242,9 @@ public class AppController {
     }
 
     /**
-     * Sets up the log table with columns
+     * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
      */
     private void setUpColumnListeners() {
-        // Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         buildingCol.setCellValueFactory(new PropertyValueFactory<>("building"));
