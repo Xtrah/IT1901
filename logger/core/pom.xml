@@ -1,77 +1,77 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>core</artifactId>
-    <parent>
-        <artifactId>logger</artifactId>
-        <groupId>it1901</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>core</artifactId>
+  <build>
+    <plugins>
+      <!-- Compiling code -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
 
-    <dependencies>
+      <!-- Running tests -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
 
-        <!-- Test with JUnit5 -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.4.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.4.2</version>
-            <scope>test</scope>
-        </dependency>
+      <!-- JaCoCo -->
+      <plugin>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <groupId>org.jacoco</groupId>
+      </plugin>
 
-        <!-- Jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.11.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.11.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.6</version>
-        </dependency>
-    </dependencies>
+      <!-- Spotbugs -->
+      <plugin>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <groupId>com.github.spotbugs</groupId>
+      </plugin>
 
-    <build>
-        <plugins>
-            <!-- Compiling code -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
+      <!-- Checkstyle -->
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
 
-            <!-- Running tests -->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
+    <!-- Test with JUnit5 -->
+    <dependency>
+      <artifactId>junit-jupiter-api</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <scope>test</scope>
+      <version>5.4.2</version>
+    </dependency>
+    <dependency>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <scope>test</scope>
+      <version>5.4.2</version>
+    </dependency>
 
-            <!-- JaCoCo -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
+    <!-- Jackson -->
+    <dependency>
+      <artifactId>jackson-databind</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-annotations</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <groupId>org.jacoco</groupId>
+      <version>0.8.6</version>
+    </dependency>
+  </dependencies>
 
-            <!-- Spotbugs -->
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-            </plugin>
+  <modelVersion>4.0.0</modelVersion>
 
-            <!-- Checkstyle -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+  <parent>
+    <artifactId>logger</artifactId>
+    <groupId>it1901</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
 </project>

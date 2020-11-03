@@ -1,118 +1,118 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>it1901</groupId>
-	<artifactId>logger</artifactId>
-    <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <modules>
-        <module>core</module>
-		<module>fxui</module>
-	</modules>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>logger</artifactId>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Compiling code -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <encoding>UTF-8</encoding>
+            <release>14</release>
+          </configuration>
+          <version>3.8.1</version>
+        </plugin>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+        <!-- Running tests -->
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          </configuration>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>3.0.0-M5</version>
+        </plugin>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<!-- Compiling code -->
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.1</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-						<release>14</release>
-					</configuration>
-				</plugin>
+        <!-- JaCoCo -->
+        <plugin>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <configuration>
+            <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+            <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+              <id>jacoco-prepare-agent</id>
+              <phase>process-test-classes</phase>
+            </execution>
+            <execution>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <id>jacoco-report</id>
+              <phase>verify</phase>
+            </execution>
 
-				<!-- Running tests -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.0.0-M5</version>
-					<configuration>
-						<redirectTestOutputToFile>true</redirectTestOutputToFile>
-					</configuration>
-				</plugin>
+          </executions>
+          <groupId>org.jacoco</groupId>
+          <version>0.8.6</version>
+        </plugin>
 
-				<!-- JaCoCo -->
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.8.6</version>
-					<configuration>
-						<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
-						<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
-					</configuration>
-					<executions>
-						<execution>
-                            <id>jacoco-prepare-agent</id>
-                            <phase>process-test-classes</phase>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>jacoco-report</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
+        <!-- Spotbugs -->
+        <plugin>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <id>spotbugs-check</id>
+              <phase>verify</phase>
+            </execution>
+          </executions>
+          <groupId>com.github.spotbugs</groupId>
+          <version>4.0.4</version>
+        </plugin>
 
-					</executions>
-				</plugin>
+        <!-- Checkstyle -->
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <configuration>
+            <configLocation>google_checks.xml</configLocation>
+            <consoleOutput>true</consoleOutput>
+            <encoding>UTF-8</encoding>
+            <failsOnError>true</failsOnError>
+            <linkXRef>false</linkXRef>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <artifactId>checkstyle</artifactId>
+              <groupId>com.puppycrawl.tools</groupId>
+              <version>8.36.1</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <id>checkstyle-check</id>
+              <phase>verify</phase>
+            </execution>
+          </executions>
+          <groupId>org.apache.maven.plugins</groupId>
+          <version>3.1.1</version>
+        </plugin>
 
-				<!-- Spotbugs -->
-				<plugin>
-					<groupId>com.github.spotbugs</groupId>
-					<artifactId>spotbugs-maven-plugin</artifactId>
-					<version>4.0.4</version>
-					<executions>
-						<execution>
-							<id>spotbugs-check</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <groupId>it1901</groupId>
+  <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <module>core</module>
+    <module>fxui</module>
+  </modules>
+  <packaging>pom</packaging>
 
-				<!-- Checkstyle -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-checkstyle-plugin</artifactId>
-					<version>3.1.1</version>
-					<dependencies>
-						<dependency>
-							<groupId>com.puppycrawl.tools</groupId>
-							<artifactId>checkstyle</artifactId>
-							<version>8.36.1</version>
-						</dependency>
-					</dependencies>
-					<configuration>
-						<configLocation>google_checks.xml</configLocation>
-						<encoding>UTF-8</encoding>
-						<consoleOutput>true</consoleOutput>
-						<failsOnError>true</failsOnError>
-						<linkXRef>false</linkXRef>
-					</configuration>
-					<executions>
-						<execution>
-							<id>checkstyle-check</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-			</plugins>
-		</pluginManagement>
-	</build>
+  <version>0.0.1-SNAPSHOT</version>
 </project>
