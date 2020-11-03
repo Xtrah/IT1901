@@ -89,22 +89,4 @@ public class Visit {
                 ", id='" + id + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (! (obj instanceof Visit)) return false;
-        Visit other = (Visit) obj;
-
-        return this.getName().equals(other.getName())
-                && this.getPhone().equals(other.getPhone())
-                && this.getBuilding().equals(other.getBuilding())
-                && this.getRoom().equals(other.getRoom())
-                && this.getTo().equals(other.getTo())
-                && this.getFrom().equals(other.getFrom());
-    }
-
-    @Override
-    public int hashCode() {
-        return 41;
-    }
 }

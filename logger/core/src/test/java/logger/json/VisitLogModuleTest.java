@@ -80,7 +80,8 @@ public class VisitLogModuleTest {
     void testDeserializers() {
         String json = testSerializers();
         try {
-            assertEquals(log, mapper.readValue(json, VisitLog.class));
+            VisitLog deserLog = mapper.readValue(json, VisitLog.class);
+            assertEquals(2, deserLog.getLog().size());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             fail();
