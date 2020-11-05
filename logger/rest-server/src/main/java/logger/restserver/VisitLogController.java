@@ -21,7 +21,7 @@ public class VisitLogController {
 
   @Autowired
   public VisitLogController(VisitLogService visitLogService) {
-    this.visitLogService = visitLogService;
+    // this.visitLogService = visitLogService; // commented out, not yet in use
   }
 
   /**
