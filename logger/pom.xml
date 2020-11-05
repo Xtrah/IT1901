@@ -107,6 +107,7 @@
   <modules>
     <module>core</module>
     <module>fxui</module>
+    <module>rest-api</module>
   </modules>
   <packaging>pom</packaging>
 
