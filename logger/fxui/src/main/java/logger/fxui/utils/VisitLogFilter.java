@@ -1,4 +1,4 @@
-package logger.fxui;
+package logger.fxui.utils;
 
 import java.time.LocalDate;
 import java.util.List;

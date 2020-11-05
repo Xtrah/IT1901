@@ -1,6 +1,6 @@
 package logger.fxui;
 
-import static logger.fxui.validation.VisitValidation.isEmptyString;
+import static logger.fxui.utils.VisitValidation.isEmptyString;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -21,14 +21,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
 import logger.core.Visit;
 import logger.core.VisitLog;
-import logger.fxui.validation.VisitValidation;
+import logger.fxui.utils.LocalVisitLogDataAccess;
+import logger.fxui.utils.VisitLogDataAccess;
+import logger.fxui.utils.VisitLogFilter;
+import logger.fxui.utils.VisitValidation;
 import logger.json.BuildingReader;
-import logger.json.VisitLogPersistence;
 
 public class AppController {
 
   private VisitLog log;
-  private VisitLogPersistence persistence;
+  private VisitLogDataAccess visitLogDataAccess = new LocalVisitLogDataAccess();
 
   // Registration
   @FXML
@@ -265,7 +267,7 @@ public class AppController {
    * Updates the log
    */
   private void updateTable() {
-    persistence.writeVisitLog(log);
+    visitLogDataAccess.storeVisitLog(log);
     tableView.getItems().clear();
     tableView.getItems().addAll(log.getLog());
   }
@@ -298,8 +300,7 @@ public class AppController {
    * Imports previously stored visits and displays them, or creates a new log if none is found
    */
   private void setUpPersistence() {
-    persistence = new VisitLogPersistence();
-    log = persistence.readVisitLog();
+    log = visitLogDataAccess.getVisitLog();
     updateTable();
   }
 
