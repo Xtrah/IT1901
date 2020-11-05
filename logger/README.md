@@ -14,9 +14,12 @@ The purpose of the app is to register a user's visits to rooms and see an overvi
 ![UI register view](https://i.imgur.com/gxikIqa.png)
 ![UI visit log view](https://i.imgur.com/UYIaMtT.png)
 
+## Package Diagram
+![PlantUML package diagram](package_diagram.png)
+
 ## Class Diagram
 
-![PlantUML class diagram](../PlantUML_diagram.png)
+![PlantUML class diagram](PlantUML_diagram.png)
 
 The PlantUML diagram illustrates the relationship between the classes. We have chosen a hierarchic layout.  
 
@@ -33,3 +36,5 @@ Lastly, it is the controller that creates both the instance of Visit and VisitLo
 AppController.java is solely dependent on VisitLog to exist and work for the test to run. This is also true for the VisitLogTest class. VisitLog is further dependent on the Visit class.
 
 On a conceptual level you could say that you need the concept of visits to comprehend the idea of a visit log. The controller and the test class also depends on this as they directly work by using the Visit log, which uses Visit.
+
+
