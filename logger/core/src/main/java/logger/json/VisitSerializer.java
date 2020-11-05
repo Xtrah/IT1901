@@ -12,6 +12,7 @@ public class VisitSerializer extends JsonSerializer<Visit> {
   public void serialize(Visit visit, JsonGenerator jGen, SerializerProvider serializerProvider)
       throws IOException {
     jGen.writeStartObject();
+    jGen.writeStringField("id", visit.getId());
     jGen.writeStringField("name", visit.getName());
     jGen.writeStringField("phone", visit.getPhone());
     jGen.writeStringField("building", visit.getBuilding());

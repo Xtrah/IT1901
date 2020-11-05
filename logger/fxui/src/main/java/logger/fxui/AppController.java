@@ -137,7 +137,7 @@ public class AppController {
   private void deleteVisit() {
     ObservableList<Visit> deleteList = tableView.getSelectionModel().getSelectedItems();
     Visit deleteVisit = deleteList.get(0);
-    log.removeVisit(deleteVisit);
+    log.removeVisit(deleteVisit.getId());
     updateTable();
   }
 

@@ -58,7 +58,7 @@ class VisitLogTest {
   void testRemoveVisit() {
     log.addVisit(v1);
     log.addVisit(v2);
-    log.removeVisit(v1);
+    log.removeVisit(v1.getId());
     assertEquals(log.getLog().size(), 1);
   }
 }
