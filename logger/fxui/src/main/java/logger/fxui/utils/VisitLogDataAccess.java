@@ -13,13 +13,6 @@ public interface VisitLogDataAccess {
   VisitLog getVisitLog();
 
   /**
-   * visitLog is stored
-   *
-   * @param visitLog
-   */
-  void storeVisitLog(VisitLog visitLog);
-
-  /**
    * Add visit to visitlog
    *
    * @param visit

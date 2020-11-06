@@ -3,6 +3,8 @@ package logger.fxui;
 import static logger.fxui.utils.VisitValidation.isEmptyString;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
 import logger.core.Visit;
 import logger.fxui.utils.LocalVisitLogDataAccess;
+import logger.fxui.utils.RemoteVisitLogDataAccess;
 import logger.fxui.utils.VisitLogDataAccess;
 import logger.fxui.utils.VisitLogFilter;
 import logger.fxui.utils.VisitValidation;
@@ -28,7 +31,8 @@ import logger.json.BuildingReader;
 
 public class AppController {
 
-  private final VisitLogDataAccess visitLogDataAccess = new LocalVisitLogDataAccess();
+  private final VisitLogDataAccess visitLogDataAccess = new RemoteVisitLogDataAccess(
+      uriSetup("http://localhost:8080/logger"));
 
   // Registration
   @FXML
@@ -231,6 +235,16 @@ public class AppController {
       rooms = FXCollections.observableArrayList(selectedBuilding.getRooms());
     }
     dropdownRoom.getItems().addAll(rooms);
+  }
+
+  private URI uriSetup(String uri) {
+    URI newUri = null;
+    try {
+      newUri = new URI(uri);
+    } catch (URISyntaxException e) {
+      System.out.println(e.getMessage());
+    }
+    return newUri;
   }
 
   /**

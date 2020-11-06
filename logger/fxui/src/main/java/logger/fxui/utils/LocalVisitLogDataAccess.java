@@ -23,11 +23,9 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
    *
    * @param visitLog to store
    */
-  @Override
-  public void storeVisitLog(VisitLog visitLog) {
+  private void storeVisitLog(VisitLog visitLog) {
     visitLogPersistence.writeVisitLog(visitLog);
   }
-
 
   /**
    * Deletes visit log with given id
