@@ -36,7 +36,7 @@ public class Building {
     this.rooms = rooms;
   }
 
-  public void addRoom(String room){
+  public void addRoom(String room) {
     this.rooms.add(room);
   }
 }
