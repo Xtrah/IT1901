@@ -35,4 +35,8 @@ public class Building {
   public void setRooms(List<String> rooms) {
     this.rooms = rooms;
   }
+
+  public void addRoom(String room){
+    this.rooms.add(room);
+  }
 }
