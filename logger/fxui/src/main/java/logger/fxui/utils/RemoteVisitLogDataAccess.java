@@ -14,7 +14,7 @@ import logger.json.VisitLogModule;
 public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
 
   private final URI endpointUri;
-  private ObjectMapper objectMapper;
+  private final ObjectMapper objectMapper;
 
   private VisitLog visitLog;
 
@@ -24,9 +24,7 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
   }
 
   /**
-   * Gets visitlog
-   *
-   * Send http get request to remote server
+   * Gets visitlog. Sends http get request to remote server
    *
    * @return the VisitLog
    */
@@ -44,7 +42,7 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
                 .build()
                 .send(req, HttpResponse.BodyHandlers.ofString());
         this.visitLog = objectMapper.readValue(res.body(), VisitLog.class);
-      } catch(IOException | InterruptedException e) {
+      } catch (IOException | InterruptedException e) {
         throw new RuntimeException(e);
       }
     }
@@ -52,11 +50,9 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
   }
 
   /**
-   * Add visit to visitlog
+   * Add visit to visitlog. Sends http post request to remote server
    *
-   * Send http post request to remote server
-   *
-   * @param visit
+   * @param visit Visit to add
    */
   @Override
   public void addVisit(Visit visit) {
@@ -83,9 +79,7 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
   }
 
   /**
-   * Deletes visit based on given id
-   *
-   * Send http delete request to remote server
+   * Deletes visit based on given id. Sends http delete request to remote server
    *
    * @param id visit id
    */
