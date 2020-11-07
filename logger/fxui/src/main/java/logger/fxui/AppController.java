@@ -31,8 +31,8 @@ import logger.json.BuildingReader;
 
 public class AppController {
 
-  private final VisitLogDataAccess visitLogDataAccess = new RemoteVisitLogDataAccess(
-      uriSetup("http://localhost:8080/logger"));
+  // true for remote storage, false for local storage
+  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(true);
 
   // Registration
   @FXML
@@ -237,6 +237,12 @@ public class AppController {
     dropdownRoom.getItems().addAll(rooms);
   }
 
+  /**
+   * Make uri for endpoint.
+   *
+   * @param uri for endpoint
+   * @return
+   */
   private URI uriSetup(String uri) {
     URI newUri = null;
     try {
@@ -245,6 +251,20 @@ public class AppController {
       System.out.println(e.getMessage());
     }
     return newUri;
+  }
+
+  /**
+   * Sets local or remote storage.
+   *
+   * @param isRemote either true or false
+   * @return
+   */
+  private VisitLogDataAccess isRemoteStorage(boolean isRemote) {
+    if (isRemote) {
+      return new RemoteVisitLogDataAccess(
+          uriSetup("http://localhost:8080/logger"));
+    }
+    return new LocalVisitLogDataAccess();
   }
 
   /**

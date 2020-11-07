@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class VisitLogService {
 
-  private VisitLog visitLog;
+  private VisitLog visitLog = new VisitLog();
 
   public VisitLogService() {
   }

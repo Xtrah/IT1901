@@ -93,7 +93,7 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
   public void deleteVisit(String id) {
     try {
       final HttpRequest req = HttpRequest
-          .newBuilder(endpointUri)
+          .newBuilder(URI.create(endpointUri + "/" + id))
           .header("Accept", "application/json")
           .DELETE()
           .build();
