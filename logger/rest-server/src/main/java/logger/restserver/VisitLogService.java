@@ -1,5 +1,6 @@
 package logger.restserver;
 
+import java.io.File;
 import logger.core.Visit;
 import logger.core.VisitLog;
 import logger.json.VisitLogPersistence;
@@ -8,13 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class VisitLogService {
 
-  private VisitLog visitLog = new VisitLog();
+  private static final String LOG_PATH =
+      System.getProperty("user.dir") + File.separator + "log.json";
+
+  private final VisitLogPersistence persistence;
+  private final VisitLog visitLog;
 
   public VisitLogService() {
-  }
-
-  public VisitLogService(VisitLog visitLog) {
-    this.visitLog = visitLog;
+    persistence = new VisitLogPersistence(new File(LOG_PATH));
+    visitLog = persistence.readVisitLog();
   }
 
   /**
@@ -22,9 +25,10 @@ public class VisitLogService {
    *
    * @return a sample VisitLog
    */
-  private static VisitLog defaultVisitLog() {
-    VisitLogPersistence persister = new VisitLogPersistence();
-    return persister.readVisitLog();
+  private static VisitLog sampleVisitLog() {
+    return new VisitLogPersistence(
+        new File(System.getProperty("user.dir") + File.separator + "sampleLog.json"))
+        .readVisitLog();
   }
 
   /**
@@ -33,7 +37,7 @@ public class VisitLogService {
    * @return the VisitLog
    */
   public VisitLog getVisitLog() {
-    return visitLog;
+    return persistence.readVisitLog();
   }
 
   /**
@@ -43,6 +47,7 @@ public class VisitLogService {
    */
   public void addVisit(Visit visit) {
     visitLog.addVisit(visit);
+    persistence.writeVisitLog(visitLog);
   }
 
   /**
@@ -52,5 +57,6 @@ public class VisitLogService {
    */
   public void removeVisit(String id) {
     visitLog.removeVisit(id);
+    persistence.writeVisitLog(visitLog);
   }
 }

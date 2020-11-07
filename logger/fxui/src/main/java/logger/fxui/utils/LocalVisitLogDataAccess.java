@@ -1,12 +1,22 @@
 package logger.fxui.utils;
 
+import java.io.File;
 import logger.core.Visit;
 import logger.core.VisitLog;
 import logger.json.VisitLogPersistence;
 
 public class LocalVisitLogDataAccess implements VisitLogDataAccess {
-  private final VisitLogPersistence visitLogPersistence = new VisitLogPersistence();
-  private VisitLog visitLog = getVisitLog();
+
+  private static final String LOG_PATH =
+      System.getProperty("user.dir") + File.separator + "log.json";
+
+  private final VisitLogPersistence persistence;
+  private final VisitLog visitLog;
+
+  public LocalVisitLogDataAccess() {
+    persistence = new VisitLogPersistence(new File(LOG_PATH));
+    visitLog = getVisitLog();
+  }
 
   /**
    * Read visit log from local file and return it
@@ -15,27 +25,7 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
    */
   @Override
   public VisitLog getVisitLog() {
-    return visitLogPersistence.readVisitLog();
-  }
-
-  /**
-   * Stores Visit Log in local file
-   *
-   * @param visitLog to store
-   */
-  private void storeVisitLog(VisitLog visitLog) {
-    visitLogPersistence.writeVisitLog(visitLog);
-  }
-
-  /**
-   * Deletes visit log with given id
-   *
-   * @param id visit id to delete
-   */
-  @Override
-  public void deleteVisit(String id) {
-    visitLog.removeVisit(id);
-    storeVisitLog(visitLog);
+    return persistence.readVisitLog();
   }
 
   /**
@@ -46,7 +36,18 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
   @Override
   public void addVisit(Visit visit) {
     visitLog.addVisit(visit);
-    storeVisitLog(visitLog);
+    persistence.writeVisitLog(visitLog);
+  }
+
+  /**
+   * Deletes visit log with given id
+   *
+   * @param id visit id to delete
+   */
+  @Override
+  public void deleteVisit(String id) {
+    visitLog.removeVisit(id);
+    persistence.writeVisitLog(visitLog);
   }
 
 

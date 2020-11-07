@@ -12,27 +12,29 @@ import logger.core.VisitLog;
 
 public class VisitLogPersistence {
 
-  private static final File DEFAULT_FILE = new File(System.getProperty("user.dir") + "/log.json");
+  private final File file;
+  private final ObjectMapper mapper;
 
-  private ObjectMapper mapper;
-
-  public VisitLogPersistence() {
+  public VisitLogPersistence(File file) {
     mapper = new ObjectMapper();
     mapper.registerModule(new VisitLogModule());
+    this.file = file;
   }
 
   public VisitLog readVisitLog() {
-    try (Reader reader = new FileReader(DEFAULT_FILE, StandardCharsets.UTF_8)) {
+    try (Reader reader = new FileReader(file, StandardCharsets.UTF_8)) {
       return mapper.readValue(reader, VisitLog.class);
     } catch (IOException e) {
-      System.out.println("Couldn't read data from file, creating empty VisitLog...");
-      return new VisitLog();
+      System.out.printf("Couldn't find %s, creating new VisitLog...%n", file.getName());
+      VisitLog newLog = new VisitLog();
+      writeVisitLog(newLog);
+      return newLog;
     }
   }
 
-  public void writeVisitLog(VisitLog todoModel) {
-    try (Writer writer = new FileWriter(DEFAULT_FILE, StandardCharsets.UTF_8)) {
-      mapper.writerWithDefaultPrettyPrinter().writeValue(writer, todoModel);
+  public void writeVisitLog(VisitLog visitLog) {
+    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
+      mapper.writerWithDefaultPrettyPrinter().writeValue(writer, visitLog);
     } catch (IOException e) {
       System.err.println("Something went wrong when writing to file.");
       e.printStackTrace();
