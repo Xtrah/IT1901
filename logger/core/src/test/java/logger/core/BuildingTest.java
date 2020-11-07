@@ -11,6 +11,9 @@ public class BuildingTest {
   private Building b1;
   private Building b2;
 
+  /**
+   * Sets up sample Building objects
+   */
   @BeforeEach
   void setUp() {
     b1 = new Building();
@@ -20,7 +23,7 @@ public class BuildingTest {
   }
 
   @Test
-  void testName(){
+  void testName() {
     assertEquals(null, b1.getName());
     assertEquals("Realfagbygget", b2.getName());
     b2.setName("Stripa");
@@ -28,16 +31,16 @@ public class BuildingTest {
   }
 
   @Test
-  void testRooms(){
+  void testRooms() {
     int sizeBefore = b2.getRooms().size();
     b2.addRoom("A4-124");
-    assertEquals(sizeBefore+1, b2.getRooms().size());
+    assertEquals(sizeBefore + 1, b2.getRooms().size());
     b2.setRooms(new ArrayList<String>());
     assertEquals(0, b2.getRooms().size());
   }
 
   @Test
-  void testToString(){
+  void testToString() {
     assertEquals("Realfagbygget", b2.toString());
   }
 }

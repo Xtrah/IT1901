@@ -38,7 +38,7 @@ class VisitLogTest {
 
     log = new VisitLog();
   }
-
+  
   @Test
   void testAddVisit() {
     assertEquals(0, log.getLog().size());
@@ -70,7 +70,7 @@ class VisitLogTest {
   }
 
   @Test
-  void testToString(){
+  void testToString() {
     assertEquals("VisitLog{" + "log=" + log.getLog() + '}', log.toString());
   }
 }
