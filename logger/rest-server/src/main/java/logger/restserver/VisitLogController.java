@@ -17,7 +17,7 @@ public class VisitLogController {
 
   public static final String CONTROLLER_PATH = "/logger";
 
-  VisitLogService visitLogService;
+  private final VisitLogService visitLogService;
 
   @Autowired
   public VisitLogController(VisitLogService visitLogService) {
