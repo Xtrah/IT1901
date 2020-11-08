@@ -11,8 +11,8 @@ public class Building {
   }
 
   public Building(String name, List<String> rooms) {
-    this.name = name;
-    this.rooms = rooms;
+    setName(name);
+    setRooms(rooms);
   }
 
   @Override
@@ -25,7 +25,11 @@ public class Building {
   }
 
   public void setName(String name) {
-    this.name = name;
+    if (Validation.isValidStructureName(name)) {
+      this.name = name;
+    } else {
+      throw new IllegalArgumentException("Building name is invalid!");
+    }
   }
 
   public List<String> getRooms() {
@@ -36,7 +40,11 @@ public class Building {
     this.rooms = rooms;
   }
 
-  public void addRoom(String room) {
-    this.rooms.add(room);
+  public void addRoom(String name) {
+    if (Validation.isValidStructureName(name)) {
+      this.rooms.add(name);
+    } else {
+      throw new IllegalArgumentException("Room name is invalid!");
+    }
   }
 }
