@@ -46,7 +46,7 @@
     </Tab>
     <Tab fx:id="visitTab" text=" Visit Log ">
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="704.0">
-        <Button fx:id="deleteButton" layoutX="584.0" layoutY="14.0" mnemonicParsing="false" onAction="#deleteVisit" text="Delete" />
+        <Button fx:id="deleteButton" layoutX="661.0" layoutY="67.0" mnemonicParsing="false" onAction="#deleteVisit" prefHeight="26.0" prefWidth="84.0" text="Delete" />
         <ChoiceBox fx:id="chooseSearch" layoutX="292.0" layoutY="67.0" onAction="#filterVisitLog" prefHeight="26.0" prefWidth="158.0" />
         <DatePicker fx:id="logToDate" layoutX="487.0" layoutY="129.0" onAction="#filterVisitLog" prefHeight="25.0" prefWidth="147.0" />
         <DatePicker fx:id="logFromDate" layoutX="289.0" layoutY="129.0" onAction="#filterVisitLog" prefHeight="25.0" prefWidth="162.0" />
