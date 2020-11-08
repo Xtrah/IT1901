@@ -5,101 +5,69 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+
 <!--suppress JavaFxUnresolvedFxIdReference -->
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
-  minHeight="-Infinity"
-  minWidth="-Infinity" prefHeight="604.0" prefWidth="376.0"
-  xmlns="http://javafx.com/javafx/11.0.1" fx:controller="logger.fxui.AppController">
-  <TabPane layoutX="3.0" layoutY="14.0" prefHeight="590.0" prefWidth="370.0" side="BOTTOM"
-    tabClosingPolicy="UNAVAILABLE">
-    <Tab text=" Register " fx:id="registerTab">
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-        <Button layoutX="147.0" layoutY="485.0" mnemonicParsing="false"
-          onAction="#registerVisit" prefHeight="32.0" prefWidth="75.0"
-          text="Register" fx:id="buttonRegister"/>
-        <ChoiceBox layoutX="95.0" layoutY="228.0" onAction="#fillDropdownRoom"
-          onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0"
-          fx:id="dropdownBuilding"/>
-        <ChoiceBox layoutX="95.0" layoutY="275.0" onKeyTyped="#validateValues"
-          prefHeight="28.0" prefWidth="180.0" fx:id="dropdownRoom"/>
-        <DatePicker layoutX="95.0" layoutY="356.0" onAction="#validateValues"
-          onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="180.0"
-          fx:id="inputDate"/>
-        <Label alignment="CENTER" layoutX="127.0" layoutY="30.0" text="Register Visit">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logger.fxui.AppController">
+  <TabPane layoutY="-7.0" prefHeight="604.0" prefWidth="937.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+    <Tab fx:id="registerTab" text=" Register ">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="723.0">
+        <Button fx:id="buttonRegister" layoutX="436.0" layoutY="497.0" mnemonicParsing="false" onAction="#registerVisit" prefHeight="32.0" prefWidth="75.0" text="Register" />
+        <ChoiceBox fx:id="dropdownBuilding" layoutX="384.0" layoutY="240.0" onAction="#fillDropdownRoom" onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0" />
+        <ChoiceBox fx:id="dropdownRoom" layoutX="384.0" layoutY="287.0" onKeyTyped="#validateValues" prefHeight="28.0" prefWidth="180.0" />
+        <DatePicker fx:id="inputDate" layoutX="384.0" layoutY="368.0" onAction="#validateValues" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="180.0" />
+        <Label alignment="CENTER" layoutX="416.0" layoutY="42.0" text="Register Visit">
           <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
           </font>
         </Label>
-        <Label layoutX="110.0" layoutY="432.0" text=":"/>
-        <Label layoutX="257.0" layoutY="431.0" text=":"/>
-        <Label layoutX="97.0" layoutY="400.0" text="From"/>
-        <Label layoutX="251.0" layoutY="400.0" text="To"/>
-        <Label layoutX="39.0" layoutY="232.0" text="Building:"/>
-        <Label layoutX="50.0" layoutY="280.0" text="Room:"/>
-        <Label layoutX="57.0" layoutY="360.0" text="Date:"/>
-        <Label alignment="CENTER" layoutX="51.0" layoutY="461.0" prefHeight="17.0"
-          prefWidth="267.0" fx:id="helperText"/>
-        <TextField layoutX="50.0" layoutY="99.0" onKeyTyped="#validateValues"
-          prefHeight="26.0" prefWidth="270.0" promptText="Name"
-          fx:id="inputName"/>
-        <TextField layoutX="50.0" layoutY="149.0" onKeyTyped="#validateValues"
-          prefHeight="26.0" prefWidth="270.0" promptText="Phone (8 digits)"
-          fx:id="inputPhone"/>
-        <TextField alignment="CENTER" layoutX="75.0" layoutY="428.0"
-          onKeyTyped="#validateValues"
-          prefHeight="26.0" prefWidth="30.0" promptText="00" fx:id="inputHour1"/>
-        <TextField alignment="CENTER" layoutX="118.0" layoutY="428.0"
-          onKeyTyped="#validateValues"
-          prefHeight="26.0" prefWidth="30.0" promptText="00" fx:id="inputMin1"/>
-        <TextField alignment="CENTER" layoutX="222.0" layoutY="427.0"
-          onKeyTyped="#validateValues"
-          prefHeight="26.0" prefWidth="30.0" promptText="00" fx:id="inputHour2"/>
-        <TextField alignment="CENTER" layoutX="264.0" layoutY="427.0"
-          onKeyTyped="#validateValues"
-          prefHeight="26.0" prefWidth="30.0" promptText="00" fx:id="inputMin2"/>
+        <Label layoutX="399.0" layoutY="444.0" text=":" />
+        <Label layoutX="546.0" layoutY="443.0" text=":" />
+        <Label layoutX="386.0" layoutY="412.0" text="From" />
+        <Label layoutX="540.0" layoutY="412.0" text="To" />
+        <Label layoutX="328.0" layoutY="244.0" text="Building:" />
+        <Label layoutX="339.0" layoutY="292.0" text="Room:" />
+        <Label layoutX="346.0" layoutY="372.0" text="Date:" />
+        <Label fx:id="helperText" alignment="CENTER" layoutX="340.0" layoutY="473.0" prefHeight="17.0" prefWidth="267.0" />
+        <TextField fx:id="inputName" layoutX="339.0" layoutY="111.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="270.0" promptText="Name" />
+        <TextField fx:id="inputPhone" layoutX="339.0" layoutY="161.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="270.0" promptText="Phone (8 digits)" />
+        <TextField fx:id="inputHour1" alignment="CENTER" layoutX="364.0" layoutY="440.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+        <TextField fx:id="inputMin1" alignment="CENTER" layoutX="407.0" layoutY="440.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+        <TextField fx:id="inputHour2" alignment="CENTER" layoutX="511.0" layoutY="439.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
+        <TextField fx:id="inputMin2" alignment="CENTER" layoutX="553.0" layoutY="439.0" onKeyTyped="#validateValues" prefHeight="26.0" prefWidth="30.0" promptText="00" />
       </AnchorPane>
     </Tab>
-    <Tab text=" Visit Log " fx:id="visitTab">
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-        <Button layoutX="306.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteVisit"
-          text="Delete" fx:id="deleteButton"/>
-        <ChoiceBox layoutX="14.0" layoutY="66.0" onAction="#filterVisitLog"
-          prefHeight="26.0" prefWidth="158.0" fx:id="chooseSearch"/>
-        <DatePicker layoutX="209.0" layoutY="128.0" onAction="#filterVisitLog"
-          prefHeight="25.0" prefWidth="147.0" fx:id="logToDate"/>
-        <DatePicker layoutX="11.0" layoutY="128.0" onAction="#filterVisitLog"
-          prefHeight="25.0" prefWidth="162.0" fx:id="logFromDate"/>
-        <Label layoutX="14.0" layoutY="104.0" prefHeight="17.0" prefWidth="89.0"
-          text="From date" fx:id="logFromDateLabel"/>
-        <Label layoutX="209.0" layoutY="104.0" prefHeight="17.0" prefWidth="89.0"
-          text="To date" fx:id="logToDateLabel"/>
-        <Label layoutX="150.0" layoutY="25.0" text="Visit Log">
+    <Tab fx:id="visitTab" text=" Visit Log ">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="704.0">
+        <Button fx:id="deleteButton" layoutX="661.0" layoutY="67.0" mnemonicParsing="false" onAction="#deleteVisit" prefHeight="26.0" prefWidth="84.0" text="Delete" />
+        <ChoiceBox fx:id="chooseSearch" layoutX="292.0" layoutY="67.0" onAction="#filterVisitLog" prefHeight="26.0" prefWidth="158.0" />
+        <DatePicker fx:id="logToDate" layoutX="487.0" layoutY="129.0" onAction="#filterVisitLog" prefHeight="25.0" prefWidth="147.0" />
+        <DatePicker fx:id="logFromDate" layoutX="289.0" layoutY="129.0" onAction="#filterVisitLog" prefHeight="25.0" prefWidth="162.0" />
+        <Label fx:id="logFromDateLabel" layoutX="292.0" layoutY="105.0" prefHeight="17.0" prefWidth="89.0" text="From date" />
+        <Label fx:id="logToDateLabel" layoutX="487.0" layoutY="105.0" prefHeight="17.0" prefWidth="89.0" text="To date" />
+        <Label layoutX="428.0" layoutY="26.0" text="Visit Log">
           <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
           </font>
         </Label>
-        <TableView layoutX="1.0" layoutY="162.0" prefHeight="342.0" prefWidth="370.0"
-          fx:id="tableView">
+        <TableView fx:id="tableView" layoutX="2.0" layoutY="189.0" prefHeight="342.0" prefWidth="929.0">
           <columns>
-            <TableColumn maxWidth="120.0" prefWidth="60.0" text="Name" fx:id="nameCol"/>
-            <TableColumn maxWidth="120.0" prefWidth="60.0" text="Phone" fx:id="phoneCol"/>
-            <TableColumn maxWidth="120.0" prefWidth="60.0" text="Building"
-              fx:id="buildingCol"/>
-            <TableColumn maxWidth="120.0" prefWidth="60.0" text="Room" fx:id="roomCol"/>
-            <TableColumn maxWidth="120.0" prefWidth="60.0" text="From" fx:id="fromTimeCol"/>
-            <TableColumn maxWidth="120.0" prefWidth="60.0" text="To" fx:id="toTimeCol"/>
+            <TableColumn fx:id="nameCol" maxWidth="300.0" prefWidth="238.0" text="Name" />
+            <TableColumn fx:id="phoneCol" maxWidth="325.0" prefWidth="147.0" text="Phone" />
+            <TableColumn fx:id="buildingCol" maxWidth="507.0" prefWidth="198.0" text="Building" />
+            <TableColumn fx:id="roomCol" maxWidth="452.0" prefWidth="57.0" text="Room" />
+            <TableColumn fx:id="fromTimeCol" maxWidth="505.0" prefWidth="145.0" text="From" />
+            <TableColumn fx:id="toTimeCol" maxWidth="580.0" prefWidth="143.0" text="To" />
           </columns>
         </TableView>
-        <TextField layoutX="208.0" layoutY="66.0" onKeyTyped="#filterVisitLog"
-          prefHeight="26.0" prefWidth="150.0" promptText="Search"
-          fx:id="searchField"/>
+        <TextField fx:id="searchField" layoutX="486.0" layoutY="67.0" onKeyTyped="#filterVisitLog" prefHeight="26.0" prefWidth="150.0" promptText="Search" />
       </AnchorPane>
     </Tab>
   </TabPane>
