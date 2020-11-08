@@ -91,7 +91,7 @@ public class AppController {
    * Sets up the UI
    */
   @FXML
-  void initialize() {
+  private void initialize() {
     buttonRegister.setDisable(true);
     setUpColumnListeners();
     updateTable();
@@ -106,7 +106,7 @@ public class AppController {
    * Register a visit to the log
    */
   @FXML
-  void registerVisit() {
+  private void registerVisit() {
     String name = inputName.getText();
     String phone = inputPhone.getText();
     String building = dropdownBuilding.getValue().getName();
@@ -148,7 +148,7 @@ public class AppController {
    * Validates the user input
    */
   @FXML
-  void validateValues() {
+  private void validateValues() {
     // Initiating values
     buttonRegister.setDisable(false);
     helperText.setText("");
@@ -223,7 +223,7 @@ public class AppController {
    * Fills the room dropdown with rooms according to which building is chosen
    */
   @FXML
-  void fillDropdownRoom() {
+  private void fillDropdownRoom() {
     Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
     ObservableList<String> rooms;
     dropdownRoom.getItems().clear();

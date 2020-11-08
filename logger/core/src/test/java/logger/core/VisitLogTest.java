@@ -18,7 +18,7 @@ class VisitLogTest {
    * Sets up sample Visit objects and a VisitLog object
    */
   @BeforeEach
-  void setUp() {
+  private void setUp() {
     v1 =
         new Visit(
             "Ola Normann",
@@ -40,7 +40,7 @@ class VisitLogTest {
   }
   
   @Test
-  void testAddVisit() {
+  private void testAddVisit() {
     assertEquals(0, log.getLog().size());
 
     log.addVisit(v1);
@@ -51,12 +51,12 @@ class VisitLogTest {
   }
 
   @Test
-  void testVisitLogConstructors() {
+  private void testVisitLogConstructors() {
     assertNotNull(log);
   }
 
   @Test
-  void testRemoveVisit() {
+  private void testRemoveVisit() {
     log.addVisit(v1);
     log.addVisit(v2);
     log.removeVisit(v1.getId());

@@ -24,7 +24,7 @@ public class VisitLogApplication {
    * @return instane of VisitLogModule
    */
   @Bean
-  public Module objectMapperModule() {
+  protected Module objectMapperModule() {
     return new VisitLogModule();
   }
 }
