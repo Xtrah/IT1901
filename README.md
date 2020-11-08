@@ -16,7 +16,7 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 3. Run server using `mvn -pl rest spring-boot:run`
 4. Install modules by running `mvn install`
 5. Run app using `mvn -pl fxui javafx:run`
-6. Run code coverage check, spotbugs and tests using `mvn clean verify test`
+6. Run code coverage check, spotbugs and tests using `mvn clean verify`
 
 ### Git conventions
 
