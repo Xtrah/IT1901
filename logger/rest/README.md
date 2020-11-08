@@ -9,7 +9,7 @@ VisitLogService layer handles business requirements.
 VisitLogController handles the navigation between the different views.
 
 The server is run on localhost:8080 using cmd:
-`mvn -pl rest-server spring-boot:run`
+`mvn -pl rest spring-boot:run`
 
 The base endpoint for the rest-api is "/logger", offering three methods:
 * read Visit Log (GET "/logger")
