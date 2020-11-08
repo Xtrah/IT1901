@@ -65,7 +65,7 @@ class VisitLogTest {
       log.removeVisit(v1.getId());
       fail("Expected IllegalArgumentException thrown");
     } catch (IllegalArgumentException e) {
-      assertEquals("Didn't find Visit in VisitLog", e.getMessage());
+      assertEquals("No visit with this ID.", e.getMessage());
     }
   }
 

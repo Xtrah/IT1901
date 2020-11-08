@@ -21,12 +21,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
 import logger.core.Validation;
 import logger.core.Visit;
-import logger.core.VisitLog;
 import logger.fxui.utils.LocalVisitLogDataAccess;
 import logger.fxui.utils.RemoteVisitLogDataAccess;
 import logger.fxui.utils.VisitLogDataAccess;
 import logger.fxui.utils.VisitLogFilter;
-import logger.fxui.utils.VisitValidation;
 import logger.json.BuildingReader;
 
 public class AppController {

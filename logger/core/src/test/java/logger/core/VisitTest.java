@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 public class VisitTest {
 
   private Visit v1;
-  private Visit v2;
 
   /**
    * Sets up sample Visit objects
@@ -24,31 +23,30 @@ public class VisitTest {
             "A4-100",
             LocalDateTime.of(2020, 10, 1, 14, 15),
             LocalDateTime.of(2020, 10, 1, 16, 15));
-    v2 = new Visit();
   }
 
   @Test
   void testPerson() {
-    v2.setName("Kari Hansen");
-    assertEquals("Kari Hansen", v2.getName());
-    v2.setPhone("69696969");
-    assertEquals("69696969", v2.getPhone());
+    v1.setName("Kari Hansen");
+    assertEquals("Kari Hansen", v1.getName());
+    v1.setPhone("69696969");
+    assertEquals("69696969", v1.getPhone());
   }
 
   @Test
   void testLocation() {
-    v2.setBuilding("Stripa");
-    assertEquals("Stripa", v2.getBuilding());
-    v2.setRoom("S4");
-    assertEquals("S4", v2.getRoom());
+    v1.setBuilding("Stripa");
+    assertEquals("Stripa", v1.getBuilding());
+    v1.setRoom("S4");
+    assertEquals("S4", v1.getRoom());
   }
 
   @Test
   void testTime() {
-    v2.setFrom(LocalDateTime.of(2020, 10, 1, 16, 15));
-    assertEquals(LocalDateTime.of(2020, 10, 1, 16, 15), v2.getFrom());
-    v2.setTo(LocalDateTime.of(2020, 10, 1, 18, 15));
-    assertEquals(LocalDateTime.of(2020, 10, 1, 18, 15), v2.getTo());
+    v1.setFrom(LocalDateTime.of(2020, 10, 1, 16, 15));
+    assertEquals(LocalDateTime.of(2020, 10, 1, 16, 15), v1.getFrom());
+    v1.setTo(LocalDateTime.of(2020, 10, 1, 18, 15));
+    assertEquals(LocalDateTime.of(2020, 10, 1, 18, 15), v1.getTo());
   }
 
   @Test
