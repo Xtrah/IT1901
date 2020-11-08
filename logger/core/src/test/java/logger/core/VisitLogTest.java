@@ -23,14 +23,14 @@ class VisitLogTest {
         new Visit(
             "Ola Normann",
             "12345678",
-            "Realfagsbygget",
+            "Realfagbygget",
             "A4-100",
             LocalDateTime.of(2020, 10, 1, 14, 15),
             LocalDateTime.of(2020, 10, 1, 16, 15));
     v2 =
         new Visit(
             "Kari Hansen",
-            "487654321",
+            "87654321",
             "Stripa",
             "S4",
             LocalDateTime.of(2020, 10, 1, 16, 15),

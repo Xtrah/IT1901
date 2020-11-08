@@ -1,9 +1,9 @@
-package logger.fxui.validation;
+package logger.core;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class VisitValidation {
+public class Validation {
 
   /**
    * @param hours   hours String to be validated
@@ -17,11 +17,19 @@ public class VisitValidation {
   }
 
   /**
-   * @param text Name to be validated
-   * @return true if name only contains legal characters, false otherwise
+   * @param name Name to be validated
+   * @return true if name only contains legal characters and length, false otherwise
    */
-  public static boolean isValidName(String text) {
-    return text.matches("^[a-zA-ZæøåÆØÅ ]*$");
+  public static boolean isValidName(String name) {
+    return name.matches("^[a-zA-ZæøåÆØÅ -]{2,40}$");
+  }
+
+  /**
+   * @param name Name to be validated
+   * @return true if name only contains legal characters and length, false otherwise
+   */
+  public static boolean isValidStructureName(String name) {
+    return name.matches("^[a-zA-ZæøåÆØÅ0-9\\-\\s]{2,40}$");
   }
 
   /**
