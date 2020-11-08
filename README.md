@@ -14,8 +14,9 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 2. Open folder as Maven project in an IDE  
     **IntelliJ IDEA:** File -> New -> Module from Existing Sources -> `logger` folder -> Maven
 3. Install modules by running `mvn install`
-4. Run app using `mvn javafx:run -f fxui/pom.xml`
-5. Run code coverage check, spotbugs and tests using `mvn clean verify test`
+4. Run server using `mvn -pl rest-server spring-boot:run`
+5. Run app using `mvn javafx:run -f fxui/pom.xml`
+6. Run code coverage check, spotbugs and tests using `mvn clean verify test`
 
 ### Git conventions
 
