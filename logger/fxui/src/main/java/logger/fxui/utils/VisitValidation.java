@@ -10,7 +10,7 @@ public class VisitValidation {
    * @param minutes minutes String to be validated
    * @return true if the String is a valid time, False otherwise
    */
-  private static boolean isTimeString(String hours, String minutes) {
+  public static boolean isTimeString(String hours, String minutes) {
     String timeString = hours + ':' + minutes;
     // Check if hours are between 0-23 and minutes between 0-59
     return timeString.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
