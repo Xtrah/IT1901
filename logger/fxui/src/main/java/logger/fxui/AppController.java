@@ -1,6 +1,8 @@
 package logger.fxui;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,14 +21,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
 import logger.core.Validation;
 import logger.core.Visit;
-import logger.core.VisitLog;
+import logger.fxui.utils.LocalVisitLogDataAccess;
+import logger.fxui.utils.RemoteVisitLogDataAccess;
+import logger.fxui.utils.VisitLogDataAccess;
+import logger.fxui.utils.VisitLogFilter;
 import logger.json.BuildingReader;
-import logger.json.VisitLogPersistence;
 
 public class AppController {
 
-  private VisitLog log;
-  private VisitLogPersistence persistence;
+  // true for remote storage, false for local storage
+  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(false);
 
   // Registration
   @FXML
@@ -90,7 +94,7 @@ public class AppController {
   void initialize() {
     buttonRegister.setDisable(true);
     setUpColumnListeners();
-    setUpPersistence();
+    updateTable();
     setUpFiltering();
     setUpBuildings();
     activateInputRules();
@@ -121,7 +125,8 @@ public class AppController {
     LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
     // Handling VisitLog
-    log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
+    Visit newVisit = new Visit(name, phone, building, room, fromTime, toTime);
+    visitLogDataAccess.addVisit(newVisit);
     updateTable();
 
     resetInputs();
@@ -135,7 +140,7 @@ public class AppController {
   private void deleteVisit() {
     ObservableList<Visit> deleteList = tableView.getSelectionModel().getSelectedItems();
     Visit deleteVisit = deleteList.get(0);
-    log.removeVisit(deleteVisit);
+    visitLogDataAccess.deleteVisit(deleteVisit.getId());
     updateTable();
   }
 
@@ -190,7 +195,7 @@ public class AppController {
   private void filterVisitLog() {
     final String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
     String searchKey = chooseSearch.getValue(); // DropDown choice
-    final List<Visit> allVisits = log.getLog();
+    final List<Visit> allVisits = visitLogDataAccess.getVisitLog().getLog();
     final List<Visit> result;
 
     // Hide unused widgets
@@ -231,6 +236,36 @@ public class AppController {
   }
 
   /**
+   * Make uri for endpoint.
+   *
+   * @param uri for endpoint
+   * @return
+   */
+  private URI uriSetup(String uri) {
+    URI newUri = null;
+    try {
+      newUri = new URI(uri);
+    } catch (URISyntaxException e) {
+      System.out.println(e.getMessage());
+    }
+    return newUri;
+  }
+
+  /**
+   * Sets local or remote storage.
+   *
+   * @param isRemote either true or false
+   * @return
+   */
+  private VisitLogDataAccess isRemoteStorage(boolean isRemote) {
+    if (isRemote) {
+      return new RemoteVisitLogDataAccess(
+          uriSetup("http://localhost:8080/logger"));
+    }
+    return new LocalVisitLogDataAccess();
+  }
+
+  /**
    * Resets all inputs to empty fields, except the DatePicker which is set to today's  date.
    */
   private void resetInputs() {
@@ -262,9 +297,8 @@ public class AppController {
    * Updates the log
    */
   private void updateTable() {
-    persistence.writeVisitLog(log);
     tableView.getItems().clear();
-    tableView.getItems().addAll(log.getLog());
+    tableView.getItems().addAll(visitLogDataAccess.getVisitLog().getLog());
   }
 
   /**
@@ -290,16 +324,6 @@ public class AppController {
     forceNumberInput(inputPhone, 8);
     forceCharacterInput(inputName);
   }
-
-  /**
-   * Imports previously stored visits and displays them, or creates a new log if none is found
-   */
-  private void setUpPersistence() {
-    persistence = new VisitLogPersistence();
-    log = persistence.readVisitLog();
-    updateTable();
-  }
-
 
   /**
    * Sets up filter options and filter input fields

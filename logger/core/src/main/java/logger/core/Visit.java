@@ -5,16 +5,13 @@ import java.util.UUID;
 
 public class Visit {
 
-  private final String id = UUID.randomUUID().toString();
+  private String id;
   private String name;
   private String phone;
   private String building;
   private String room;
   private LocalDateTime from;
   private LocalDateTime to;
-
-  public Visit() {
-  }
 
   public Visit(
       String name,
@@ -29,6 +26,19 @@ public class Visit {
     setRoom(room);
     setFrom(from);
     setTo(to);
+    this.id = UUID.randomUUID().toString();
+  }
+
+  public Visit(
+      String id,
+      String name,
+      String phone,
+      String building,
+      String room,
+      LocalDateTime from,
+      LocalDateTime to) {
+    this(name, phone, building, room, from, to);
+    this.id = id;
   }
 
   public String getName() {

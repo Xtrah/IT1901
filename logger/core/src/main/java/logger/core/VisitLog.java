@@ -27,15 +27,27 @@ public class VisitLog implements Iterable<Visit> {
   }
 
   /**
+   * Gets a visit with a given ID.
+   *
+   * @param id id of visit
+   * @return the visit with the given id if it exists, null if it doesn't exist
+   */
+  public Visit getVisit(String id) {
+    return log.stream().filter((visit -> visit.getId().equals(id))).findAny().orElse(null);
+  }
+
+  /**
    * Removes a visit from the VisitLog
    *
-   * @param visit Visit to remove
+   * @param id id of visit to remove
    */
-  public void removeVisit(Visit visit) {
-    if (!log.contains(visit)) {
-      throw new IllegalArgumentException("Didn't find Visit in VisitLog");
+  public void removeVisit(String id) {
+    if (getVisit(id) == null) {
+      throw new IllegalArgumentException("No visit with this ID.");
     }
-    log = log.stream().filter(v -> !visit.getId().equals(v.getId())).collect(Collectors.toList());
+    log = log.stream()
+        .filter(visit -> !visit.getId().equals(id))
+        .collect(Collectors.toList());
   }
 
   @Override
