@@ -36,7 +36,7 @@ public class VisitLogService {
    *
    * @return the VisitLog
    */
-  protected VisitLog getVisitLog() {
+  VisitLog getVisitLog() {
     return persistence.readVisitLog();
   }
 
@@ -45,7 +45,7 @@ public class VisitLogService {
    *
    * @param visit visit to add
    */
-  protected void addVisit(Visit visit) {
+  void addVisit(Visit visit) {
     visitLog.addVisit(visit);
     persistence.writeVisitLog(visitLog);
   }
@@ -55,7 +55,7 @@ public class VisitLogService {
    *
    * @param id id of visit to remove
    */
-  protected void removeVisit(String id) {
+  void removeVisit(String id) {
     visitLog.removeVisit(id);
     persistence.writeVisitLog(visitLog);
   }
