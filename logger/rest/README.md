@@ -1,8 +1,8 @@
-# Module for REST-server and REST-API
+# Module for REST
 
 This module contains the REST-server and REST-API for [Logger](../README.md).
 
-## REST-server and REST-API
+## REST
 
 VisitLogApplication starts the spring boot server.
 VisitLogService layer handles business requirements.

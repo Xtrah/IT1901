@@ -13,8 +13,8 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 1. `git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030.git`
 2. Open folder as Maven project in an IDE  
     **IntelliJ IDEA:** File -> New -> Module from Existing Sources -> `logger` folder -> Maven
-3. Install modules by running `mvn install`
-4. Run server using `mvn -pl rest-server spring-boot:run`
+3. Run server using `mvn -pl rest-server spring-boot:run`
+4. Install modules by running `mvn install`
 5. Run app using `mvn javafx:run -f fxui/pom.xml`
 6. Run code coverage check, spotbugs and tests using `mvn clean verify test`
 
