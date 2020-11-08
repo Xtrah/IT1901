@@ -84,7 +84,7 @@ public class Visit {
   }
 
   public void setFrom(LocalDateTime from) {
-      this.from = from;
+    this.from = from;
   }
 
   public LocalDateTime getTo() {
