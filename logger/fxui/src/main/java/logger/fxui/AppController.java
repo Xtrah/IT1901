@@ -1,7 +1,5 @@
 package logger.fxui;
 
-import static logger.fxui.utils.VisitValidation.isEmptyString;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,7 +19,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
+import logger.core.Validation;
 import logger.core.Visit;
+import logger.core.VisitLog;
 import logger.fxui.utils.LocalVisitLogDataAccess;
 import logger.fxui.utils.RemoteVisitLogDataAccess;
 import logger.fxui.utils.VisitLogDataAccess;
@@ -156,22 +156,22 @@ public class AppController {
     helperText.setText("");
 
     // Validate name
-    if (!VisitValidation.isValidName(inputName.getText())) {
+    if (!Validation.isValidName(inputName.getText())) {
       buttonRegister.setDisable(true);
       helperText.setText("Names can only contain characters!");
     }
 
     // Validate phone
-    if (!VisitValidation.isValidPhone(inputPhone.getText())) {
+    if (!Validation.isValidPhone(inputPhone.getText())) {
       buttonRegister.setDisable(true);
       helperText.setText("Number must be eight digits!");
     }
 
     // Validate time
     // Format from text to LocalTime, and check if LocalTime is valid
-    if (!VisitValidation.isValidTime(
-        VisitValidation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
-        VisitValidation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
+    if (!Validation.isValidTime(
+        Validation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
+        Validation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
     )
     ) {
       buttonRegister.setDisable(true);
@@ -184,7 +184,7 @@ public class AppController {
     }
 
     // Validate date
-    if (!VisitValidation.isValidDate(inputDate.getValue())) {
+    if (!Validation.isValidDate(inputDate.getValue())) {
       buttonRegister.setDisable(true);
       helperText.setText("Can't set future visits!");
     }
@@ -288,11 +288,10 @@ public class AppController {
    */
   private boolean lackingValues() {
     return (
-        isEmptyString(inputName.getText())
-            || isEmptyString(inputPhone.getText())
-            || isEmptyString(inputPhone.getText())
+        Validation.isEmptyString(inputName.getText())
+            || Validation.isEmptyString(inputPhone.getText())
             || dropdownBuilding.getValue() == null
-            || isEmptyString(dropdownRoom.getValue())
+            || Validation.isEmptyString(dropdownRoom.getValue())
             || inputDate.getValue() == null);
   }
 

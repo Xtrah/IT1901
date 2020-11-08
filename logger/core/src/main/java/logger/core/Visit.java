@@ -20,13 +20,13 @@ public class Visit {
       String room,
       LocalDateTime from,
       LocalDateTime to) {
+    setName(name);
+    setPhone(phone);
+    setBuilding(building);
+    setRoom(room);
+    setFrom(from);
+    setTo(to);
     this.id = UUID.randomUUID().toString();
-    this.name = name;
-    this.phone = phone;
-    this.building = building;
-    this.room = room;
-    this.from = from;
-    this.to = to;
   }
 
   public Visit(
@@ -46,7 +46,11 @@ public class Visit {
   }
 
   public void setName(String name) {
-    this.name = name;
+    if (Validation.isValidName(name)) {
+      this.name = name;
+    } else {
+      throw new IllegalArgumentException("Person name is invalid!");
+    }
   }
 
   public String getPhone() {
@@ -54,7 +58,11 @@ public class Visit {
   }
 
   public void setPhone(String phone) {
-    this.phone = phone;
+    if (Validation.isValidPhone(phone)) {
+      this.phone = phone;
+    } else {
+      throw new IllegalArgumentException("Phone number is invalid!");
+    }
   }
 
   public String getBuilding() {
@@ -62,7 +70,11 @@ public class Visit {
   }
 
   public void setBuilding(String building) {
-    this.building = building;
+    if (Validation.isValidStructureName(building)) {
+      this.building = building;
+    } else {
+      throw new IllegalArgumentException("Building name is invalid!");
+    }
   }
 
   public String getRoom() {
@@ -70,7 +82,11 @@ public class Visit {
   }
 
   public void setRoom(String room) {
-    this.room = room;
+    if (Validation.isValidStructureName(room)) {
+      this.room = room;
+    } else {
+      throw new IllegalArgumentException("Room name is invalid!");
+    }
   }
 
   public LocalDateTime getFrom() {
