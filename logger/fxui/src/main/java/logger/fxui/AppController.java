@@ -253,7 +253,6 @@ public class AppController {
     return (
         Validation.isEmptyString(inputName.getText())
             || Validation.isEmptyString(inputPhone.getText())
-            || Validation.isEmptyString(inputPhone.getText())
             || dropdownBuilding.getValue() == null
             || Validation.isEmptyString(dropdownRoom.getValue())
             || inputDate.getValue() == null);

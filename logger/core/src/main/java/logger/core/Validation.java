@@ -21,7 +21,7 @@ public class Validation {
    * @return true if name only contains legal characters and length, false otherwise
    */
   public static boolean isValidName(String name) {
-    return name.matches("^[a-zA-ZæøåÆØÅ -]{2,20}$");
+    return name.matches("^[a-zA-ZæøåÆØÅ -]{2,40}$");
   }
 
   /**
@@ -29,7 +29,7 @@ public class Validation {
    * @return true if name only contains legal characters and length, false otherwise
    */
   public static boolean isValidStructureName(String name) {
-    return name.matches("^[a-zA-ZæøåÆØÅ0-9\\-\\s]{2,20}$");
+    return name.matches("^[a-zA-ZæøåÆØÅ0-9\\-\\s]{2,40}$");
   }
 
   /**
