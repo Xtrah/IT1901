@@ -15,6 +15,12 @@ public class VisitDeserializer extends JsonDeserializer<Visit> {
     return deserialize(jp.getCodec().readTree(jp));
   }
 
+  /**
+   * Deserializes a JsonNode into a Visit.
+   *
+   * @param node JsonNode node to be deserialized
+   * @return Visit
+   */
   public Visit deserialize(JsonNode node) {
     String id = node.get("id").asText();
     String name = node.get("name").asText();

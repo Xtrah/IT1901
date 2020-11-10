@@ -15,12 +15,22 @@ public class VisitLogPersistence {
   private final File file;
   private final ObjectMapper mapper;
 
+  /**
+   * Connects objectMapper, file and VisitLogModule.
+   *
+   * @param file File file to persist
+   */
   public VisitLogPersistence(File file) {
     mapper = new ObjectMapper();
     mapper.registerModule(new VisitLogModule());
     this.file = file;
   }
 
+  /**
+   * Reads and deserializes a Json VisitLog file.
+   *
+   * @return newLog VisitLog newLog
+   */
   public VisitLog readVisitLog() {
     try (Reader reader = new FileReader(file, StandardCharsets.UTF_8)) {
       return mapper.readValue(reader, VisitLog.class);
@@ -32,6 +42,11 @@ public class VisitLogPersistence {
     }
   }
 
+  /**
+   * Writes visitLog to file.
+   *
+   * @param visitLog VisitLog visitLog to be written to file
+   */
   public void writeVisitLog(VisitLog visitLog) {
     try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
       mapper.writerWithDefaultPrettyPrinter().writeValue(writer, visitLog);
