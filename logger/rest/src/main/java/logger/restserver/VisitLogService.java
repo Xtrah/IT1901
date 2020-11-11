@@ -32,7 +32,7 @@ public class VisitLogService {
   }
 
   /**
-   * Gets the VisitLog
+   * Gets the VisitLog.
    *
    * @return the VisitLog
    */
@@ -41,7 +41,7 @@ public class VisitLogService {
   }
 
   /**
-   * Adds a visit to the log
+   * Adds a visit to the log.
    *
    * @param visit visit to add
    */
@@ -51,7 +51,7 @@ public class VisitLogService {
   }
 
   /**
-   * Removes a visit from the log with given id
+   * Removes a visit from the log with given id.
    *
    * @param id id of visit to remove
    */
