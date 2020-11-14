@@ -3,60 +3,63 @@ package logger.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VisitLog implements Iterable<Visit> {
 
-    private List<Visit> log;
+  private List<Visit> log;
 
-    public VisitLog() {
-        this.log = new ArrayList<>();
+  public VisitLog() {
+    this.log = new ArrayList<>();
+  }
+
+  public List<Visit> getLog() {
+    return log;
+  }
+
+  /**
+   * Adds a visit to the VisitLog
+   *
+   * @param visit Visit to add
+   */
+  public void addVisit(Visit visit) {
+    log.add(visit);
+  }
+
+  /**
+   * Gets a visit with a given ID.
+   *
+   * @param id id of visit
+   * @return the visit with the given id if it exists, null if it doesn't exist
+   */
+  public Visit getVisit(String id) {
+    return log.stream().filter((visit -> visit.getId().equals(id))).findAny().orElse(null);
+  }
+
+  /**
+   * Removes a visit from the VisitLog
+   *
+   * @param id id of visit to remove
+   */
+  public void removeVisit(String id) {
+    if (getVisit(id) == null) {
+      throw new IllegalArgumentException("No visit with this ID.");
     }
+    log = log.stream()
+        .filter(visit -> !visit.getId().equals(id))
+        .collect(Collectors.toList());
+  }
 
-    public VisitLog(List<Visit> log) {
-        this.log = log;
-    }
+  @Override
+  public String toString() {
+    return "VisitLog{" + "log=" + log + '}';
+  }
 
-    public List<Visit> getLog() {
-        return log;
-    }
-
-    public void addVisit(Visit visit) {
-        log.add(visit);
-    }
-
-    @Override
-    public String toString() {
-        return "VisitLog{" +
-                "log=" + log +
-                '}';
-    }
-
-    @Override
-    public Iterator<Visit> iterator() {
-        return log.iterator();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (! (obj instanceof VisitLog)) return false;
-
-        VisitLog other = (VisitLog) obj;
-        if (other.getLog() == null) return false;
-
-        if (this.getLog().size() != other.getLog().size()) return false;
-
-        Iterator<Visit> it = this.iterator();
-        Iterator<Visit> oit = other.iterator();
-        while (it.hasNext()) {
-            Visit v1 = it.next();
-            Visit v2 = oit.next();
-            if (! v1.equals(v2)) return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return 42;
-    }
+  /**
+   * @return Iterator over logs
+   */
+  @Override
+  public Iterator<Visit> iterator() {
+    return log.iterator();
+  }
 }
