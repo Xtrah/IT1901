@@ -1,9 +1,12 @@
 package logger.rest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import logger.core.Visit;
 import logger.core.VisitLog;
 import logger.json.VisitLogModule;
 import org.junit.jupiter.api.Assertions;
@@ -12,10 +15,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.time.LocalDateTime;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(VisitLogController.class)
@@ -27,14 +33,49 @@ class VisitLogControllerTest {
   @MockBean
   private VisitLogService service;
 
+  @Autowired
+  private ObjectMapper mapper;
+
   @Test
   void getVisitLog() throws Exception {
-    given(service.getVisitLog()).willReturn(new VisitLog());
+    given(service.getVisitLog()).willReturn(VisitLogService.sampleVisitLog());
     MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/logger"))
         .andExpect(status().isOk())
         .andReturn();
     VisitLog logRes = new ObjectMapper().registerModule(new VisitLogModule())
         .readValue(result.getResponse().getContentAsString(), VisitLog.class);
-    Assertions.assertNotNull(logRes);
+    assertEquals(3, logRes.getLog().size());
+  }
+
+  @Test
+  void addVisit() throws Exception {
+    Visit v1 =
+            new Visit(
+                    "Ola Normann",
+                    "12345678",
+                    "Realfagbygget",
+                    "A4-100",
+                    LocalDateTime.of(2020, 10, 1, 14, 15),
+                    LocalDateTime.of(2020, 10, 1, 16, 15));
+    String json = mapper.writeValueAsString(v1);
+    given(service.getVisitLog()).willReturn(VisitLogService.sampleVisitLog());
+    MvcResult result = mvc.perform(MockMvcRequestBuilders
+            .post("/logger")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(json))
+            .andExpect(status().isOk())
+            .andReturn();
+    assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
+  }
+
+  @Test
+  void removeVisit() throws Exception {
+    String id = "a81a901e-be9c-4213-a900-4bca27d688a9";
+    given(service.getVisitLog()).willReturn(VisitLogService.sampleVisitLog());
+    MvcResult result = mvc.perform(MockMvcRequestBuilders
+            .delete("/logger/" + id))
+            .andExpect(status().isOk())
+            .andReturn();
+    assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
   }
 }

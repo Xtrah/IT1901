@@ -25,7 +25,7 @@ public class VisitLogService {
    *
    * @return a sample VisitLog
    */
-  private static VisitLog sampleVisitLog() {
+  static VisitLog sampleVisitLog() {
     return new VisitLogPersistence(
         new File(System.getProperty("user.dir") + File.separator + "sampleLog.json"))
         .readVisitLog();
