@@ -56,7 +56,7 @@ public class Visit {
   }
 
   /**
-   * Sets name of Visit. Validates the name with a regex to check for illegal charagters.
+   * Sets name of Visit. Validates the name with a regex to check for illegal characters.
    *
    * @param name String name to be set
    */
@@ -134,7 +134,7 @@ public class Visit {
   }
 
   /**
-   * Set tie of the start of the visit.
+   * Set time of the start of the visit.
    *
    * @param from LocalDateTime start of Visit
    */

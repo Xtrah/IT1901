@@ -6,7 +6,7 @@ import java.time.LocalTime;
 public class Validation {
 
   /**
-   * Check if Hours- and Minutes-String conform to the correct format.
+   * Checks whether strings are numbers between 0-23 and 0-59 respectively.
    *
    * @param hours   hours String to be validated
    * @param minutes minutes String to be validated
@@ -19,7 +19,7 @@ public class Validation {
   }
 
   /**
-   * Validates name (of a person) using a regex: "^[a-zA-ZæøåÆØÅ -]{2,40}$".
+   * Checks whether string matches a valid person name.
    * <li>No special characters</li>
    * <li>Min 2 characters</li>
    * <li>Max 40 characters</li>
@@ -33,7 +33,7 @@ public class Validation {
   }
 
   /**
-   * Validates name (of a Building or room) using a regex: "^[a-zA-ZæøåÆØÅ0-9\\-\\s]{2,40}$".
+   * Checks whether string matches a valid building/room name.
    * <li>No special characters</li>
    * <li>Min 2 characters</li>
    * <li>Max 40 characters</li>
@@ -46,7 +46,7 @@ public class Validation {
   }
 
   /**
-   * Validates phone number with regex.
+   * Checks whether string matches a valid Norwegian number (8 numbers).
    *
    * @param text phone number String to be validated
    * @return true if phone number is in a legal format, false otherwise
@@ -56,7 +56,7 @@ public class Validation {
   }
 
   /**
-   * Validates time interval.
+   * Checks that from is before to, chronologically.
    *
    * @param from start time
    * @param to   end time
@@ -97,7 +97,7 @@ public class Validation {
    * Checks if string is empty.
    *
    * @param str String to validate
-   * @return true if the string is empty, false otherwise
+   * @return true if the string is null or empty, false otherwise
    */
   public static boolean isEmptyString(String str) {
     return (str == null || str.trim().isEmpty());
