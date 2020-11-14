@@ -1,4 +1,4 @@
-package logger.restserver;
+package logger.rest;
 
 import logger.core.Visit;
 import logger.core.VisitLog;

@@ -1,4 +1,4 @@
-package logger.restserver;
+package logger.rest;
 
 import com.fasterxml.jackson.databind.Module;
 import logger.json.VisitLogModule;

@@ -1,4 +1,4 @@
-package logger.restserver;
+package logger.rest;
 
 import java.io.File;
 import logger.core.Visit;
