@@ -1,6 +1,7 @@
 package logger.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +25,12 @@ public class BuildingTest {
 
   @Test
   void testName() {
+    try {
+      b1.setName("R€alfagbygg€t");
+      fail("Expected IllegalArgumentException thrown");
+    } catch (IllegalArgumentException e) {
+      assertEquals("Building name is invalid!", e.getMessage());
+    }
     assertEquals(null, b1.getName());
     assertEquals("Realfagbygget", b2.getName());
     b2.setName("Stripa");
@@ -33,6 +40,12 @@ public class BuildingTest {
   @Test
   void testRooms() {
     int sizeBefore = b2.getRooms().size();
+    try {
+      b1.addRoom("@4-124");
+      fail("Expected IllegalArgumentException thrown");
+    } catch (IllegalArgumentException e) {
+      assertEquals("Room name is invalid!", e.getMessage());
+    }
     b2.addRoom("A4-124");
     assertEquals(sizeBefore + 1, b2.getRooms().size());
     b2.setRooms(new ArrayList<String>());
