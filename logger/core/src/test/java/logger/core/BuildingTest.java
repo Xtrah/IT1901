@@ -1,6 +1,7 @@
 package logger.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,14 +18,14 @@ public class BuildingTest {
   @BeforeEach
   void setUp() {
     b1 = new Building();
-    b2 = new Building("Realfagbygget", new ArrayList<String>());
+    b2 = new Building("Realfagbygget", new ArrayList<>());
     b2.addRoom("R1");
     b2.addRoom("R7");
   }
 
   @Test
   void testName() {
-    assertEquals(null, b1.getName());
+    assertNull(b1.getName());
     assertEquals("Realfagbygget", b2.getName());
     b2.setName("Stripa");
     assertEquals("Stripa", b2.getName());
@@ -35,7 +36,7 @@ public class BuildingTest {
     int sizeBefore = b2.getRooms().size();
     b2.addRoom("A4-124");
     assertEquals(sizeBefore + 1, b2.getRooms().size());
-    b2.setRooms(new ArrayList<String>());
+    b2.setRooms(new ArrayList<>());
     assertEquals(0, b2.getRooms().size());
   }
 
