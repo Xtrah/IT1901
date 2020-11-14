@@ -6,21 +6,21 @@ import logger.core.VisitLog;
 public interface VisitLogDataAccess {
 
   /**
-   * Gets visitlog
+   * Gets visitlog.
    *
    * @return the VisitLog
    */
   VisitLog getVisitLog();
 
   /**
-   * Add visit to visitlog
+   * Add visit to visitLog.
    *
-   * @param visit
+   * @param visit Visit visit to be added
    */
   void addVisit(Visit visit);
 
   /**
-   * Deletes visit based on given id
+   * Deletes visit based on given id.
    *
    * @param id visit id
    */

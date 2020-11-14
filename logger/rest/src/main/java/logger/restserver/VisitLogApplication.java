@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 public class VisitLogApplication {
 
   /**
-   * Starts the application
+   * Starts the application.
    *
    * @param args command line args
    */
@@ -19,7 +19,7 @@ public class VisitLogApplication {
   }
 
   /**
-   * Assign our jackson module to springboot
+   * Assign our jackson module to springboot.
    *
    * @return instane of VisitLogModule
    */

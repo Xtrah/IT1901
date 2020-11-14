@@ -25,7 +25,7 @@ public class VisitLogController {
   }
 
   /**
-   * Gets the visit log
+   * Gets the visit log.
    *
    * @return the visit log
    */
@@ -35,7 +35,7 @@ public class VisitLogController {
   }
 
   /**
-   * Adds a visit to the log
+   * Adds a visit to the log.
    *
    * @param visit visit to add
    * @return true after adding visit
@@ -47,6 +47,8 @@ public class VisitLogController {
   }
 
   /**
+   * Removes specified visit from the visitlog.
+   *
    * @param id id of visit to delete
    * @return true
    */

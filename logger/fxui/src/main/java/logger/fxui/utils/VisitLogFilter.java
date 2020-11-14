@@ -9,6 +9,8 @@ import logger.core.Visit;
 public class VisitLogFilter {
 
   /**
+   * Filters visits based on predicate.
+   *
    * @param pred      which filter
    * @param allVisits visits to filter
    * @return a list of visits that matches the filter
@@ -18,6 +20,8 @@ public class VisitLogFilter {
   }
 
   /**
+   * Filters visits based on name.
+   *
    * @param searchInput name to search for
    * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
@@ -27,6 +31,8 @@ public class VisitLogFilter {
   }
 
   /**
+   * Filters visits by phone number.
+   *
    * @param searchInput phone to search for
    * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
@@ -36,6 +42,8 @@ public class VisitLogFilter {
   }
 
   /**
+   * Filters visits by Building name.
+   *
    * @param searchInput building to search for
    * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
@@ -46,6 +54,8 @@ public class VisitLogFilter {
   }
 
   /**
+   * Filters visit by room.
+   *
    * @param searchInput room to search for
    * @param allVisits   visits to filter
    * @return a list of visits that matches the filter
@@ -55,6 +65,8 @@ public class VisitLogFilter {
   }
 
   /**
+   * Filter visits by date.
+   *
    * @param allVisits   visits to filter
    * @param logFromDate start date
    * @param logToDate   end date

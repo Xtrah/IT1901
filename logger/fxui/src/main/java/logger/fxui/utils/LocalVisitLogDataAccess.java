@@ -19,7 +19,7 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
   }
 
   /**
-   * Read visit log from local file and return it
+   * Read visit log from local file and return it.
    *
    * @return VisitLog
    */
@@ -29,7 +29,7 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
   }
 
   /**
-   * Adds visit to Visit log
+   * Adds visit to Visit log.
    *
    * @param visit to add
    */
@@ -40,7 +40,7 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
   }
 
   /**
-   * Deletes visit log with given id
+   * Deletes visit log with given id.
    *
    * @param id visit id to delete
    */
