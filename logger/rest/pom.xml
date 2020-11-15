@@ -1,130 +1,130 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>rest</artifactId>
-  <build>
-    <plugins>
-      <!-- Compiling code -->
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>rest</artifactId>
+    <build>
+        <plugins>
+            <!-- Compiling code -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
 
-      <!-- Running tests -->
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-      </plugin>
+            <!-- Running tests -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
 
-      <!-- JaCoCo -->
-      <plugin>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <groupId>org.jacoco</groupId>
-      </plugin>
+            <!-- JaCoCo -->
+            <plugin>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <groupId>org.jacoco</groupId>
+            </plugin>
 
-      <!-- Spotbugs -->
-      <plugin>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <groupId>com.github.spotbugs</groupId>
-      </plugin>
+            <!-- Spotbugs -->
+            <plugin>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <groupId>com.github.spotbugs</groupId>
+            </plugin>
 
-      <!-- Checkstyle -->
-      <plugin>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <groupId>org.apache.maven.plugins</groupId>
-      </plugin>
+            <!-- Checkstyle -->
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+            </plugin>
 
-      <!-- SpringBoot -->
-      <plugin>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <version>2.3.4.RELEASE</version>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
+            <!-- SpringBoot -->
+            <plugin>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <version>2.3.4.RELEASE</version>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
 
-    <!-- Test with JUnit5 -->
-    <dependency>
-      <artifactId>junit-jupiter-api</artifactId>
-      <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
-      <version>5.4.2</version>
-    </dependency>
-    <dependency>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
-      <version>5.4.2</version>
-    </dependency>
+        <!-- Test with JUnit5 -->
+        <dependency>
+            <artifactId>junit-jupiter-api</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <scope>test</scope>
+            <version>5.4.2</version>
+        </dependency>
+        <dependency>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <scope>test</scope>
+            <version>5.4.2</version>
+        </dependency>
 
-    <!-- Jackson -->
-    <dependency>
-      <artifactId>jackson-databind</artifactId>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <version>2.11.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>jackson-annotations</artifactId>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <version>2.11.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>jacoco-maven-plugin</artifactId>
-      <groupId>org.jacoco</groupId>
-      <version>0.8.6</version>
-    </dependency>
+        <!-- Jackson -->
+        <dependency>
+            <artifactId>jackson-databind</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>jackson-annotations</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <groupId>org.jacoco</groupId>
+            <version>0.8.6</version>
+        </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
-    <dependency>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <exclusions>
-        <exclusion>
-          <artifactId>spring-boot-starter-tomcat</artifactId>
-          <groupId>org.springframework.boot</groupId>
-        </exclusion>
-      </exclusions>
-      <groupId>org.springframework.boot</groupId>
-      <version>2.3.4.RELEASE</version>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-jetty</artifactId>
-      <groupId>org.springframework.boot</groupId>
-      <version>2.3.4.RELEASE</version>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit-vintage-engine</artifactId>
-          <groupId>org.junit.vintage</groupId>
-        </exclusion>
-      </exclusions>
-      <groupId>org.springframework.boot</groupId>
-      <scope>test</scope>
-      <version>2.3.4.RELEASE</version>
-    </dependency>
-    <dependency>
-      <artifactId>core</artifactId>
-      <groupId>it1901</groupId>
-      <scope>compile</scope>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-test-autoconfigure</artifactId>
-      <groupId>org.springframework.boot</groupId>
-      <version>2.2.6.RELEASE</version>
-    </dependency>
-    <dependency>
-      <artifactId>spring-test</artifactId>
-      <groupId>org.springframework</groupId>
-      <version>5.2.5.RELEASE</version>
-    </dependency>
-  </dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+            <groupId>org.springframework.boot</groupId>
+            <version>2.3.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <version>2.3.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit-vintage-engine</artifactId>
+                    <groupId>org.junit.vintage</groupId>
+                </exclusion>
+            </exclusions>
+            <groupId>org.springframework.boot</groupId>
+            <scope>test</scope>
+            <version>2.3.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>core</artifactId>
+            <groupId>it1901</groupId>
+            <scope>compile</scope>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-test-autoconfigure</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <version>2.2.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-test</artifactId>
+            <groupId>org.springframework</groupId>
+            <version>5.2.5.RELEASE</version>
+        </dependency>
+    </dependencies>
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <artifactId>logger</artifactId>
-    <groupId>it1901</groupId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <artifactId>logger</artifactId>
+        <groupId>it1901</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 </project>

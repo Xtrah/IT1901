@@ -8,15 +8,15 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-  public static void main(final String[] args) {
-    launch(args);
-  }
+    public static void main(final String[] args) {
+        launch(args);
+    }
 
-  @Override
-  public void start(final Stage primaryStage) throws Exception {
-    final Parent parent = FXMLLoader.load(getClass().getResource("App.fxml"));
-    primaryStage.setTitle("Logger");
-    primaryStage.setScene(new Scene(parent));
-    primaryStage.show();
-  }
+    @Override
+    public void start(final Stage primaryStage) throws Exception {
+        final Parent parent = FXMLLoader.load(getClass().getResource("App.fxml"));
+        primaryStage.setTitle("Logger");
+        primaryStage.setScene(new Scene(parent));
+        primaryStage.show();
+    }
 }
