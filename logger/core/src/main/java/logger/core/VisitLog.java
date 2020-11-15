@@ -18,7 +18,7 @@ public class VisitLog implements Iterable<Visit> {
   }
 
   /**
-   * Adds a visit to the VisitLog
+   * Adds a visit to the VisitLog.
    *
    * @param visit Visit to add
    */
@@ -27,7 +27,7 @@ public class VisitLog implements Iterable<Visit> {
   }
 
   /**
-   * Gets a visit with a given ID.
+   * Returns a visit with a given ID.
    *
    * @param id id of visit
    * @return the visit with the given id if it exists, null if it doesn't exist
@@ -37,7 +37,7 @@ public class VisitLog implements Iterable<Visit> {
   }
 
   /**
-   * Removes a visit from the VisitLog
+   * Remove visit from a VisitLog.
    *
    * @param id id of visit to remove
    */
@@ -56,6 +56,8 @@ public class VisitLog implements Iterable<Visit> {
   }
 
   /**
+   * Creates iterator to iterate over VisitLog.
+   *
    * @return Iterator over logs
    */
   @Override

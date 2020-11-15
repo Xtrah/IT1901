@@ -88,7 +88,7 @@ public class AppController {
 
 
   /**
-   * Sets up the UI
+   * Sets up the UI.
    */
   @FXML
   private void initialize() {
@@ -103,7 +103,7 @@ public class AppController {
   }
 
   /**
-   * Register a visit to the log
+   * Register a visit to the log.
    */
   @FXML
   private void registerVisit() {
@@ -134,7 +134,7 @@ public class AppController {
   }
 
   /**
-   * Deletes a visit from the log
+   * Deletes a visit from the log.
    */
   @FXML
   private void deleteVisit() {
@@ -145,7 +145,7 @@ public class AppController {
   }
 
   /**
-   * Validates the user input
+   * Validates the user input.
    */
   @FXML
   private void validateValues() {
@@ -189,7 +189,7 @@ public class AppController {
   }
 
   /**
-   * Filters the log according to what the user has chosen
+   * Filters the log according to what the user has chosen.
    */
   @FXML
   private void filterVisitLog() {
@@ -220,7 +220,7 @@ public class AppController {
   }
 
   /**
-   * Fills the room dropdown with rooms according to which building is chosen
+   * Fills the room dropdown with rooms according to which building is chosen.
    */
   @FXML
   private void fillDropdownRoom() {
@@ -282,6 +282,8 @@ public class AppController {
   }
 
   /**
+   * Checks if the input fields are empty.
+   *
    * @return true if the user has not yet filled in all required fields, false otherwise
    */
   private boolean lackingValues() {
@@ -294,7 +296,7 @@ public class AppController {
   }
 
   /**
-   * Updates the log
+   * Updates the log.
    */
   private void updateTable() {
     tableView.getItems().clear();
@@ -302,7 +304,7 @@ public class AppController {
   }
 
   /**
-   * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
+   * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'.
    */
   private void setUpColumnListeners() {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -314,7 +316,7 @@ public class AppController {
   }
 
   /**
-   * Applies input rules to input fields
+   * Applies input rules to input fields.
    */
   private void activateInputRules() {
     forceNumberInput(inputHour1, 2);
@@ -326,7 +328,7 @@ public class AppController {
   }
 
   /**
-   * Sets up filter options and filter input fields
+   * Sets up filter options and filter input fields.
    */
   private void setUpFiltering() {
     chooseSearch.getItems()
@@ -335,7 +337,7 @@ public class AppController {
   }
 
   /**
-   * Fetches buildings and puts them in the buildings dropdown menu
+   * Fetches buildings and puts them in the buildings dropdown menu.
    */
   private void setUpBuildings() {
     try {
@@ -348,7 +350,7 @@ public class AppController {
   }
 
   /**
-   * Disallows a user to input nothing but numbers in the given TextField
+   * Disallows a user to input nothing but numbers in the given TextField.
    *
    * @param fxidName  fxid of the TextField to enforce
    * @param maxLength maximum length of input
@@ -368,7 +370,7 @@ public class AppController {
 
   /**
    * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the
-   * given TextField
+   * given TextField.
    *
    * @param fxidName fxid of the TextField to enforce
    */
