@@ -27,8 +27,8 @@ JaCoCo and Checkstyle will report in .html and the console respectively, at the 
 
 ## Illustrations
 
-![UI register view](https://i.imgur.com/gxikIqa.png)
-![UI visit log view](https://i.imgur.com/UYIaMtT.png)
+![UI register view](https://i.imgur.com/VbKNfFu.png)
+![UI visit log view](https://i.imgur.com/UpOI4Kb.png)
 
 ## Architecture diagram
 
