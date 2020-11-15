@@ -1,6 +1,6 @@
 # ![Logo](https://i.imgur.com/mCYWZDc.png) Logger, the app
 
-The purpose of the app is to register a user's visits to rooms and see an overview of all their visits.
+The purpose of the app is to register a user's visits to rooms and see an overview of all their visits with an option to filter and delete visits at their own discretion.
 
 ## User stories
 
@@ -9,12 +9,32 @@ The purpose of the app is to register a user's visits to rooms and see an overvi
 - As a user I want to search in former visits, so I can easier find a certain visit
 - As a user I want to delete a former visit, so I can remove unwanted visit entries
 
+## Structure and Maven build
+
+The project includes tests for all code, with at least 80% coverage across the board.
+
+The project is configured as a modularized Maven project, where `core` handles domain logic and serializing, `fxui` handles the user interaction, and `rest` handles persistence and API.
+
+Our Maven-build requires at least Java version 14, and JavaFX version 11.
+
+We use various code quality tools in all modules:
+
+- [JaCoCo Java Code Coverage Library](https://github.com/jacoco/jacoco), to check our tests' code coverage
+- [Spotbugs](https://spotbugs.github.io/), to spot bugs
+- [Checkstyle](https://checkstyle.sourceforge.io), standardizing our formatting to [Google coding conventions](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
+
+JaCoCo and Checkstyle will report in .html and the console respectively, at the time of building the app. Spotbugs will stop our build if a bug is spotted. Some modules also uses additional plugins described in their respective documentation.
+
 ## Illustrations
 
 ![UI register view](https://i.imgur.com/gxikIqa.png)
 ![UI visit log view](https://i.imgur.com/UYIaMtT.png)
 
-## Class Diagram
+## Architecture diagram
+
+<!-- TODO -->
+
+## Class diagram
 
 ![PlantUML class diagram](../PlantUML_diagram.png)
 
