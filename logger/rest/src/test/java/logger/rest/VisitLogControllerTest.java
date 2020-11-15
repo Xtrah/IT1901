@@ -34,6 +34,11 @@ class VisitLogControllerTest {
   @Autowired
   private ObjectMapper mapper;
 
+  /**
+   * Dispatches a GET request to get a VisitLog and tests if the request was successful.
+   *
+   * @throws Exception if something goes wrong with the MvcReqeusts.
+   */
   @Test
   void getVisitLog() throws Exception {
     given(service.getVisitLog()).willReturn(VisitLogService.sampleVisitLog());
@@ -45,6 +50,11 @@ class VisitLogControllerTest {
     assertEquals(3, logRes.getLog().size());
   }
 
+  /**
+   * Dispatches a POST request to add a Visit and tests if the request was successful.
+   *
+   * @throws Exception if something goes wrong with the MvcReqeusts.
+   */
   @Test
   void addVisit() throws Exception {
     Visit v1 =
@@ -65,6 +75,12 @@ class VisitLogControllerTest {
     assertTrue(Boolean.parseBoolean(result.getResponse().getContentAsString()));
   }
 
+  /**
+   * Dispatches a DELETE request to delete a Visit with a given ID and tests if the request was
+   * successful.
+   *
+   * @throws Exception if something goes wrong with the MvcReqeusts
+   */
   @Test
   void removeVisit() throws Exception {
     String id = "a81a901e-be9c-4213-a900-4bca27d688a9";
