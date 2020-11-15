@@ -15,11 +15,11 @@ The purpose of the app is to register a user's visits to rooms and see an overvi
 ![UI visit log view](https://i.imgur.com/UYIaMtT.png)
 
 ## Package Diagram
-![PlantUML package diagram](package_diagram.png)
+![PlantUML package diagram](diagrams/package_diagram.png)
 
 ## Class Diagram
 
-![PlantUML class diagram](PlantUML_diagram.png)
+![PlantUML class diagram](diagrams/PlantUML_diagram.png)
 
 The PlantUML diagram illustrates the relationship between the classes. We have chosen a hierarchic layout.  
 
