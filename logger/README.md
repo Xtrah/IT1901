@@ -46,10 +46,8 @@ Visit.java, which sits at the top, is the class which formats and creates the vi
 
 VisitLog.java keeps track of all the visits in one log. It has the functionality of adding visits and reading/writing to file.
 
-AppController.java plays the role of combining all the functionality and connecting it to the FXML. 
-Furthermore, the controller has the full set of input fields declared as FXML variables. Therefore, to access the fields, you have to use the controller.
-Other features of the controller are validation and checks for the input fields. This ensures that no matter the user input, the program has a way of recognizing its validity and dealing with potential errors.
-Lastly, it is the controller that creates both the instance of Visit and VisitLog.
-AppController.java is solely dependent on VisitLog to exist and work for the test to run. This is also true for the VisitLogTest class. VisitLog is further dependent on the Visit class.
+AppController.java plays the role of combining all the functionality and connecting it to the FXML.
+
+Furthermore, the controller has the full set of input fields declared as FXML variables. Therefore, to access the fields, you have to use the controller. Other features of the controller are validation and checks for the input fields. This ensures that no matter the user input, the program has a way of recognizing its validity and dealing with potential errors. Lastly, it is the controller that creates both the instance of Visit and VisitLog. AppController.java is solely dependent on VisitLog to exist and work for the test to run. This is also true for the VisitLogTest class. VisitLog is further dependent on the Visit class.
 
 On a conceptual level you could say that you need the concept of visits to comprehend the idea of a visit log. The controller and the test class also depends on this as they directly work by using the Visit log, which uses Visit.

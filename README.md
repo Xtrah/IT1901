@@ -19,7 +19,8 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 6. Run code coverage check, spotbugs and tests using `mvn clean verify`
 
 \*Choose remote or local storage by changing truth value in function `isRemoteStorage` in `logger/fxui/src/main/java/logger.fxui/AppController`.
-### Git conventions
+
+## Git conventions
 
 During development of the app we will strive to follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
 
