@@ -6,6 +6,8 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import logger.core.Visit;
 import logger.core.VisitLog;
@@ -46,7 +48,7 @@ class VisitLogControllerTest {
         .andExpect(status().isOk())
         .andReturn();
     VisitLog logRes = new ObjectMapper().registerModule(new VisitLogModule())
-        .readValue(result.getResponse().getContentAsString(), VisitLog.class);
+        .readValue(result.getResponse().getContentAsString(StandardCharsets.UTF_8), VisitLog.class);
     assertEquals(3, logRes.getLog().size());
   }
 
