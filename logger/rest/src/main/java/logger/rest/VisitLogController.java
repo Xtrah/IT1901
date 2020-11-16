@@ -30,7 +30,7 @@ public class VisitLogController {
    * @return the visit log
    */
   @GetMapping
-  public VisitLog getVisitLog() {
+  protected VisitLog getVisitLog() {
     return visitLogService.getVisitLog();
   }
 
@@ -41,7 +41,7 @@ public class VisitLogController {
    * @return true after adding visit
    */
   @PostMapping
-  public boolean addVisit(@RequestBody Visit visit) {
+  protected boolean addVisit(@RequestBody Visit visit) {
     visitLogService.addVisit(visit);
     return true;
   }
@@ -53,7 +53,7 @@ public class VisitLogController {
    * @return true
    */
   @DeleteMapping(path = "/{id}")
-  public boolean removeVisit(@PathVariable("id") String id) {
+  protected boolean removeVisit(@PathVariable("id") String id) {
     visitLogService.removeVisit(id);
     return true;
   }
