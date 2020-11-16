@@ -30,7 +30,7 @@ import logger.json.BuildingReader;
 public class AppController {
 
   // true for remote storage, false for local storage
-  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(false);
+  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(true);
 
   // Registration
   @FXML
@@ -341,7 +341,8 @@ public class AppController {
    */
   private void setUpBuildings() {
     try {
-      List<Building> buildings = BuildingReader.readBuildings();
+      List<Building> buildings = BuildingReader
+          .readBuildings(getClass().getResource("buildings.json"));
       dropdownBuilding.getItems().addAll(buildings);
     } catch (IOException e) {
       System.out.println("Couldn't fetch any buildings");

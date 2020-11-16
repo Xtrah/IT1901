@@ -13,12 +13,14 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 1. `git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030.git`
 2. Open folder as Maven project in an IDE  
     **IntelliJ IDEA:** File -> New -> Module from Existing Sources -> `logger` folder -> Maven
-3. Run server using `mvn -pl rest spring-boot:run`
-4. Install modules by running `mvn install`
+3. Run server using `mvn -pl rest spring-boot:run` *
+4. Install modules by running `mvn clean install`
 5. Run app using `mvn -pl fxui javafx:run`
 6. Run code coverage check, spotbugs and tests using `mvn clean verify`
 
-### Git conventions
+\*Choose remote or local storage by changing truth value in function `isRemoteStorage` in `logger/fxui/src/main/java/logger.fxui/AppController`.
+
+## Git conventions
 
 During development of the app we will strive to follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
 

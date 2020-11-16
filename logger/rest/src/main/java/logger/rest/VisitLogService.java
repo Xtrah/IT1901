@@ -1,4 +1,4 @@
-package logger.restserver;
+package logger.rest;
 
 import java.io.File;
 import logger.core.Visit;
@@ -21,11 +21,11 @@ public class VisitLogService {
   }
 
   /**
-   * Generates a sample VisitLog. Usually used for testing
+   * Generates a sample VisitLog. Usually used for testing.
    *
    * @return a sample VisitLog
    */
-  private static VisitLog sampleVisitLog() {
+  public static VisitLog sampleVisitLog() {
     return new VisitLogPersistence(
         new File(System.getProperty("user.dir") + File.separator + "sampleLog.json"))
         .readVisitLog();
@@ -36,7 +36,7 @@ public class VisitLogService {
    *
    * @return the VisitLog
    */
-  VisitLog getVisitLog() {
+  protected VisitLog getVisitLog() {
     return persistence.readVisitLog();
   }
 
@@ -45,9 +45,10 @@ public class VisitLogService {
    *
    * @param visit visit to add
    */
-  void addVisit(Visit visit) {
+  protected boolean addVisit(Visit visit) {
     visitLog.addVisit(visit);
     persistence.writeVisitLog(visitLog);
+    return true;
   }
 
   /**
@@ -55,8 +56,9 @@ public class VisitLogService {
    *
    * @param id id of visit to remove
    */
-  void removeVisit(String id) {
+  protected boolean removeVisit(String id) {
     visitLog.removeVisit(id);
     persistence.writeVisitLog(visitLog);
+    return true;
   }
 }

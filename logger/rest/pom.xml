@@ -89,8 +89,8 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <exclusions>
         <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+          <groupId>org.junit.vintage</groupId>
         </exclusion>
       </exclusions>
       <groupId>org.springframework.boot</groupId>
@@ -104,6 +104,16 @@
       <groupId>it1901</groupId>
       <scope>compile</scope>
       <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-test-autoconfigure</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <version>2.2.6.RELEASE</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-test</artifactId>
+      <groupId>org.springframework</groupId>
+      <version>5.2.5.RELEASE</version>
     </dependency>
   </dependencies>
 
