@@ -12,6 +12,5 @@ The user interface is built using JavaFX and is located in the logger.fxui packa
 
 In addition to the plugins used [project-wide](../README.md#Structure_and_Maven_build), we use the following plugins in the FXUI module to run our client application/user interface:
 
-- [JavaFX](https://github.com/openjdk/jfx)
-- [TestFX](https://github.com/TestFX/TestFX#testfx) and [Hamcrest](https://github.com/hamcrest/JavaHamcrest#java-hamcrest), to test our JavaFX code
-- [Google Guava](https://github.com/google/guava#guava-google-core-libraries-for-java), for additional Java collection types
+- [JavaFX](https://github.com/openjdk/jfx) to create and show a client user interface
+- [TestFX](https://github.com/TestFX/TestFX) to test our JavaFX code
