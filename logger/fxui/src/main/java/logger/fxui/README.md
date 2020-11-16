@@ -12,8 +12,10 @@ We have several supporting [utility classes](utils/) for our AppController to ha
 
 The architecture is a standard JavaFX application using FXML as  resource. The app initializes using the class **App.java**, while **AppController.java** handles user interaction.
 
-FXML resources are located in [logger\fxui\src\main\resources\logger\fxui](logger\fxui\src\main\resources\logger\fxui).
+FXML resources are located in [logger/fxui/src/main/resources/logger/fxui](logger/fxui/src/main/resources/logger/fxui).
 
-## Diagram
+## Class diagram
 
 Class diagrams are found in [logger/diagrams](logger/diagrams).
+
+![Fxui class diagram](/logger/diagrams/fxui_class_diagram.png)

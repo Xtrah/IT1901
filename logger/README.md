@@ -26,32 +26,21 @@ We use various code quality tools in all modules:
 JaCoCo and Checkstyle will report in .html and the console respectively, at the time of building the app. Spotbugs will stop our build if a bug is spotted. Some modules also uses additional plugins described in their respective documentation.
 
 ## Illustrations
+Here are two screenshots of the application running. Our UI consists of two tabs, one for each feature; registering visits and viewing them.
 
+Here is a view of the registration form:
 ![UI register view](https://i.imgur.com/VbKNfFu.png)
+
+The image below illustrates the view of the visit log:
 ![UI visit log view](https://i.imgur.com/UpOI4Kb.png)
 
-## Architecture diagram
-<!-- TODO -->
+## Diagrams
 
-## Package Diagram
+### Package Diagram
+Our package diagram shows the connection between packages as well as the modules within them. It also visualizes where we use frameworks.
 ![PlantUML package diagram](diagrams/package_diagram.png)
 
-## Class diagram
+### Class diagrams
 
-![PlantUML class diagram](diagrams/PlantUML_diagram.png)
-
-The PlantUML diagram illustrates the relationship between the classes. We have chosen a hierarchic layout.  
-
-App.java lies besides the structure because it has no form of dependency or relationship with the others. This is because it simply instructs the program to start.
-
-Visit.java, which sits at the top, is the class which formats and creates the visits. Therefore, all other classes depend on this class to create Visit objects.
-
-VisitLog.java keeps track of all the visits in one log. It has the functionality of adding visits and reading/writing to file.
-
-AppController.java plays the role of combining all the functionality of the application and connecting it to the FXML interface.
-
-Furthermore, the controller has the full set of input fields declared as FXML variables. Therefore, to access the fields, you have to use the controller. Other features of the controller are validation and checks for the input fields. This ensures that no matter the user input, the program has a way of recognizing its validity and dealing with potential errors. Lastly, it is the controller that creates both the instance of Visit and VisitLog. AppController.java is solely dependent on VisitLog to exist and work for the test to run. This is also true for the VisitLogTest class. VisitLog is further dependent on the Visit class.
-
-On a conceptual level you could say that you need the concept of visits to comprehend the idea of a visit log. The controller and the test class also depends on this as they directly work by using the Visit log, which uses Visit.
-
-
+For our class diagrams we have chosen to create one for each package. This is because one single class diagram is not very useful.
+Having a class diagram for each package makes it easier to see the connection between classes without too much clutter. When looking at connections across packages, you can use the dedicated package diagram.
