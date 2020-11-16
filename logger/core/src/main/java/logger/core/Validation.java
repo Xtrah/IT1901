@@ -2,6 +2,7 @@ package logger.core;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Validation {
 
@@ -14,8 +15,9 @@ public class Validation {
    */
   public static boolean isTimeString(String hours, String minutes) {
     String timeString = hours + ':' + minutes;
-    // Check if hours are between 0-23 and minutes between 0-59
-    return timeString.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+    // HH:MM. Check if hours are between 0-23 and minutes between 0-59
+    // Must have leading zero.
+    return timeString.matches("^([0-1][0-9]|2[0-3]):[0-5][0-9]$");
   }
 
   /**
