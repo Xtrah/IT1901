@@ -5,26 +5,26 @@ import logger.core.VisitLog;
 
 public interface VisitLogDataAccess {
 
-    /**
-     * Gets visitlog
-     *
-     * @return the VisitLog
-     */
-    VisitLog getVisitLog();
+  /**
+   * Gets visitlog.
+   *
+   * @return the VisitLog
+   */
+  VisitLog getVisitLog();
 
-    /**
-     * Add visit to visitlog
-     *
-     * @param visit
-     */
-    void addVisit(Visit visit);
+  /**
+   * Add visit to visitLog.
+   *
+   * @param visit Visit visit to be added
+   */
+  void addVisit(Visit visit);
 
-    /**
-     * Deletes visit based on given id
-     *
-     * @param id visit id
-     */
-    void deleteVisit(String id);
+  /**
+   * Deletes visit based on given id.
+   *
+   * @param id visit id
+   */
+  void deleteVisit(String id);
 
 
 }
