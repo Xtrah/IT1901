@@ -27,7 +27,7 @@ public class VisitLogModuleTest {
    * Sets up sample Visit objects and a mapper with the VisitLogModule registered to it
    */
   @BeforeAll
-  private static void initialize() {
+  static void initialize() {
     TEST_INPUT1 =
         new Visit(
             "Jørgen Reimers",
@@ -51,14 +51,14 @@ public class VisitLogModuleTest {
   }
 
   @BeforeEach
-  private void setUp() {
+  void setUp() {
     log = new VisitLog();
     log.addVisit(TEST_INPUT1);
     log.addVisit(TEST_INPUT2);
   }
 
   @Test
-  private String testSerializers() {
+  String testSerializers() {
     String json = null;
     try {
       json = mapper.writeValueAsString(log);
@@ -77,7 +77,7 @@ public class VisitLogModuleTest {
   }
 
   @Test
-  private void testDeserializers() {
+  void testDeserializers() {
     String json = testSerializers();
     try {
       VisitLog deserLog = mapper.readValue(json, VisitLog.class);
