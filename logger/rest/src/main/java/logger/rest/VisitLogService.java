@@ -25,7 +25,7 @@ public class VisitLogService {
    *
    * @return a sample VisitLog
    */
-  static VisitLog sampleVisitLog() {
+  public static VisitLog sampleVisitLog() {
     return new VisitLogPersistence(
         new File(System.getProperty("user.dir") + File.separator + "sampleLog.json"))
         .readVisitLog();
@@ -36,7 +36,7 @@ public class VisitLogService {
    *
    * @return the VisitLog
    */
-  VisitLog getVisitLog() {
+  public VisitLog getVisitLog() {
     return persistence.readVisitLog();
   }
 
@@ -45,7 +45,7 @@ public class VisitLogService {
    *
    * @param visit visit to add
    */
-  boolean addVisit(Visit visit) {
+  public boolean addVisit(Visit visit) {
     visitLog.addVisit(visit);
     persistence.writeVisitLog(visitLog);
     return true;
@@ -56,7 +56,7 @@ public class VisitLogService {
    *
    * @param id id of visit to remove
    */
-  boolean removeVisit(String id) {
+  public boolean removeVisit(String id) {
     visitLog.removeVisit(id);
     persistence.writeVisitLog(visitLog);
     return true;

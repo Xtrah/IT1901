@@ -20,7 +20,7 @@ public class VisitLogController {
   private final VisitLogService visitLogService;
 
   @Autowired
-  VisitLogController(final VisitLogService visitLogService) {
+  public VisitLogController(final VisitLogService visitLogService) {
     this.visitLogService = visitLogService;
   }
 
@@ -30,7 +30,7 @@ public class VisitLogController {
    * @return the visit log
    */
   @GetMapping
-  VisitLog getVisitLog() {
+  public VisitLog getVisitLog() {
     return visitLogService.getVisitLog();
   }
 
@@ -41,7 +41,7 @@ public class VisitLogController {
    * @return true after adding visit
    */
   @PostMapping
-  boolean addVisit(@RequestBody Visit visit) {
+  public boolean addVisit(@RequestBody Visit visit) {
     visitLogService.addVisit(visit);
     return true;
   }
@@ -53,7 +53,7 @@ public class VisitLogController {
    * @return true
    */
   @DeleteMapping(path = "/{id}")
-  boolean removeVisit(@PathVariable("id") String id) {
+  public boolean removeVisit(@PathVariable("id") String id) {
     visitLogService.removeVisit(id);
     return true;
   }
