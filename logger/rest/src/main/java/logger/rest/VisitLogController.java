@@ -1,4 +1,4 @@
-package logger.restserver;
+package logger.rest;
 
 import logger.core.Visit;
 import logger.core.VisitLog;
@@ -20,40 +20,40 @@ public class VisitLogController {
   private final VisitLogService visitLogService;
 
   @Autowired
-  private VisitLogController(VisitLogService visitLogService) {
+  public VisitLogController(final VisitLogService visitLogService) {
     this.visitLogService = visitLogService;
   }
 
   /**
-   * Gets the visit log.
+   * Gets the servers' VisitLog.
    *
    * @return the visit log
    */
   @GetMapping
-  private VisitLog getVisitLog() {
+  protected VisitLog getVisitLog() {
     return visitLogService.getVisitLog();
   }
 
   /**
-   * Adds a visit to the log.
+   * Adds a visit to the servers' VisitLog.
    *
    * @param visit visit to add
    * @return true after adding visit
    */
   @PostMapping
-  private boolean addVisit(@RequestBody Visit visit) {
+  protected boolean addVisit(@RequestBody Visit visit) {
     visitLogService.addVisit(visit);
     return true;
   }
 
   /**
-   * Removes specified visit from the visitlog.
+   * Removes a Visit from the servers' VisitLog.
    *
    * @param id id of visit to delete
    * @return true
    */
   @DeleteMapping(path = "/{id}")
-  private boolean removeVisit(@PathVariable("id") String id) {
+  protected boolean removeVisit(@PathVariable("id") String id) {
     visitLogService.removeVisit(id);
     return true;
   }
