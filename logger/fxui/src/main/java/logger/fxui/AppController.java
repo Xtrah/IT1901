@@ -30,7 +30,7 @@ import logger.json.BuildingReader;
 public class AppController {
 
   // true for remote storage, false for local storage
-  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(true);
+  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(false);
 
   // Registration
   @FXML
