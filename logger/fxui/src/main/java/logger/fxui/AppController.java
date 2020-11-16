@@ -341,7 +341,8 @@ public class AppController {
    */
   private void setUpBuildings() {
     try {
-      List<Building> buildings = BuildingReader.readBuildings();
+      List<Building> buildings = BuildingReader
+          .readBuildings(getClass().getResource("buildings.json"));
       dropdownBuilding.getItems().addAll(buildings);
     } catch (IOException e) {
       System.out.println("Couldn't fetch any buildings");

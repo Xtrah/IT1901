@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 public class VisitTest {
 
   private Visit v1;
-  private Visit v2;
 
   /**
    * Sets up sample Visit objects
@@ -25,15 +24,6 @@ public class VisitTest {
             "A4-100",
             LocalDateTime.of(2020, 10, 1, 14, 15),
             LocalDateTime.of(2020, 10, 1, 16, 15));
-    v2 =
-            new Visit(
-                    "69",
-                    "Ola Normann",
-                    "12345678",
-                    "Realfagbygget",
-                    "A4-100",
-                    LocalDateTime.of(2020, 10, 1, 14, 15),
-                    LocalDateTime.of(2020, 10, 1, 16, 15));
   }
 
   @Test
