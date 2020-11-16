@@ -11,9 +11,9 @@ The purpose of the app is to register a user's visits to rooms and see an overvi
 
 ## Structure and Maven build
 
-The project includes tests for all code, with at least 80% coverage across the board.
+The project includes tests for all modules, striving for at least 80% coverage across the board.
 
-The project is configured as a modularized Maven project, where `core` handles domain logic and serializing, `fxui` handles the user interaction, and `rest` handles persistence and API.
+The project is configured as a modularized Maven project, where `core` handles domain logic and serializing/local storage, `fxui` handles the user interaction, and `rest` handles remote storage, including a server and API endpoints.
 
 Our Maven-build requires at least Java version 14, and JavaFX version 11.
 
@@ -46,7 +46,7 @@ Visit.java, which sits at the top, is the class which formats and creates the vi
 
 VisitLog.java keeps track of all the visits in one log. It has the functionality of adding visits and reading/writing to file.
 
-AppController.java plays the role of combining all the functionality and connecting it to the FXML.
+AppController.java plays the role of combining all the functionality of the application and connecting it to the FXML interface.
 
 Furthermore, the controller has the full set of input fields declared as FXML variables. Therefore, to access the fields, you have to use the controller. Other features of the controller are validation and checks for the input fields. This ensures that no matter the user input, the program has a way of recognizing its validity and dealing with potential errors. Lastly, it is the controller that creates both the instance of Visit and VisitLog. AppController.java is solely dependent on VisitLog to exist and work for the test to run. This is also true for the VisitLogTest class. VisitLog is further dependent on the Visit class.
 

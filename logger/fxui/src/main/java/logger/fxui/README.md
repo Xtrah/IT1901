@@ -2,7 +2,7 @@
 
 The user interface builds using JavaFX and FXML.
 
-The UI is simple and consists of two tabs. The register-tab is used to create and add a Visit to VisitLog. The Visit Log tab uses a table view to all Visits in a Visit Log. It also gives the user the possibility to filter on various criteria and to delete a Visit.
+The UI is simple and consists of two tabs. The register-tab is used to create and add a Visit to VisitLog. The Visit Log tab uses a table view to show all Visits in a Visit Log. It also gives the user the possibility to filter on various criteria and to delete a Visit.
 
 ## Utils
 
