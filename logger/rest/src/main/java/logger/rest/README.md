@@ -1,6 +1,6 @@
 # Source-code for REST
 
-This module contains the REST-server and REST-API for [Logger](../README.md).
+This module contains the REST-server and REST-API for [Logger](../../README.md).
 
 ## REST
 
