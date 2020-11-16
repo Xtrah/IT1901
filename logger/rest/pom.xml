@@ -42,38 +42,33 @@
   </build>
   <dependencies>
 
-    <!-- Test with JUnit5 -->
+    <!-- JUnit5 -->
     <dependency>
       <artifactId>junit-jupiter-api</artifactId>
       <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
-      <version>5.4.2</version>
     </dependency>
     <dependency>
       <artifactId>junit-jupiter-engine</artifactId>
       <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
-      <version>5.4.2</version>
     </dependency>
 
     <!-- Jackson -->
     <dependency>
       <artifactId>jackson-databind</artifactId>
       <groupId>com.fasterxml.jackson.core</groupId>
-      <version>2.11.0</version>
     </dependency>
     <dependency>
       <artifactId>jackson-annotations</artifactId>
       <groupId>com.fasterxml.jackson.core</groupId>
-      <version>2.11.0</version>
     </dependency>
+
+    <!-- Jacoco -->
     <dependency>
       <artifactId>jacoco-maven-plugin</artifactId>
       <groupId>org.jacoco</groupId>
-      <version>0.8.6</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+    <!-- SpringBoot -->
     <dependency>
       <artifactId>spring-boot-starter-web</artifactId>
       <exclusions>
@@ -102,6 +97,8 @@
       <scope>test</scope>
       <version>2.3.4.RELEASE</version>
     </dependency>
+
+    <!-- Project modules -->
     <dependency>
       <artifactId>core</artifactId>
       <groupId>it1901</groupId>
