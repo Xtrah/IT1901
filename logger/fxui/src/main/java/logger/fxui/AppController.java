@@ -1,8 +1,8 @@
 package logger.fxui;
 
-import static logger.fxui.validation.VisitValidation.isEmptyString;
-
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,16 +19,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
+import logger.core.Validation;
 import logger.core.Visit;
-import logger.core.VisitLog;
-import logger.fxui.validation.VisitValidation;
+import logger.fxui.utils.LocalVisitLogDataAccess;
+import logger.fxui.utils.RemoteVisitLogDataAccess;
+import logger.fxui.utils.VisitLogDataAccess;
+import logger.fxui.utils.VisitLogFilter;
 import logger.json.BuildingReader;
-import logger.json.VisitLogPersistence;
 
 public class AppController {
 
-  private VisitLog log;
-  private VisitLogPersistence persistence;
+  // true for remote storage, false for local storage
+  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(false);
 
   // Registration
   @FXML
@@ -86,13 +88,13 @@ public class AppController {
 
 
   /**
-   * Sets up the UI
+   * Sets up the UI.
    */
   @FXML
-  void initialize() {
+  private void initialize() {
     buttonRegister.setDisable(true);
     setUpColumnListeners();
-    setUpPersistence();
+    updateTable();
     setUpFiltering();
     setUpBuildings();
     activateInputRules();
@@ -101,10 +103,10 @@ public class AppController {
   }
 
   /**
-   * Register a visit to the log
+   * Register a visit to the log.
    */
   @FXML
-  void registerVisit() {
+  private void registerVisit() {
     String name = inputName.getText();
     String phone = inputPhone.getText();
     String building = dropdownBuilding.getValue().getName();
@@ -123,7 +125,8 @@ public class AppController {
     LocalDateTime toTime = LocalDateTime.of(year, month, day, hour2, min2);
 
     // Handling VisitLog
-    log.addVisit(new Visit(name, phone, building, room, fromTime, toTime));
+    Visit newVisit = new Visit(name, phone, building, room, fromTime, toTime);
+    visitLogDataAccess.addVisit(newVisit);
     updateTable();
 
     resetInputs();
@@ -131,42 +134,42 @@ public class AppController {
   }
 
   /**
-   * Deletes a visit from the log
+   * Deletes a visit from the log.
    */
   @FXML
   private void deleteVisit() {
     ObservableList<Visit> deleteList = tableView.getSelectionModel().getSelectedItems();
     Visit deleteVisit = deleteList.get(0);
-    log.removeVisit(deleteVisit);
+    visitLogDataAccess.deleteVisit(deleteVisit.getId());
     updateTable();
   }
 
   /**
-   * Validates the user input
+   * Validates the user input.
    */
   @FXML
-  void validateValues() {
+  private void validateValues() {
     // Initiating values
     buttonRegister.setDisable(false);
     helperText.setText("");
 
     // Validate name
-    if (!VisitValidation.isValidName(inputName.getText())) {
+    if (!Validation.isValidName(inputName.getText())) {
       buttonRegister.setDisable(true);
       helperText.setText("Names can only contain characters!");
     }
 
     // Validate phone
-    if (!VisitValidation.isValidPhone(inputPhone.getText())) {
+    if (!Validation.isValidPhone(inputPhone.getText())) {
       buttonRegister.setDisable(true);
       helperText.setText("Number must be eight digits!");
     }
 
     // Validate time
     // Format from text to LocalTime, and check if LocalTime is valid
-    if (!VisitValidation.isValidTime(
-        VisitValidation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
-        VisitValidation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
+    if (!Validation.isValidTime(
+        Validation.formatToLocalTime(inputHour1.getText(), inputMin1.getText()),
+        Validation.formatToLocalTime(inputHour2.getText(), inputMin2.getText())
     )
     ) {
       buttonRegister.setDisable(true);
@@ -179,20 +182,20 @@ public class AppController {
     }
 
     // Validate date
-    if (!VisitValidation.isValidDate(inputDate.getValue())) {
+    if (!Validation.isValidDate(inputDate.getValue())) {
       buttonRegister.setDisable(true);
       helperText.setText("Can't set future visits!");
     }
   }
 
   /**
-   * Filters the log according to what the user has chosen
+   * Filters the log according to what the user has chosen.
    */
   @FXML
   private void filterVisitLog() {
     final String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
     String searchKey = chooseSearch.getValue(); // DropDown choice
-    final List<Visit> allVisits = log.getLog();
+    final List<Visit> allVisits = visitLogDataAccess.getVisitLog().getLog();
     final List<Visit> result;
 
     // Hide unused widgets
@@ -217,10 +220,10 @@ public class AppController {
   }
 
   /**
-   * Fills the room dropdown with rooms according to which building is chosen
+   * Fills the room dropdown with rooms according to which building is chosen.
    */
   @FXML
-  void fillDropdownRoom() {
+  private void fillDropdownRoom() {
     Building selectedBuilding = dropdownBuilding.getSelectionModel().getSelectedItem();
     ObservableList<String> rooms;
     dropdownRoom.getItems().clear();
@@ -230,6 +233,36 @@ public class AppController {
       rooms = FXCollections.observableArrayList(selectedBuilding.getRooms());
     }
     dropdownRoom.getItems().addAll(rooms);
+  }
+
+  /**
+   * Make uri for endpoint.
+   *
+   * @param uri for endpoint
+   * @return
+   */
+  private URI uriSetup(String uri) {
+    URI newUri = null;
+    try {
+      newUri = new URI(uri);
+    } catch (URISyntaxException e) {
+      System.out.println(e.getMessage());
+    }
+    return newUri;
+  }
+
+  /**
+   * Sets local or remote storage.
+   *
+   * @param isRemote either true or false
+   * @return
+   */
+  private VisitLogDataAccess isRemoteStorage(boolean isRemote) {
+    if (isRemote) {
+      return new RemoteVisitLogDataAccess(
+          uriSetup("http://localhost:8080/logger"));
+    }
+    return new LocalVisitLogDataAccess();
   }
 
   /**
@@ -249,29 +282,29 @@ public class AppController {
   }
 
   /**
+   * Checks if the input fields are empty.
+   *
    * @return true if the user has not yet filled in all required fields, false otherwise
    */
   private boolean lackingValues() {
     return (
-        isEmptyString(inputName.getText())
-            || isEmptyString(inputPhone.getText())
-            || isEmptyString(inputPhone.getText())
+        Validation.isEmptyString(inputName.getText())
+            || Validation.isEmptyString(inputPhone.getText())
             || dropdownBuilding.getValue() == null
-            || isEmptyString(dropdownRoom.getValue())
+            || Validation.isEmptyString(dropdownRoom.getValue())
             || inputDate.getValue() == null);
   }
 
   /**
-   * Updates the log
+   * Updates the log.
    */
   private void updateTable() {
-    persistence.writeVisitLog(log);
     tableView.getItems().clear();
-    tableView.getItems().addAll(log.getLog());
+    tableView.getItems().addAll(visitLogDataAccess.getVisitLog().getLog());
   }
 
   /**
-   * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'
+   * Make columns listen to values in Visit, e.g. 'name' in class 'Visit'.
    */
   private void setUpColumnListeners() {
     nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -283,7 +316,7 @@ public class AppController {
   }
 
   /**
-   * Applies input rules to input fields
+   * Applies input rules to input fields.
    */
   private void activateInputRules() {
     forceNumberInput(inputHour1, 2);
@@ -295,17 +328,7 @@ public class AppController {
   }
 
   /**
-   * Imports previously stored visits and displays them, or creates a new log if none is found
-   */
-  private void setUpPersistence() {
-    persistence = new VisitLogPersistence();
-    log = persistence.readVisitLog();
-    updateTable();
-  }
-
-
-  /**
-   * Sets up filter options and filter input fields
+   * Sets up filter options and filter input fields.
    */
   private void setUpFiltering() {
     chooseSearch.getItems()
@@ -314,7 +337,7 @@ public class AppController {
   }
 
   /**
-   * Fetches buildings and puts them in the buildings dropdown menu
+   * Fetches buildings and puts them in the buildings dropdown menu.
    */
   private void setUpBuildings() {
     try {
@@ -328,7 +351,7 @@ public class AppController {
   }
 
   /**
-   * Disallows a user to input nothing but numbers in the given TextField
+   * Disallows a user to input nothing but numbers in the given TextField.
    *
    * @param fxidName  fxid of the TextField to enforce
    * @param maxLength maximum length of input
@@ -348,7 +371,7 @@ public class AppController {
 
   /**
    * Disallows a user to input nothing but letters (including norwegian letters) and spaces in the
-   * given TextField
+   * given TextField.
    *
    * @param fxidName fxid of the TextField to enforce
    */

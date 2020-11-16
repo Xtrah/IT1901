@@ -9,6 +9,9 @@ public class VisitLogModule extends SimpleModule {
   private static final long serialVersionUID = 1L;
   private static final String NAME = "VisitLogModule";
 
+  /**
+   * Registers serializers and deserializers and connects them to the correct class.
+   */
   public VisitLogModule() {
     super(NAME);
     addSerializer(Visit.class, new VisitSerializer());

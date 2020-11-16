@@ -10,14 +10,14 @@ import logger.core.VisitLog;
 public class VisitLogSerializer extends JsonSerializer<VisitLog> {
 
   @Override
-  public void serialize(VisitLog log, JsonGenerator jGen, SerializerProvider serializerProvider)
+  public void serialize(VisitLog log, JsonGenerator jgen, SerializerProvider serializerProvider)
       throws IOException {
-    jGen.writeStartObject();
-    jGen.writeArrayFieldStart("log");
+    jgen.writeStartObject();
+    jgen.writeArrayFieldStart("log");
     for (Visit v : log) {
-      jGen.writeObject(v);
+      jgen.writeObject(v);
     }
-    jGen.writeEndArray();
-    jGen.writeEndObject();
+    jgen.writeEndArray();
+    jgen.writeEndObject();
   }
 }

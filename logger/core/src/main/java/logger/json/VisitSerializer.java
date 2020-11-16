@@ -9,15 +9,16 @@ import logger.core.Visit;
 public class VisitSerializer extends JsonSerializer<Visit> {
 
   @Override
-  public void serialize(Visit visit, JsonGenerator jGen, SerializerProvider serializerProvider)
+  public void serialize(Visit visit, JsonGenerator jgen, SerializerProvider serializerProvider)
       throws IOException {
-    jGen.writeStartObject();
-    jGen.writeStringField("name", visit.getName());
-    jGen.writeStringField("phone", visit.getPhone());
-    jGen.writeStringField("building", visit.getBuilding());
-    jGen.writeStringField("room", visit.getRoom());
-    jGen.writeStringField("from", visit.getFrom().toString());
-    jGen.writeStringField("to", visit.getTo().toString());
-    jGen.writeEndObject();
+    jgen.writeStartObject();
+    jgen.writeStringField("id", visit.getId());
+    jgen.writeStringField("name", visit.getName());
+    jgen.writeStringField("phone", visit.getPhone());
+    jgen.writeStringField("building", visit.getBuilding());
+    jgen.writeStringField("room", visit.getRoom());
+    jgen.writeStringField("from", visit.getFrom().toString());
+    jgen.writeStringField("to", visit.getTo().toString());
+    jgen.writeEndObject();
   }
 }
