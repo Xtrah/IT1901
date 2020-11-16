@@ -1,0 +1,13 @@
+@startuml
+
+User -> Frontend: Another authentication Request
+User <-- Frontend: Another authentication Response
+
+Frontend -> "Backend (Rest)": Test
+Frontend <-- "Backend (Rest)": return test result
+
+"Backend (Rest)" -> Database: get data
+"Backend (Rest)" <-- Database: return
+
+
+@enduml
