@@ -1,11 +1,14 @@
 image:
   file: .gitpod.dockerfile
 
+# enable for the master/default branch (defaults to true)
 tasks:
   - init: sdk use java 14.0.2.j9-adpt
-    command: cd logger && mvn clean install && mvn -pl rest spring-boot:run
+    command: cd logger && mvn install -f core/pom.xml && mvn -pl rest spring-boot:run && mvn install
+    name: REST server
   - openMode: split-right
-    command: echo Run the following command to run app && echo 'mvn -pl fxui javafx:run'
+    command: cd logger && echo Run the following command to run app after the build is complete. && echo 'mvn -pl fxui javafx:run'
+    name: User terminal
 
 ports:
   # used by virtual desktop and vnc, supports JavaFX
