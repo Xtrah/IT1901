@@ -12,13 +12,12 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 
 1. `git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030.git`
 2. Open folder as Maven project in an IDE or [Gitpod](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030)
-3. Install core module to run server by running `mvn install -f core/pom.xml`
-4. Run server using `mvn -pl rest spring-boot:run`
-5. Install modules and run initialization tests by running `mvn clean install`
-6. Run app using `mvn -pl fxui javafx:run`
-7. Run code coverage check, spotbugs and tests using `mvn clean verify`
+3. Install modules and run initialization tests with `mvn clean install`
+4. Run server with `mvn -pl rest spring-boot:run`
+5. Run app with `mvn -pl fxui javafx:run`
+6. Run tests, code coverage check and spotbugs with `mvn clean verify`
 
-> To choose remote or local storage, change the truth value in the method `isRemoteStorage` in `logger/fxui/src/main/java/logger.fxui/AppController`.
+> To choose remote or local storage, change the truth value in the method `isRemoteStorage` in `logger/fxui/src/main/java/logger.fxui/AppController`. Server needs to run if remote is set to true!
 
 ## Git conventions
 
