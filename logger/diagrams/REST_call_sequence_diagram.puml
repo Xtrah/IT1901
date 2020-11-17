@@ -1,13 +1,56 @@
 @startuml
 
-User -> Frontend: Another authentication Request
-User <-- Frontend: Another authentication Response
+group User registers visit
+user -> fxui: click "register"
+fxui -> core: addVisit()
+core --> core: validate
+core -> rest: POST [serialize(input)]
+rest -> database: save to database
 
-Frontend -> "Backend (Rest)": Test
-Frontend <-- "Backend (Rest)": return test result
+rest <-- database: saved
+core <-- rest: response
+fxui <-- core: added
+fxui --> fxui: **updateTableView()**
+user <-- fxui: Registered
+end
 
-"Backend (Rest)" -> Database: get data
-"Backend (Rest)" <-- Database: return
 
+
+group updateTableView()
+fxui -> fxui: //updateTableView()//
+note left: Called on: \n-initialize() \n-delete(visit) \n-register(visit)
+fxui -> core: getVisitLog()
+core -> rest: GET [getVisitLog()]
+rest -> database: read from database
+
+rest <-- database: return VisitLog.json
+core <-- rest: response \ndeserialize(VisitLog.json)
+core --> core: **filter()**
+fxui <-- core: return VisitLog
+user <-- fxui: Display VisitLog
+
+end
+
+
+group filter()
+user --> fxui: set filter
+fxui --> core: filterVisitLog()
+fxui <-- core: filtered
+user <-- fxui: display VisitLog
+end
+
+group User deletes visit
+user <- user: select element in table
+user -> fxui: click "delete"
+fxui -> core: removeVisit(id)
+core -> rest: DELETE [serialize(id)]
+rest -> database: delete from database
+
+rest <-- database: deleted
+core <-- rest: response
+fxui <-- core: removed
+fxui --> fxui: **updateTableView()**
+user <-- fxui: Removed
+end
 
 @enduml
