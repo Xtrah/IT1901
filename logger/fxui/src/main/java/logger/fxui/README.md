@@ -19,3 +19,6 @@ FXML resources are located in [logger/fxui/src/main/resources/logger/fxui](logge
 Class diagrams are found in [logger/diagrams](logger/diagrams).
 
 ![Fxui class diagram](/logger/diagrams/fxui_class_diagram.png)
+
+### Description
+
