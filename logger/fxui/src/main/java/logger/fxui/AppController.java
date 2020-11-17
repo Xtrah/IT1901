@@ -139,6 +139,9 @@ public class AppController {
   @FXML
   private void deleteVisit() {
     ObservableList<Visit> deleteList = tableView.getSelectionModel().getSelectedItems();
+    if (deleteList.isEmpty()) {
+      return;
+    }
     Visit deleteVisit = deleteList.get(0);
     visitLogDataAccess.deleteVisit(deleteVisit.getId());
     updateTable();
