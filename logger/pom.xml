@@ -102,6 +102,42 @@
       </plugins>
     </pluginManagement>
   </build>
+  <dependencyManagement>
+    <dependencies>
+      <!-- JUnit5 -->
+      <dependency>
+        <artifactId>junit-jupiter-api</artifactId>
+        <groupId>org.junit.jupiter</groupId>
+        <scope>test</scope>
+        <version>5.4.2</version>
+      </dependency>
+      <dependency>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <groupId>org.junit.jupiter</groupId>
+        <scope>test</scope>
+        <version>5.4.2</version>
+      </dependency>
+
+      <!-- Jackson -->
+      <dependency>
+        <artifactId>jackson-databind</artifactId>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <version>2.11.0</version>
+      </dependency>
+      <dependency>
+        <artifactId>jackson-annotations</artifactId>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <version>2.11.0</version>
+      </dependency>
+
+      <!-- JaCoCo -->
+      <dependency>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <groupId>org.jacoco</groupId>
+        <version>0.8.6</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <groupId>it1901</groupId>
   <modelVersion>4.0.0</modelVersion>
   <modules>
