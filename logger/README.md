@@ -26,6 +26,7 @@ We use various code quality tools in all modules:
 JaCoCo and Checkstyle will report in .html and the console respectively, at the time of building the app. Spotbugs will stop our build if a bug is spotted. Some modules also uses additional plugins described in their respective documentation.
 
 ## Illustrations
+
 Here are two screenshots of the application running. Our UI consists of two tabs, one for each feature; registering visits and viewing them.
 
 Here is a view of the registration form:
@@ -37,6 +38,7 @@ The image below illustrates the view of the visit log:
 ## Diagrams
 
 ### Package Diagram
+
 Our package diagram shows the connection between packages as well as the modules within them. It also visualizes where we use frameworks.
 ![PlantUML package diagram](diagrams/package_diagram.png)
 
@@ -44,3 +46,7 @@ Our package diagram shows the connection between packages as well as the modules
 
 For our class diagrams we have chosen to create one for each package. This is because one single class diagram is not very useful.
 Having a class diagram for each package makes it easier to see the connection between classes without too much clutter. When looking at connections across packages, you can use the dedicated package diagram.
+
+### Sequence diagram
+
+![REST call diagram](logger/diagrams/REST_call_sequence_diagram.png)
