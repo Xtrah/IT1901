@@ -30,7 +30,7 @@ public class Validation {
    * @return true if name only contains legal characters and length, false otherwise
    */
   public static boolean isValidName(String name) {
-    return name.matches("^[a-zA-ZæøåÆØÅ -]{2,40}$");
+    return name.matches("^[a-zA-ZæøåÆØÅ -]{1,40}$");
   }
 
   /**
@@ -63,7 +63,7 @@ public class Validation {
    * @param to   end time
    * @return true if no params are null and from is chronologically behind to, false otherwise
    */
-  public static boolean isValidTime(LocalTime from, LocalTime to) {
+  public static boolean fromIsBeforeTo(LocalTime from, LocalTime to) {
     if (from != null && to != null) {
       return from.isBefore(to);
     }
