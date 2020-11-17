@@ -180,8 +180,8 @@ public class AppController {
     }
 
     // Validate time
-    if (!Validation.isTimeString(inputHour1.getText(), inputMin1.getText()) ||
-        !Validation.isTimeString(inputHour2.getText(), inputMin2.getText())) {
+    if (!Validation.isTimeString(inputHour1.getText(), inputMin1.getText())
+        || !Validation.isTimeString(inputHour2.getText(), inputMin2.getText())) {
       setErrorMessage("Invalid time input! Must be on format hh:mm");
       return false;
     }
