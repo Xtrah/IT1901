@@ -19,12 +19,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logger.core.Building;
+import logger.core.Filter;
 import logger.core.Validation;
 import logger.core.Visit;
 import logger.fxui.utils.LocalVisitLogDataAccess;
 import logger.fxui.utils.RemoteVisitLogDataAccess;
 import logger.fxui.utils.VisitLogDataAccess;
-import logger.fxui.utils.VisitLogFilter;
 import logger.json.BuildingReader;
 
 public class AppController {
@@ -206,11 +206,11 @@ public class AppController {
     logToDate.setVisible(searchKey.equals("Date"));
 
     result = switch (searchKey) {
-      case "Name" -> VisitLogFilter.filterByName(searchInput, allVisits);
-      case "Phone" -> VisitLogFilter.filterByPhone(searchInput, allVisits);
-      case "Building" -> VisitLogFilter.filterByBuilding(searchInput, allVisits);
-      case "Room" -> VisitLogFilter.filterByRoom(searchInput, allVisits);
-      case "Date" -> VisitLogFilter
+      case "Name" -> Filter.filterByName(searchInput, allVisits);
+      case "Phone" -> Filter.filterByPhone(searchInput, allVisits);
+      case "Building" -> Filter.filterByBuilding(searchInput, allVisits);
+      case "Room" -> Filter.filterByRoom(searchInput, allVisits);
+      case "Date" -> Filter
           .filterByDate(allVisits, logFromDate.getValue(), logToDate.getValue());
       default -> allVisits;
     };
@@ -239,7 +239,7 @@ public class AppController {
    * Make uri for endpoint.
    *
    * @param uri for endpoint
-   * @return
+   * @return a valid URI for the endpoint
    */
   private URI uriSetup(String uri) {
     URI newUri = null;
@@ -255,7 +255,7 @@ public class AppController {
    * Sets local or remote storage.
    *
    * @param isRemote either true or false
-   * @return
+   * @return an instance of remote storage if true, an instance of local storage if false
    */
   private VisitLogDataAccess isRemoteStorage(boolean isRemote) {
     if (isRemote) {

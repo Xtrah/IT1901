@@ -1,12 +1,11 @@
-package logger.fxui.utils;
+package logger.core;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import logger.core.Visit;
 
-public class VisitLogFilter {
+public class Filter {
 
   /**
    * Filters visits based on predicate.
