@@ -1,0 +1,61 @@
+@startuml
+folder logger  #DDDDDD {
+
+    component core #00000 {
+        package logger.core #FFFFCC{
+               
+            }
+            package logger.json #FFFFCC{
+
+            }
+        }
+
+    component fxui #00000 {
+        package logger.fxui #FFFFCC{
+            
+        }
+    }
+
+    component javafx #00000 {
+        component fxml {
+                
+        }
+    }
+
+    component rest #00000 {
+        package logger.rest #FFFFCC {
+                
+        }
+        package logger.restapi #FFFFCC {
+                
+        }
+    }
+
+    component springboot {
+
+    }
+
+    component jackson {
+
+    }
+
+}
+
+fxui ..> javafx
+fxui ..> fxml
+
+logger.fxui ..> logger.json
+logger.fxui ..> logger.core
+
+rest .> springboot
+
+logger.json ..> jackson
+
+logger.restapi ..> logger.core
+logger.restapi ..> logger.json
+
+
+logger.rest ..> logger.restapi
+logger.rest ..> logger.core
+
+@enduml
