@@ -26,9 +26,6 @@ folder logger  #DDDDDD {
         package logger.rest #FFFFCC {
                 
         }
-        package logger.restapi #FFFFCC {
-                
-        }
     }
 
     component springboot {
@@ -41,8 +38,7 @@ folder logger  #DDDDDD {
 
 }
 
-fxui ..> javafx
-fxui ..> fxml
+logger.fxui ..> fxml
 
 logger.fxui ..> logger.json
 logger.fxui ..> logger.core
@@ -51,11 +47,8 @@ rest .> springboot
 
 logger.json ..> jackson
 
-logger.restapi ..> logger.core
-logger.restapi ..> logger.json
+logger.rest ..> logger.json
 
-
-logger.rest ..> logger.restapi
 logger.rest ..> logger.core
 
 @enduml
