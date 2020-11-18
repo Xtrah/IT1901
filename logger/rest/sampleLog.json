@@ -2,18 +2,18 @@
   "log": [
     {
       "id": "a81a901e-be9c-4213-a900-4bca27d688a9",
-      "name": "No hello",
-      "phone": "91837871",
-      "building": "Realfagsbygget",
-      "room": "A4",
+      "name": "Henrik Viken Finsås",
+      "phone": "73591500",
+      "building": "Realfagbygget",
+      "room": "A4-100",
       "from": "2020-11-05T12:00",
       "to": "2020-11-05T15:00"
     },
     {
       "id": "6afd7156-b6d1-4e13-99e0-a0d10389e7de",
       "name": "Marcus Obama",
-      "phone": "43123426",
-      "building": "Realfagsbygget",
+      "phone": "90869840",
+      "building": "Realfagbygget",
       "room": "R7",
       "from": "2020-11-03T10:15",
       "to": "2020-11-03T12:15"
@@ -21,8 +21,8 @@
     {
       "id": "5d5eb2ef-876e-43a1-a9b3-1326d9f32273",
       "name": "Jørgen Eastwood",
-      "phone": "91191169",
-      "building": "Stripa",
+      "phone": "73538630",
+      "building": "Sentralbygget",
       "room": "S1",
       "from": "2020-10-29T08:15",
       "to": "2020-10-29T16:16"
