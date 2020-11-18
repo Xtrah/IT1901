@@ -12,6 +12,6 @@ The persistence layer handles reading buildings from a source `.json`, and handl
 
 ## Maven build
 
-In addition to the plugins used [project-wide](../README.md#Structure_and_Maven_build), we use the following plugins in the Core module to run our core module:
+In addition to the plugins used [project-wide](../README.md#structure_and_maven_build), we use the following plugins in the Core module to run our core module:
 
 - [Jackson](https://github.com/FasterXML/jackson) to handle JSON parsing in Java
