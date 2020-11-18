@@ -5,9 +5,10 @@ The purpose of the app is to register a user's visits to rooms and see an overvi
 ## User stories
 
 - As a user I want to register where I have been using my name and phone number, when I visited and how long
-- As a user I want to see former visits, so I can see who have visited a room
-- As a user I want to search in former visits, so I can easier find a certain visit
-- As a user I want to delete a former visit, so I can remove unwanted visit entries
+- As a user I want to see former visits, so that I can see who have visited a room or a building
+- As a user I want to search in former visits, so that I can easier find a certain visit
+- As a user I want to delete a former visit, so that I can remove unwanted visit entries
+- As a user I want to filter through visit based on all fields, such as phone number, date of visit and building, so that I can find specific visits
 
 ## Structure and Maven build
 
