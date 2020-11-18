@@ -17,7 +17,8 @@ public class AppTest extends ApplicationTest {
 
   @Override
   public void start(final Stage stage) throws Exception {
-    final FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+    final FXMLLoader loader = new FXMLLoader(getClass().getResource("TestApp.fxml"));
+    loader.setController(new AppController(false));
     final Parent root = loader.load();
     stage.setScene(new Scene(root));
     stage.show();

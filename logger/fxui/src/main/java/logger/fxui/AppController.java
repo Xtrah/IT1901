@@ -29,8 +29,8 @@ import logger.json.BuildingReader;
 
 public class AppController {
 
-  // true for remote storage, false for local storage
-  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(false);
+  private final boolean isRemote;
+  private VisitLogDataAccess dataAccess;
 
   // Registration
   @FXML
@@ -84,12 +84,20 @@ public class AppController {
   @FXML
   private TableColumn<String, Visit> toTimeCol;
 
+  public AppController() {
+    this.isRemote = true;
+  }
+
+  public AppController(boolean isRemote) {
+    this.isRemote = isRemote;
+  }
 
   /**
    * Sets up the UI.
    */
   @FXML
   private void initialize() {
+    setUpStorage();
     setUpColumnListeners();
     updateTable();
     setUpFiltering();
@@ -124,7 +132,7 @@ public class AppController {
 
       // Handling VisitLog
       Visit newVisit = new Visit(name, phone, building, room, fromTime, toTime);
-      visitLogDataAccess.addVisit(newVisit);
+      dataAccess.addVisit(newVisit);
       updateTable();
 
       resetInputs();
@@ -143,7 +151,7 @@ public class AppController {
       return;
     }
     Visit deleteVisit = deleteList.get(0);
-    visitLogDataAccess.deleteVisit(deleteVisit.getId());
+    dataAccess.deleteVisit(deleteVisit.getId());
     updateTable();
   }
 
@@ -218,7 +226,7 @@ public class AppController {
   private void filterVisitLog() {
     final String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
     String searchKey = chooseSearch.getValue(); // DropDown choice
-    final List<Visit> allVisits = visitLogDataAccess.getVisitLog().getLog();
+    final List<Visit> allVisits = dataAccess.getVisitLog().getLog();
     final List<Visit> result;
 
     // Hide unused widgets
@@ -258,6 +266,14 @@ public class AppController {
     dropdownRoom.getItems().addAll(rooms);
   }
 
+  private void setUpStorage() {
+    if (this.isRemote) {
+      dataAccess = new RemoteVisitLogDataAccess(uriSetup());
+    } else {
+      dataAccess = new LocalVisitLogDataAccess();
+    }
+  }
+
   private void setErrorMessage(String msg) {
     helperText.setText(msg);
     helperText.setTextFill(Color.RED);
@@ -266,13 +282,12 @@ public class AppController {
   /**
    * Make uri for endpoint.
    *
-   * @param uri for endpoint
    * @return a valid URI for the endpoint
    */
-  private URI uriSetup(String uri) {
+  private URI uriSetup() {
     URI newUri = null;
     try {
-      newUri = new URI(uri);
+      newUri = new URI("http://localhost:8080/logger");
     } catch (URISyntaxException e) {
       System.out.println(e.getMessage());
     }
@@ -288,7 +303,7 @@ public class AppController {
   private VisitLogDataAccess isRemoteStorage(boolean isRemote) {
     if (isRemote) {
       return new RemoteVisitLogDataAccess(
-          uriSetup("http://localhost:8080/logger"));
+          uriSetup());
     }
     return new LocalVisitLogDataAccess();
   }
@@ -327,7 +342,7 @@ public class AppController {
    */
   private void updateTable() {
     tableView.getItems().clear();
-    tableView.getItems().addAll(visitLogDataAccess.getVisitLog().getLog());
+    tableView.getItems().addAll(dataAccess.getVisitLog().getLog());
   }
 
   /**
