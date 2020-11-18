@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import logger.core.Visit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -18,7 +19,6 @@ public class AppTest extends ApplicationTest {
   @Override
   public void start(final Stage stage) throws Exception {
     final FXMLLoader loader = new FXMLLoader(getClass().getResource("TestApp.fxml"));
-    loader.setController(new AppController(false));
     final Parent root = loader.load();
     stage.setScene(new Scene(root));
     stage.show();
@@ -44,7 +44,7 @@ public class AppTest extends ApplicationTest {
   public void testRegisterVisit() {
     // Add visit
     clickOn("#visitTab");
-    TableView tableView = lookup("#tableView").queryTableView();
+    TableView<Visit> tableView = lookup("#tableView").queryTableView();
     int tableSizeBefore = tableView.getItems().size();
     clickOn("#registerTab");
     clickOn("#inputName").write("Kari Traa");

@@ -7,14 +7,11 @@ import logger.json.VisitLogPersistence;
 
 public class LocalVisitLogDataAccess implements VisitLogDataAccess {
 
-  private static final String LOG_PATH =
-      System.getProperty("user.dir") + File.separator + "log.json";
-
   private final VisitLogPersistence persistence;
   private final VisitLog visitLog;
 
-  public LocalVisitLogDataAccess() {
-    persistence = new VisitLogPersistence(new File(LOG_PATH));
+  public LocalVisitLogDataAccess(String path) {
+    persistence = new VisitLogPersistence(new File(path));
     visitLog = getVisitLog();
   }
 

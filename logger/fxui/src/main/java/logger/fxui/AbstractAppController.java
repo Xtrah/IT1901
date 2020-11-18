@@ -1,6 +1,5 @@
 package logger.fxui;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
@@ -22,23 +21,18 @@ import logger.core.Building;
 import logger.core.Filter;
 import logger.core.Validation;
 import logger.core.Visit;
-import logger.fxui.utils.LocalVisitLogDataAccess;
-import logger.fxui.utils.RemoteVisitLogDataAccess;
 import logger.fxui.utils.VisitLogDataAccess;
-import logger.json.BuildingReader;
 
-public class AppController {
+public abstract class AbstractAppController {
 
-  private final boolean isRemote;
-  private VisitLogDataAccess dataAccess;
-
+  protected VisitLogDataAccess dataAccess;
+  @FXML
+  protected ChoiceBox<Building> dropdownBuilding;
   // Registration
   @FXML
   private TextField inputName;
   @FXML
   private TextField inputPhone;
-  @FXML
-  private ChoiceBox<Building> dropdownBuilding;
   @FXML
   private ChoiceBox<String> dropdownRoom;
   @FXML
@@ -84,13 +78,6 @@ public class AppController {
   @FXML
   private TableColumn<String, Visit> toTimeCol;
 
-  public AppController() {
-    this.isRemote = true;
-  }
-
-  public AppController(boolean isRemote) {
-    this.isRemote = isRemote;
-  }
 
   /**
    * Sets up the UI.
@@ -266,13 +253,10 @@ public class AppController {
     dropdownRoom.getItems().addAll(rooms);
   }
 
-  private void setUpStorage() {
-    if (this.isRemote) {
-      dataAccess = new RemoteVisitLogDataAccess(uriSetup());
-    } else {
-      dataAccess = new LocalVisitLogDataAccess();
-    }
-  }
+  /**
+   * Sets local or remote storage according to the isRemote field.
+   */
+  protected abstract void setUpStorage();
 
   private void setErrorMessage(String msg) {
     helperText.setText(msg);
@@ -284,7 +268,7 @@ public class AppController {
    *
    * @return a valid URI for the endpoint
    */
-  private URI uriSetup() {
+  protected URI uriSetup() {
     URI newUri = null;
     try {
       newUri = new URI("http://localhost:8080/logger");
@@ -292,20 +276,6 @@ public class AppController {
       System.out.println(e.getMessage());
     }
     return newUri;
-  }
-
-  /**
-   * Sets local or remote storage.
-   *
-   * @param isRemote either true or false
-   * @return an instance of remote storage if true, an instance of local storage if false
-   */
-  private VisitLogDataAccess isRemoteStorage(boolean isRemote) {
-    if (isRemote) {
-      return new RemoteVisitLogDataAccess(
-          uriSetup());
-    }
-    return new LocalVisitLogDataAccess();
   }
 
   /**
@@ -381,16 +351,7 @@ public class AppController {
   /**
    * Fetches buildings and puts them in the buildings dropdown menu.
    */
-  private void setUpBuildings() {
-    try {
-      List<Building> buildings = BuildingReader
-          .readBuildings(getClass().getResource("buildings.json"));
-      dropdownBuilding.getItems().addAll(buildings);
-    } catch (IOException e) {
-      System.out.println("Couldn't fetch any buildings");
-      dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
-    }
-  }
+  protected abstract void setUpBuildings();
 
   /**
    * Disallows a user to input nothing but numbers in the given TextField.
