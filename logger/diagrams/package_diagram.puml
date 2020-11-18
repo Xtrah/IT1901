@@ -4,11 +4,11 @@ folder logger  #DDDDDD {
     component core #00000 {
         package logger.core #FFFFCC{
                
-            }
-            package logger.json #FFFFCC{
-
-            }
         }
+        package logger.json #FFFFCC{
+
+        }
+    }
 
     component fxui #00000 {
         package logger.fxui #FFFFCC{
