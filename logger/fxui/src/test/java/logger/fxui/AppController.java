@@ -2,7 +2,7 @@ package logger.fxui;
 
 import logger.fxui.utils.LocalVisitLogDataAccess;
 
-public class AppTestController extends AppControllerLocal {
+public class AppController extends LocalAppController {
 
   @Override
   protected void setUpStorage() {

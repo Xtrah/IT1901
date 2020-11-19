@@ -1,5 +1,6 @@
 package logger.fxui;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ import logger.core.Filter;
 import logger.core.Validation;
 import logger.core.Visit;
 import logger.fxui.utils.VisitLogDataAccess;
+import logger.json.BuildingReader;
 
 public abstract class AbstractAppController {
 
@@ -78,6 +80,19 @@ public abstract class AbstractAppController {
   @FXML
   private TableColumn<String, Visit> toTimeCol;
 
+  /**
+   * Fetches buildings and puts them in the buildings dropdown menu.
+   */
+  private void setUpBuildings() {
+    try {
+      List<Building> buildings = BuildingReader
+          .readBuildings(AbstractAppController.class.getResource("buildings.json"));
+      dropdownBuilding.getItems().addAll(buildings);
+    } catch (IOException e) {
+      System.out.println("Couldn't fetch any buildings");
+      dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
+    }
+  }
 
   /**
    * Sets up the UI.
@@ -254,7 +269,7 @@ public abstract class AbstractAppController {
   }
 
   /**
-   * Sets local or remote storage according to the isRemote field.
+   * Initializes storing and reading from file.
    */
   protected abstract void setUpStorage();
 
@@ -347,11 +362,6 @@ public abstract class AbstractAppController {
         .addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
     chooseSearch.getSelectionModel().selectFirst();
   }
-
-  /**
-   * Fetches buildings and puts them in the buildings dropdown menu.
-   */
-  protected abstract void setUpBuildings();
 
   /**
    * Disallows a user to input nothing but numbers in the given TextField.
