@@ -10,9 +10,9 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030)
 
-Running the app in Gitpod will automatically install modules and run initialization tests. 
+Running the app in Gitpod will automatically install modules, run initialization tests and start the REST server.
 
-When the build is complete, run the app using `mvn -pl fxui javafx:run` and tests/checks using `mvn clean verify`.
+When the build is complete, run the app using `mvn -pl fxui javafx:run` and tests/checks using `mvn clean verify` in the right side console.
 
 ## Developer installation
 
@@ -28,7 +28,7 @@ When the build is complete, run the app using `mvn -pl fxui javafx:run` and test
 
 ## Git conventions
 
-During development we will strive to follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
+During development, we will strive to follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
 
 - [Overview of different commit types](https://github.com/commitizen/conventional-commit-types/blob/v3.0.0/index.json)
 - [Rules for commit messages](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
