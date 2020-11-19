@@ -22,23 +22,19 @@ import logger.core.Building;
 import logger.core.Filter;
 import logger.core.Validation;
 import logger.core.Visit;
-import logger.fxui.utils.LocalVisitLogDataAccess;
-import logger.fxui.utils.RemoteVisitLogDataAccess;
 import logger.fxui.utils.VisitLogDataAccess;
 import logger.json.BuildingReader;
 
-public class AppController {
+public abstract class AbstractAppController {
 
-  // true for remote storage, false for local storage
-  private final VisitLogDataAccess visitLogDataAccess = isRemoteStorage(false);
-
+  protected VisitLogDataAccess dataAccess;
+  @FXML
+  protected ChoiceBox<Building> dropdownBuilding;
   // Registration
   @FXML
   private TextField inputName;
   @FXML
   private TextField inputPhone;
-  @FXML
-  private ChoiceBox<Building> dropdownBuilding;
   @FXML
   private ChoiceBox<String> dropdownRoom;
   @FXML
@@ -84,12 +80,26 @@ public class AppController {
   @FXML
   private TableColumn<String, Visit> toTimeCol;
 
+  /**
+   * Fetches buildings and puts them in the buildings dropdown menu.
+   */
+  private void setUpBuildings() {
+    try {
+      List<Building> buildings = BuildingReader
+          .readBuildings(AbstractAppController.class.getResource("buildings.json"));
+      dropdownBuilding.getItems().addAll(buildings);
+    } catch (IOException e) {
+      System.out.println("Couldn't fetch any buildings");
+      dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
+    }
+  }
 
   /**
    * Sets up the UI.
    */
   @FXML
   private void initialize() {
+    setUpStorage();
     setUpColumnListeners();
     updateTable();
     setUpFiltering();
@@ -124,7 +134,7 @@ public class AppController {
 
       // Handling VisitLog
       Visit newVisit = new Visit(name, phone, building, room, fromTime, toTime);
-      visitLogDataAccess.addVisit(newVisit);
+      dataAccess.addVisit(newVisit);
       updateTable();
 
       resetInputs();
@@ -143,7 +153,7 @@ public class AppController {
       return;
     }
     Visit deleteVisit = deleteList.get(0);
-    visitLogDataAccess.deleteVisit(deleteVisit.getId());
+    dataAccess.deleteVisit(deleteVisit.getId());
     updateTable();
   }
 
@@ -218,7 +228,7 @@ public class AppController {
   private void filterVisitLog() {
     final String searchInput = searchField.getText().toLowerCase(); // User input. Case insensitive
     String searchKey = chooseSearch.getValue(); // DropDown choice
-    final List<Visit> allVisits = visitLogDataAccess.getVisitLog().getLog();
+    final List<Visit> allVisits = dataAccess.getVisitLog().getLog();
     final List<Visit> result;
 
     // Hide unused widgets
@@ -258,6 +268,11 @@ public class AppController {
     dropdownRoom.getItems().addAll(rooms);
   }
 
+  /**
+   * Initializes storing and reading from file.
+   */
+  protected abstract void setUpStorage();
+
   private void setErrorMessage(String msg) {
     helperText.setText(msg);
     helperText.setTextFill(Color.RED);
@@ -266,31 +281,16 @@ public class AppController {
   /**
    * Make uri for endpoint.
    *
-   * @param uri for endpoint
    * @return a valid URI for the endpoint
    */
-  private URI uriSetup(String uri) {
+  protected URI uriSetup() {
     URI newUri = null;
     try {
-      newUri = new URI(uri);
+      newUri = new URI("http://localhost:8080/logger");
     } catch (URISyntaxException e) {
       System.out.println(e.getMessage());
     }
     return newUri;
-  }
-
-  /**
-   * Sets local or remote storage.
-   *
-   * @param isRemote either true or false
-   * @return an instance of remote storage if true, an instance of local storage if false
-   */
-  private VisitLogDataAccess isRemoteStorage(boolean isRemote) {
-    if (isRemote) {
-      return new RemoteVisitLogDataAccess(
-          uriSetup("http://localhost:8080/logger"));
-    }
-    return new LocalVisitLogDataAccess();
   }
 
   /**
@@ -327,7 +327,7 @@ public class AppController {
    */
   private void updateTable() {
     tableView.getItems().clear();
-    tableView.getItems().addAll(visitLogDataAccess.getVisitLog().getLog());
+    tableView.getItems().addAll(dataAccess.getVisitLog().getLog());
   }
 
   /**
@@ -361,20 +361,6 @@ public class AppController {
     chooseSearch.getItems()
         .addAll(FXCollections.observableArrayList("Name", "Phone", "Building", "Room", "Date"));
     chooseSearch.getSelectionModel().selectFirst();
-  }
-
-  /**
-   * Fetches buildings and puts them in the buildings dropdown menu.
-   */
-  private void setUpBuildings() {
-    try {
-      List<Building> buildings = BuildingReader
-          .readBuildings(getClass().getResource("buildings.json"));
-      dropdownBuilding.getItems().addAll(buildings);
-    } catch (IOException e) {
-      System.out.println("Couldn't fetch any buildings");
-      dropdownBuilding.getItems().addAll(FXCollections.observableArrayList(new ArrayList<>()));
-    }
   }
 
   /**
