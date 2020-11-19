@@ -12,19 +12,17 @@ folder logger  #DDDDDD {
 
     component fxui #00000 {
         package logger.fxui #FFFFCC{
-            
         }
     }
 
-    component javafx #00000 {
+    component resources #00000 {
         component fxml {
                 
         }
     }
-
     component rest #00000 {
         package logger.rest #FFFFCC {
-                
+
         }
     }
 
@@ -50,5 +48,7 @@ logger.json ..> jackson
 logger.rest ..> logger.json
 
 logger.rest ..> logger.core
+
+logger.fxui .> logger.rest
 
 @enduml
