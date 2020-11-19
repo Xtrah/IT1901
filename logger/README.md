@@ -45,17 +45,14 @@ Our package diagram shows the connection between packages as well as the modules
 
 The fxui contains two data access classes. One for remote and one for local storage. 
 
-* The remote access class connects to the rest module when setting up remote storage.
-* The local access class sets up local storage internally.
+* **[RemoteVisitLogDataAccess](logger/fxui/src/main/java/logger/fxui/utils/RemoteVisitLogDataAccess.java)** connects to the rest module when setting up remote storage.
+* **[LocalVisitLogDataAccess](logger/fxui/src/main/java/logger/fxui/utils/LocalVisitLogDataAccess.java)** sets up local storage internally.
 
 The fxui also connects the fxml (UI) to the logic layer, which is the core module.
 
 Rest communicates with the core for persistence when handling visits. Examples are when adding and removing visits from the log.
 
-Springboot and Jackson are important dependencies for the project to work.
-
-
-
+Springboot and Jackson are important dependencies for the project to work. Springboot is used for the server, while Jackson is used for deserializing and serializing.
 
 ### Class diagrams
 
