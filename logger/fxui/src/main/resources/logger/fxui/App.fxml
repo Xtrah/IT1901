@@ -18,6 +18,8 @@
   minHeight="-Infinity"
   minWidth="-Infinity" prefHeight="604.0" prefWidth="937.0"
   xmlns="http://javafx.com/javafx/11.0.1" fx:controller="logger.fxui.RestAppController">
+  <!-- For local storage, use fx:controller="logger.fxui.RestAppController" -->
+  <!-- For remote storage, use fx:controller="logger.fxui.LocalAppController" -->
   <TabPane layoutY="-7.0" prefHeight="604.0" prefWidth="937.0" side="BOTTOM"
     tabClosingPolicy="UNAVAILABLE">
     <Tab text=" Register " fx:id="registerTab">
