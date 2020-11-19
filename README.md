@@ -1,12 +1,18 @@
 # IT1901 gr2030 repository
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030)
-
 ## About
 
-This repository contains the **Logger** JavaFX app, an app to register a user's visits to rooms and see an overview of all their visits.
+This repository contains the **Logger** JavaFX app, an app to register visits to rooms, and see an overview of all registered visits. It allows the user to create, browse, filter and delete visits at their own discretion. It reads and stores data to JSON objects, which can be stored either locally or remotely.
 
 The app is located in [logger](logger). The repository also includes Gitpod configuration files and a [.gitignore](.gitignore) file for Java development.
+
+## Running in Gitpod
+
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030)
+
+Running the app in Gitpod will automatically install modules, run initialization tests and start the REST server.
+
+When the build is complete, run the app using `mvn -pl fxui javafx:run` and tests/checks using `mvn clean verify` in the right side console.
 
 ## Developer installation
 
@@ -22,7 +28,7 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 
 ## Git conventions
 
-During development of the app we will strive to follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
+During development, we will strive to follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
 
 - [Overview of different commit types](https://github.com/commitizen/conventional-commit-types/blob/v3.0.0/index.json)
 - [Rules for commit messages](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
