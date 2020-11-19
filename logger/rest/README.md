@@ -2,16 +2,16 @@
 
 This module contains the REST-server and REST-API for [Logger](../README.md).
 
-## REST
+## Information
 
-VisitLogApplication starts the spring boot server.
-VisitLogService layer handles business requirements.
-VisitLogController handles the navigation between the different views.
+* **VisitLogApplication** starts the spring boot server.
+* **VisitLogService** layer handles business requirements.
+* **VisitLogController** handles the navigation between the different views.
 
 The server is run on localhost:8080 using cmd:
 `mvn -pl rest spring-boot:run` *
 
-\*Choose remote or local storage by changing truth value in function `isRemoteStorage` in `logger/fxui/src/main/java/logger.fxui/AppController`.
+\*Choose remote or local storage by changing controller on line 20 in `logger/fxui/src/main/resources/logger.fxui/App.fxml`.
 
 The base endpoint for the rest-api is "/logger", offering three methods:
 
