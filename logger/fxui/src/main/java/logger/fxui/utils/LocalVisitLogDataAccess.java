@@ -7,14 +7,11 @@ import logger.json.VisitLogPersistence;
 
 public class LocalVisitLogDataAccess implements VisitLogDataAccess {
 
-  private static final String LOG_PATH =
-      System.getProperty("user.dir") + File.separator + "log.json";
-
   private final VisitLogPersistence persistence;
   private final VisitLog visitLog;
 
-  public LocalVisitLogDataAccess() {
-    persistence = new VisitLogPersistence(new File(LOG_PATH));
+  public LocalVisitLogDataAccess(String path) {
+    persistence = new VisitLogPersistence(new File(path));
     visitLog = getVisitLog();
   }
 
@@ -32,22 +29,26 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
    * Adds visit to Visit log.
    *
    * @param visit to add
+   * @return true
    */
   @Override
-  public void addVisit(Visit visit) {
+  public boolean addVisit(Visit visit) {
     visitLog.addVisit(visit);
     persistence.writeVisitLog(visitLog);
+    return true;
   }
 
   /**
    * Deletes visit log with given id.
    *
    * @param id visit id to delete
+   * @return true
    */
   @Override
-  public void deleteVisit(String id) {
+  public boolean deleteVisit(String id) {
     visitLog.removeVisit(id);
     persistence.writeVisitLog(visitLog);
+    return true;
   }
 
 

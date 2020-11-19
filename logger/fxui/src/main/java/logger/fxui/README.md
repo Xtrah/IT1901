@@ -10,7 +10,9 @@ We have several supporting [utility classes](utils/) for our AppController to ha
 
 ## Architecture
 
-The architecture is a standard JavaFX application using FXML as  resource. The app initializes using the class **App.java**, while **AppController.java** handles user interaction.
+The architecture is a standard JavaFX application using FXML as resource. The app initializes using the class **App.java**, while the AppControllers handles user interaction.
+
+We have chosen to split the controllers into two: **RestAppController** for REST interactions and **LocalAppController** for local interactions. Both of these inherit most of their functionality from AbstractAppController.
 
 FXML resources are located in [logger/fxui/src/main/resources/logger/fxui](logger/fxui/src/main/resources/logger/fxui).
 
@@ -22,3 +24,6 @@ Class diagrams are found in [logger/diagrams](logger/diagrams).
 
 ### Description
 
+The App extends the Application-class and is used to start the program through the start-method. It does this by loading the fxml and starting the AppController.
+
+After the application has been started, the app controller starts initializing the app. The controller further delegates logical operations to the core layer and uses the various data access layers to get data and display them to the user.

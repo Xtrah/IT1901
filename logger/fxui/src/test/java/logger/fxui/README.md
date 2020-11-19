@@ -1,3 +1,3 @@
-# Tests for fxui module
+# FXUI Tests
 
-Here are the tests for the fxui module located.
+Here lies the FXUI tests.

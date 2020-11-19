@@ -87,6 +87,15 @@
       <artifactId>junit-jupiter-api</artifactId>
       <groupId>org.junit.jupiter</groupId>
     </dependency>
+
+    <!-- WireMock -->
+    <dependency>
+      <artifactId>wiremock-jre8</artifactId>
+      <groupId>com.github.tomakehurst</groupId>
+      <scope>test</scope>
+      <version>2.27.2</version>
+    </dependency>
+
   </dependencies>
 
   <modelVersion>4.0.0</modelVersion>
