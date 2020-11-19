@@ -43,6 +43,17 @@ The image below illustrates the view of the visit log:
 Our package diagram shows the connection between packages as well as the modules within them. It also visualizes where we use frameworks.
 ![PlantUML package diagram](diagrams/package_diagram.png)
 
+The fxui contains two data access classes. One for remote and one for local storage. 
+
+* **[RemoteVisitLogDataAccess](logger/fxui/src/main/java/logger/fxui/utils/RemoteVisitLogDataAccess.java)** connects to the rest module when setting up remote storage.
+* **[LocalVisitLogDataAccess](logger/fxui/src/main/java/logger/fxui/utils/LocalVisitLogDataAccess.java)** sets up local storage internally.
+
+The fxui also connects the fxml (UI) to the logic layer, which is the core module.
+
+Rest communicates with the core for persistence when handling visits. Examples are when adding and removing visits from the log.
+
+Springboot and Jackson are important dependencies for the project to work. Springboot is used for the server, while Jackson is used for deserializing and serializing.
+
 ### Class diagrams
 
 For our class diagrams we have chosen to create one for each package. This is because one single class diagram is not very useful.

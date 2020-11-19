@@ -1,18 +1,28 @@
 [
   {
-    "name": "Realfagsbygget",
+    "name": "IT-bygget",
     "rooms": [
-      "A3",
-      "A4",
-      "R7"
+      "F1",
+      "Drivhuset"
     ]
   },
   {
-    "name": "Stripa",
+    "name": "Realfagbygget",
+    "rooms": [
+      "R1",
+      "R7",
+      "A4-100",
+      "A4-156"
+    ]
+  },
+  {
+    "name": "Sentralbygget",
     "rooms": [
       "S1",
       "S3",
-      "S5"
+      "S7",
+      "Kabinen",
+      "Hangaren"
     ]
   }
 ]
