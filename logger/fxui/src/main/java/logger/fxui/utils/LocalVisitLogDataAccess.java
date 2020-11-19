@@ -29,22 +29,26 @@ public class LocalVisitLogDataAccess implements VisitLogDataAccess {
    * Adds visit to Visit log.
    *
    * @param visit to add
+   * @return true
    */
   @Override
-  public void addVisit(Visit visit) {
+  public boolean addVisit(Visit visit) {
     visitLog.addVisit(visit);
     persistence.writeVisitLog(visitLog);
+    return true;
   }
 
   /**
    * Deletes visit log with given id.
    *
    * @param id visit id to delete
+   * @return true
    */
   @Override
-  public void deleteVisit(String id) {
+  public boolean deleteVisit(String id) {
     visitLog.removeVisit(id);
     persistence.writeVisitLog(visitLog);
+    return true;
   }
 
 

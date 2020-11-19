@@ -13,4 +13,5 @@ public class LocalAppController extends AbstractAppController {
     dataAccess = new LocalVisitLogDataAccess(
         System.getProperty("user.dir") + File.separator + "log.json");
   }
+
 }

@@ -55,7 +55,7 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
    * @param visit Visit to add
    */
   @Override
-  public void addVisit(Visit visit) {
+  public boolean addVisit(Visit visit) {
     try {
       String jsonVisit = objectMapper.writeValueAsString(visit);
       final HttpRequest req = HttpRequest
@@ -70,21 +70,23 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
               .build()
               .send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyAdded = objectMapper.readValue(res.body(), Boolean.class);
-      if (successfullyAdded != null) {
+      if (successfullyAdded != null && successfullyAdded) {
         visitLog.addVisit(visit);
+        return true;
       }
+      return false;
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
 
   /**
-   * Deletes visit based on given id. Sends http delete request to remote server
+   * Deletes visit based on given id. Sends http delete request to remote server.
    *
    * @param id visit id
    */
   @Override
-  public void deleteVisit(String id) {
+  public boolean deleteVisit(String id) {
     try {
       final HttpRequest req = HttpRequest
           .newBuilder(URI.create(endpointUri + "/" + id))
@@ -96,9 +98,11 @@ public class RemoteVisitLogDataAccess implements VisitLogDataAccess {
               .newBuilder()
               .build().send(req, HttpResponse.BodyHandlers.ofString());
       Boolean successfullyRemoved = objectMapper.readValue(res.body(), Boolean.class);
-      if (successfullyRemoved != null) {
+      if (successfullyRemoved != null && successfullyRemoved) {
         visitLog.removeVisit(id);
+        return true;
       }
+      return false;
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
