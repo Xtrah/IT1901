@@ -14,4 +14,4 @@ In addition to the plugins used [project-wide](../README.md), we use the followi
 
 - [JavaFX](https://github.com/openjdk/jfx) to create and show a client user interface
 - [TestFX](https://github.com/TestFX/TestFX) to test our JavaFX App
-- [Mockito](https://github.com/mockito/mockito) to test our JavaFX controllers
+- [WireMock](https://github.com/tomakehurst/wiremock) to test remote storage interactions

@@ -46,6 +46,9 @@ public class RemoteDataAccessTest {
         new URI("http://localhost:" + wmServer.port() + "/logger"));
   }
 
+  /**
+   * Tests remote fetch of VisitLog.
+   */
   @Test
   public void testGetLog() {
     // Arrange
