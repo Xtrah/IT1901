@@ -21,3 +21,9 @@ FXML resources are located in [logger/fxui/src/main/resources/logger/fxui](logge
 Class diagrams are found in [logger/diagrams](logger/diagrams).
 
 ![Fxui class diagram](/logger/diagrams/fxui_class_diagram.png)
+
+### Description
+
+The App extends the Application-class and is used to start the program through the start-method. It does this by loading the fxml and starting the AppController.
+
+After the application has been started, the app controller starts initializing the app. The controller further delegates logical operations to the core layer and uses the various data access layers to get data and display them to the user.
