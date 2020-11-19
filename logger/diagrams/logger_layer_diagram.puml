@@ -1,0 +1,37 @@
+@startuml
+
+actor user
+
+node "Presentation Layer" as presLayer {
+    component "fxui" as FXUI {
+        component fxui
+    }
+    component javafx {
+        component fxml
+    }
+}
+
+
+
+node "Logic Layer" as logicLayer {
+    component core #FFFFCC{
+    }
+    component json #FFFFCC{
+    }
+}
+
+node "Data Access Layer" as accessLayer {
+    component rest
+}
+
+cloud remote{
+database database
+}
+
+user --> presLayer
+presLayer <--> logicLayer
+logicLayer <--> accessLayer
+rest <.> database
+fxml <.> fxui
+
+@enduml
