@@ -13,4 +13,5 @@ The user interface builds using JavaFX and is located in the logger.fxui package
 In addition to the plugins used [project-wide](../README.md), we use the following plugins in the FXUI module to run our client application/user interface:
 
 - [JavaFX](https://github.com/openjdk/jfx) to create and show a client user interface
-- [TestFX](https://github.com/TestFX/TestFX) to test our JavaFX code
+- [TestFX](https://github.com/TestFX/TestFX) to test our JavaFX App
+- [WireMock](https://github.com/tomakehurst/wiremock) to test remote storage interactions

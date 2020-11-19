@@ -18,3 +18,9 @@ The base endpoint for the rest-api is "/logger", offering three methods:
 * read Visit Log (GET "/logger")
 * add visit to Visit Log (POST "/logger")
 * remove visit from Visit Log (DELETE "logger/{id}")
+
+## Maven build
+
+In addition to the plugins used [project-wide](../README.md), we use the following plugins in the REST module to run our server and REST API:
+
+- [SpringBoot](https://spring.io/projects/spring-boot) to set up a server on localhost, set up REST API endpoints and for testing these features.
