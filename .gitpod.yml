@@ -4,7 +4,7 @@ image:
 # enable for the master/default branch (defaults to true)
 tasks:
   - init: sdk use java 14.0.2.j9-adpt
-    command: cd logger && mvn install -f core/pom.xml && mvn -pl rest spring-boot:run && mvn install
+    command: cd logger && mvn clean install && mvn -pl rest spring-boot:run
     name: REST server
   - openMode: split-right
     command: cd logger && echo Run the following command to run app after the build is complete. && echo 'mvn -pl fxui javafx:run'
