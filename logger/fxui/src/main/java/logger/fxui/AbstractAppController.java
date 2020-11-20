@@ -273,6 +273,11 @@ public abstract class AbstractAppController {
    */
   protected abstract void setUpStorage();
 
+  /**
+   * This method sets helper text to msg and sets the text as red.
+   *
+   * @param msg to set helper text
+   */
   private void setErrorMessage(String msg) {
     helperText.setText(msg);
     helperText.setTextFill(Color.RED);
