@@ -1,8 +1,6 @@
 package logger.fxui;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -281,21 +279,6 @@ public abstract class AbstractAppController {
   private void setErrorMessage(String msg) {
     helperText.setText(msg);
     helperText.setTextFill(Color.RED);
-  }
-
-  /**
-   * Make uri for endpoint.
-   *
-   * @return a valid URI for the endpoint
-   */
-  protected URI uriSetup() {
-    URI newUri = null;
-    try {
-      newUri = new URI("http://localhost:8080/logger");
-    } catch (URISyntaxException e) {
-      System.out.println(e.getMessage());
-    }
-    return newUri;
   }
 
   /**
