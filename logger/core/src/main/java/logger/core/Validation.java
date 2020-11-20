@@ -7,15 +7,14 @@ public class Validation {
 
   /**
    * Checks whether strings are numbers between 0-23 and 0-59 respectively.
+   * Time must be on a HH:MM format with a leading zero.
    *
    * @param hours   hours String to be validated
    * @param minutes minutes String to be validated
-   * @return true if the String is a valid time, False otherwise
+   * @return true if the String is a valid time, false otherwise
    */
   public static boolean isTimeString(String hours, String minutes) {
     String timeString = hours + ':' + minutes;
-    // HH:MM. Check if hours are between 0-23 and minutes between 0-59
-    // Must have leading zero.
     return timeString.matches("^([0-1][0-9]|2[0-3]):[0-5][0-9]$");
   }
 
@@ -57,7 +56,7 @@ public class Validation {
   }
 
   /**
-   * Checks that from is before to, chronologically.
+   * Checks that time "from" is before time "to".
    *
    * @param from start time
    * @param to   end time
@@ -71,7 +70,7 @@ public class Validation {
   }
 
   /**
-   * Validates date by checking if the date precedes or proceeds now.
+   * A valid date can't be in the future.
    *
    * @param date date to validate
    * @return true if date is in the past or today, false otherwise

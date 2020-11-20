@@ -11,6 +11,14 @@ public class VisitLogDeserializer extends JsonDeserializer<VisitLog> {
 
   private final VisitDeserializer visitDeserializer = new VisitDeserializer();
 
+  /**
+   * This method accepts json and returns a VisitLog.
+   *
+   * @param jp is a json-tree
+   * @param ctxt is the deserialization context
+   * @return a visit log.
+   * @throws IOException if reading goes wrong
+   */
   @Override
   public VisitLog deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
     JsonNode node = jp.getCodec().readTree(jp);

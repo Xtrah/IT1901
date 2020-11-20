@@ -55,7 +55,7 @@ class VisitLogControllerTest {
   /**
    * Dispatches a POST request to add a Visit and tests if the request was successful.
    *
-   * @throws Exception if something goes wrong with the MvcReqeusts.
+   * @throws Exception if something goes wrong with the MvcRequest.
    */
   @Test
   void addVisit() throws Exception {
@@ -78,10 +78,10 @@ class VisitLogControllerTest {
   }
 
   /**
-   * Dispatches a DELETE request to delete a Visit with a given ID and tests if the request was
-   * successful.
+   * Dispatches a DELETE request to delete a Visit
+   * with a given ID and tests if the request was successful.
    *
-   * @throws Exception if something goes wrong with the MvcReqeusts
+   * @throws Exception if something goes wrong with the MvcRequest
    */
   @Test
   void removeVisit() throws Exception {
