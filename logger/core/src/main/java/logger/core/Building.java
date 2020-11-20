@@ -25,8 +25,7 @@ public class Building {
   }
 
   /**
-   * Sets name of Building if name is valid.
-   * Else, throw Exception.
+   * Sets name of Building if name is valid. Else, throw Exception.
    *
    * @param name String
    */
@@ -53,8 +52,7 @@ public class Building {
   }
 
   /**
-   * Adds room to Building if room-name is valid.
-   * Else, throw Exception.
+   * Adds room to Building if room-name is valid. Else, throw Exception.
    *
    * @param name String name of room to add to Building
    */
