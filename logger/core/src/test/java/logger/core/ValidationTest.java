@@ -7,6 +7,7 @@ import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 import static logger.core.Validation.formatToLocalTime;
 import static logger.core.Validation.fromIsBeforeTo;
+import static logger.core.Validation.isEmptyString;
 import static logger.core.Validation.isTimeString;
 import static logger.core.Validation.isValidDate;
 
@@ -15,6 +16,13 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 public class ValidationTest {
+
+  @Test
+  void testIsEmptyString () {
+    assertTrue(isEmptyString(null));
+    assertTrue(isEmptyString(""));
+    assertFalse(isEmptyString("Not empty"));
+  }
 
   @Test
   void testRegexValidation() {
