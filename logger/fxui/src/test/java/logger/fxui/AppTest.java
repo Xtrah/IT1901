@@ -86,7 +86,6 @@ public class AppTest extends ApplicationTest {
     clickOn("#dropdownRoom").type(KeyCode.ENTER);
 
     testInvalidInputInTextField("#inputHour1", "25", "Invalid time input! Must be on format hh:mm");
-    clickOn("#inputPhone").write("8");
   }
 
   private void testInvalidInputInTextField(String query, String input, String errorMsg) {
