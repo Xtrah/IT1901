@@ -4,8 +4,9 @@ The domain layer consists of classes to represent buildings and visits, that a V
 
 ## Class diagram
 
-Class diagrams are found in [logger/diagrams](logger/diagrams/core_class_diagram.png).
-![PlantUML class diagram](logger/diagrams/core_class_diagram.png)
+Class diagrams are found in [logger/diagrams](../../../../../../diagrams/core_class_diagram.png).
+
+![PlantUML class diagram](../../../../../../diagrams/core_class_diagram.png)
 
 ### Description
 
