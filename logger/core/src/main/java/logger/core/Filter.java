@@ -26,7 +26,8 @@ public class Filter {
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByName(String searchInput, List<Visit> allVisits) {
-    return filterVisits(visit -> visit.getName().toLowerCase().contains(searchInput), allVisits);
+    return filterVisits(visit -> visit.getName().toLowerCase().contains(searchInput.toLowerCase()),
+        allVisits);
   }
 
   /**
@@ -37,7 +38,7 @@ public class Filter {
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByPhone(String searchInput, List<Visit> allVisits) {
-    return filterVisits(visit -> visit.getPhone().contains(searchInput), allVisits);
+    return filterVisits(visit -> visit.getPhone().contains(searchInput.toLowerCase()), allVisits);
   }
 
   /**
@@ -49,7 +50,7 @@ public class Filter {
    */
   public static List<Visit> filterByBuilding(String searchInput, List<Visit> allVisits) {
     return filterVisits(
-        visit -> visit.getBuilding().toLowerCase().contains(searchInput), allVisits);
+        visit -> visit.getBuilding().toLowerCase().contains(searchInput.toLowerCase()), allVisits);
   }
 
   /**
@@ -60,7 +61,8 @@ public class Filter {
    * @return a list of visits that matches the filter
    */
   public static List<Visit> filterByRoom(String searchInput, List<Visit> allVisits) {
-    return filterVisits(visit -> visit.getRoom().toLowerCase().contains(searchInput), allVisits);
+    return filterVisits(visit -> visit.getRoom().toLowerCase().contains(searchInput.toLowerCase()),
+        allVisits);
   }
 
   /**
