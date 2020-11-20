@@ -12,19 +12,26 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 
 Running the app in Gitpod will automatically install modules, run initialization tests and start the REST server.
 
-When the build is complete, run the app using `mvn -pl fxui javafx:run` and tests/checks using `mvn clean verify` in the right side console.
+When the build is complete, run the app using `mvn -pl fxui javafx:run` and tests/checks using `mvn verify` in the right side console.
+
+### GitPod installation
+
+1. Click on the gitpod tag in this README.
+2. Let the machine start, download the required dependencies and start the server.
+3. If the download fails*, follow developer installation from step 3.
+
+\*This is a known GitPod+Maven problem. ([Github issue](https://github.com/Shippable/support/issues/1995))
 
 ## Developer installation
 
 1. `git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030.git`
 2. Open folder as Maven project in an IDE  
-    **IntelliJ IDEA:** File -> New -> Module from Existing Sources -> `logger` folder -> Maven
-3. Install modules by running `mvn clean install`
+3. Install modules by running `mvn install` (make sure you are in the logger folder, not the gr2030 folder)
 4. Run server using `mvn -pl rest spring-boot:run` *
 5. Run app using `mvn -pl fxui javafx:run`
-6. Run code coverage check, spotbugs and tests using `mvn clean verify`
+6. Run code coverage check, spotbugs and tests using `mvn verify`
 
-\*Choose remote or local storage by changing controller on line 20 in `logger/fxui/src/main/resources/logger.fxui/App.fxml`.
+\*Choose remote or local storage by changing controller on line 20 in [App.fxml](logger/fxui/src/main/resources/logger.fxui/App.fxml).
 
 ## Git conventions
 

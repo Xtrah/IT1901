@@ -10,7 +10,7 @@ This folder contains the REST-server and REST-API for [Logger](../../README.md).
 
 ## Class diagram
 
-![Rest class diagram](/logger/diagrams/rest_class_diagram.png)
+![Rest class diagram](../../../../../../diagrams/rest_class_diagram.png)
 
 ### Description
 
