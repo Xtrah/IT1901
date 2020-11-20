@@ -51,6 +51,7 @@ class VisitLogServiceTest {
             LocalDateTime.of(2020, 10, 1, 14, 15),
             LocalDateTime.of(2020, 10, 1, 16, 15));
     assertTrue(service.addVisit(v2));
+    // Cleanup
     service.removeVisit(v2.getId());
   }
 
