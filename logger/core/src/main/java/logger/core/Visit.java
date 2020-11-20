@@ -16,12 +16,12 @@ public class Visit {
   /**
    * Constructs Visit.
    *
-   * @param name String name of visitor
-   * @param phone String phone of visitor
+   * @param name     String name of visitor
+   * @param phone    String phone of visitor
    * @param building String name of building that is visited
-   * @param room String room name that was visited
-   * @param from visit lasted String from ...
-   * @param to visit lasted String to
+   * @param room     String room name that was visited
+   * @param from     visit lasted String from ...
+   * @param to       visit lasted String to
    */
   public Visit(
       String name,
@@ -152,7 +152,7 @@ public class Visit {
   }
 
   /**
-   *  Set time of start of Visit.
+   * Set time of start of Visit.
    *
    * @param to LocalDateTime time of the end of the Visit
    */
@@ -161,7 +161,7 @@ public class Visit {
   }
 
   /**
-   *  Get id of visit.
+   * Get id of visit.
    *
    * @return id id of Visit
    */

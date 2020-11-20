@@ -14,7 +14,7 @@ public class VisitLogDeserializer extends JsonDeserializer<VisitLog> {
   /**
    * This method accepts json and returns a VisitLog.
    *
-   * @param jp is a json-tree
+   * @param jp   is a json-tree
    * @param ctxt is the deserialization context
    * @return a visit log.
    * @throws IOException if reading goes wrong

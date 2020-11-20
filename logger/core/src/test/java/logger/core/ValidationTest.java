@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 public class ValidationTest {
 
   @Test
-  void testIsEmptyString () {
+  void testIsEmptyString() {
     assertTrue(isEmptyString(null));
     assertTrue(isEmptyString(""));
     assertFalse(isEmptyString("Not empty"));

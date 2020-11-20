@@ -6,7 +6,6 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import logger.core.Visit;
@@ -79,8 +78,8 @@ class VisitLogControllerTest {
   }
 
   /**
-   * Dispatches a DELETE request to delete a Visit
-   * with a given ID and tests if the request was successful.
+   * Dispatches a DELETE request to delete a Visit with a given ID and tests if the request was
+   * successful.
    *
    * @throws Exception if something goes wrong with the MvcRequest
    */

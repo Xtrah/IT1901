@@ -6,8 +6,8 @@ import java.time.LocalTime;
 public class Validation {
 
   /**
-   * Checks whether strings are numbers between 0-23 and 0-59 respectively.
-   * Time must be on a HH:MM format with a leading zero.
+   * Checks whether strings are numbers between 0-23 and 0-59 respectively. Time must be on a HH:MM
+   * format with a leading zero.
    *
    * @param hours   hours String to be validated
    * @param minutes minutes String to be validated

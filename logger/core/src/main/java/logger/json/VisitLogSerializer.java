@@ -12,8 +12,8 @@ public class VisitLogSerializer extends JsonSerializer<VisitLog> {
   /**
    * This method accepts a visit log and writes json to file.
    *
-   * @param log to be written to file
-   * @param jgen generates json
+   * @param log                to be written to file
+   * @param jgen               generates json
    * @param serializerProvider provides serializing functionality
    * @throws IOException if writing file goes wrong
    */
