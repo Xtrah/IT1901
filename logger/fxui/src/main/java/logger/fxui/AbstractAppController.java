@@ -284,21 +284,6 @@ public abstract class AbstractAppController {
   }
 
   /**
-   * Make uri for endpoint.
-   *
-   * @return a valid URI for the endpoint
-   */
-  protected URI uriSetup() {
-    URI newUri = null;
-    try {
-      newUri = new URI("http://localhost:8080/logger");
-    } catch (URISyntaxException e) {
-      System.out.println(e.getMessage());
-    }
-    return newUri;
-  }
-
-  /**
    * Resets all inputs to empty fields, except the DatePicker which is set to today's  date.
    */
   private void resetInputs() {
