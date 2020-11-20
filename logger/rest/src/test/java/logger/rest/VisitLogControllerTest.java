@@ -61,6 +61,7 @@ class VisitLogControllerTest {
   void addVisit() throws Exception {
     Visit v1 =
         new Visit(
+            "a81a901e-be9c-4213-a900-4bca27d688a9",
             "Ola Normann",
             "12345678",
             "Realfagbygget",
