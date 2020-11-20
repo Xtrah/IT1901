@@ -5,6 +5,7 @@ import static junit.framework.Assert.assertEquals;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -67,5 +68,36 @@ public class AppTest extends ApplicationTest {
     clickOn("#deleteButton");
     int tableSizeAfterDelete = tableView.getItems().size();
     assertEquals(tableSizeBefore, tableSizeAfterDelete);
+  }
+
+  @Test
+  public void testErrorMsg() {
+    testInvalidInputInTextField("#inputName", "",
+        "Name cannot be empty and can only contain characters!");
+    clickOn("#inputName").write("Kari Traa");
+
+    testInvalidInputInTextField("#inputPhone", "1234567", "Phone number must be eight digits!");
+    clickOn("#inputPhone").write("8");
+
+    testInvalidInputInDropdownMenu("#dropdownBuilding", "A building must be chosen!");
+    clickOn("#dropdownBuilding").type(KeyCode.ENTER);
+
+    testInvalidInputInDropdownMenu("#dropdownRoom", "A room must be chosen!");
+    clickOn("#dropdownRoom").type(KeyCode.ENTER);
+
+    testInvalidInputInTextField("#inputHour1", "25", "Invalid time input! Must be on format hh:mm");
+    clickOn("#inputPhone").write("8");
+  }
+
+  private void testInvalidInputInTextField(String query, String input, String errorMsg) {
+    clickOn(query).write(input);
+    clickOn("#buttonRegister");
+    assertEquals(errorMsg, ((Label) lookup("#helperText").query()).getText());
+  }
+
+  private void testInvalidInputInDropdownMenu(String query, String errorMsg) {
+    clickOn("#buttonRegister");
+    assertEquals(errorMsg, ((Label) lookup("#helperText").query()).getText());
+    clickOn(query).type(KeyCode.ENTER);
   }
 }
