@@ -10,17 +10,12 @@ The app is located in [logger](logger). The repository also includes Gitpod conf
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2030/gr2030)
 
-Running the app in Gitpod will automatically install modules, run initialization tests and start the REST server.
-
-When the build is complete, run the app using `mvn -pl fxui javafx:run` and tests/checks using `mvn verify` in the right side console.
-
-### GitPod installation
-
 1. Click on the gitpod tag in this README.
-2. Let the machine start, download the required dependencies and start the server.
-3. If the download fails*, follow developer installation from step 3.
+2. Wait for the machine to start, letting it download the required dependencies and start the server. *
+3. When the build is complete, run the app using `mvn -pl fxui javafx:run` on the right side console.
+4. Run tests and checks using `mvn verify` in the right side console.
 
-\*This is a known GitPod+Maven problem. ([Github issue](https://github.com/Shippable/support/issues/1995))
+\* If the download fails, follow developer installation from step 3. This is a known GitPod+Maven problem. ([Github issue](https://github.com/Shippable/support/issues/1995))
 
 ## Developer installation
 
