@@ -10,9 +10,8 @@ public class VisitSerializer extends JsonSerializer<Visit> {
 
   /**
    * This method accepts a visit and writes json to file.
-   * <p>
-   * docs   * @param visit              to be written to file
    *
+   * @param visit              to be written to file
    * @param jgen               generates json
    * @param serializerProvider provides serializing functionality
    * @throws IOException if writing file goes wrong
