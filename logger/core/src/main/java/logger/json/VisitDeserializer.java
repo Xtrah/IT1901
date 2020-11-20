@@ -10,6 +10,14 @@ import logger.core.Visit;
 
 public class VisitDeserializer extends JsonDeserializer<Visit> {
 
+  /**
+   * This method accepts json and returns a visit.
+   *
+   * @param jp is a json-tree
+   * @param ctxt is the deserialization context
+   * @return a visit
+   * @throws IOException if reading value goes wrong.
+   */
   @Override
   public Visit deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
     return deserialize(jp.getCodec().readTree(jp));
