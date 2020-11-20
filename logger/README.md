@@ -31,9 +31,11 @@ JaCoCo and Checkstyle will report in .html and the console respectively, at the 
 Here are two screenshots of the application running. Our UI consists of two tabs, one for each feature; registering visits and viewing them.
 
 Here is a view of the registration form:
+
 ![UI register view](https://i.imgur.com/VbKNfFu.png)
 
 The image below illustrates the view of the visit log:
+
 ![UI visit log view](https://i.imgur.com/UpOI4Kb.png)
 
 ## Diagrams
@@ -41,6 +43,7 @@ The image below illustrates the view of the visit log:
 ### Package Diagram
 
 Our package diagram shows the connection between packages as well as the modules within them. It also visualizes where we use frameworks.
+
 ![PlantUML package diagram](diagrams/package_diagram.png)
 
 The fxui contains two data access classes. One for remote and one for local storage. 
@@ -61,4 +64,4 @@ Having a class diagram for each package makes it easier to see the connection be
 
 ### Sequence diagram
 
-![REST call diagram](logger/diagrams/REST_call_sequence_diagram.png)
+![REST call diagram](diagrams/REST_call_sequence_diagram.png)

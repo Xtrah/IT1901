@@ -6,7 +6,7 @@ The persistence layer consists of all serializing and deserializing classes for 
 
 Class diagrams are found in [logger/diagrams](logger/diagrams).
 
-![Json class diagram](logger/diagrams/json_core_class_diagram.png)
+![Json class diagram](../../../../../../diagrams/json_core_class_diagram.png)
 
 ### Description
 
